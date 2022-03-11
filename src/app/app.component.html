@@ -1,0 +1,11 @@
+<router-outlet></router-outlet>
+<div id="spinnerBox" *ngIf="spinner.show">
+  <div id="login" class="p-d-flex p-jc-center">
+    <div class="p-grid vh100 p-ai-center vertical-container">
+      <div class="p-col">
+        <p-progressSpinner strokeWidth="5"></p-progressSpinner>
+        <h2>{{ spinner.title }}</h2>
+      </div>
+    </div>
+  </div>
+</div>
