@@ -1,0 +1,35 @@
+
+<div class="container-fluid">
+<p-table   (onLazyLoad)="loadPage($event, 'd')"  [paginator]="true"  [rows]="5" tyle="font-size:16px;padding:20px" [value]="data" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Cod.</th>
+            <th>Competência</th>
+            <th>Responsável</th>
+            <th>Data de Geração</th>
+            <th>Data Limite de Execução</th>
+            <th>Data Limite de Transmissão</th>
+            <th *ngIf="idsetor == 3 || (idsetor != 3 && idsetor != 2 && idsetor != 8 )">RH - % Completo</th>
+            <th *ngIf="idsetor == 2">Fiscal - % Completo</th>
+            <th *ngIf="idsetor == 8">Declarações - % Completo</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-competencia>
+        <tr>
+            <td>{{ competencia.id_empresa_competencia }}</td>
+            <td>{{ competencia.competencia }}</td>
+            <td>{{ competencia.responsavel }}</td>
+            <td>{{ competencia.data_criacao }}</td>
+            <td>{{ competencia.data_limite_execucao }}</td>
+            <td>{{ competencia.data_limite_transmissao }}</td>
+
+            <td *ngIf="idsetor == 3  || (idsetor != 3 && idsetor != 2 && idsetor != 8 ) "> <p-progressBar [value]="competencia.percDarf"></p-progressBar></td>
+            <td *ngIf="idsetor == 2"> <p-progressBar [value]="competencia.percTotalFiscalRet"></p-progressBar> </td>
+            <td *ngIf="idsetor == 8">  <p-progressBar [value]="competencia.percTotalDeclaracoes"></p-progressBar> </td>
+
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+
+

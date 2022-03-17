@@ -1,3 +1,4 @@
+import { DctfWeb } from './../../../services/dctfweb/dctfweb.service';
 import { Component, OnInit } from '@angular/core'
 
 @Component({
@@ -6,8 +7,15 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  constructor () { }
+  competencias: any
+  idsetor: any
+  constructor (private dctfWebService: DctfWeb) { }
 
-  ngOnInit (): void {
+  ngOnInit () : void {
+    this.idsetor = 8
+    this.dctfWebService.getAllDctfCompetencias().subscribe((data: any) => {
+      this.competencias = data
+      console.log(this.competencias)
+    })
   }
 }
