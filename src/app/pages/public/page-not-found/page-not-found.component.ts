@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { DctfWeb } from 'src/app/services/dctfweb/dctfweb.service'
 
 @Component({
   selector: 'app-page-not-found',
@@ -6,9 +7,18 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./page-not-found.component.css']
 })
 export class PageNotFoundComponent implements OnInit {
-  constructor () { }
+  products: any
+  competencias: any
+  idsetor: any
+
+  constructor (private dctfWebService: DctfWeb) {
+    this.idsetor = 8
+  }
 
   ngOnInit (): void {
-    throw new Error('Ocoreu um erro!')
+    this.dctfWebService.getAllDctfCompetencias().subscribe((data: any) => {
+      this.competencias = data
+      console.log(this.competencias)
+    })
   }
 }
