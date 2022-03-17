@@ -1,6 +1,11 @@
 
 <div class="container-fluid">
-<p-table   (onLazyLoad)="loadPage($event, 'd')"  [paginator]="true"  [rows]="5" tyle="font-size:16px;padding:20px" [value]="data" responsiveLayout="scroll">
+<p-table #dt   (onLazyLoad)="loadPage($event, dt)"  
+      [paginator]="true"  
+      [rows]="5" 
+      [totalRecords]="totaldata" 
+      tyle="font-size:16px;padding:20px"
+      [value]="data" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
             <th>Cod.</th>

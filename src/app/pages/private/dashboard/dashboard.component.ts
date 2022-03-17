@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core'
 export class DashboardComponent implements OnInit {
   competencias: any
   idsetor: any
+  counttotaldata=0
   constructor (private dctfWebService: DctfWeb) { }
 
   ngOnInit () : void {
