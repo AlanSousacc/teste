@@ -1,9 +1,13 @@
 <p>dashboard works!</p>
 
 <app-table-component
-    [data]="competencias.data"
+    [data]="competencias"
     [idsetor]="idsetor"
     [totaldata]="counttotaldata"
+    (loadnextpage)="loadNextPage($event)"
+    (loadbackpage)="loadBackPage($event)"
 >
 </app-table-component>
+
+
 

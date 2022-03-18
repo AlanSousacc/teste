@@ -3,6 +3,7 @@
 <p-table #dt   (onLazyLoad)="loadPage($event, dt)"  
       [paginator]="true"  
       [rows]="5" 
+      [lazy]="true" 
       [totalRecords]="totaldata" 
       tyle="font-size:16px;padding:20px"
       [value]="data" responsiveLayout="scroll">
