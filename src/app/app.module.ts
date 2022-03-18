@@ -12,6 +12,9 @@ import { AppComponent } from './app.component'
 import { DashboardComponent } from './pages/private/dashboard/dashboard.component'
 import { PageNotFoundComponent } from './pages/public/page-not-found/page-not-found.component'
 import { GlobalErrorHandler } from './guards/global-error-handler'
+import { ButtonModule } from 'primeng/button'
+import { InputTextModule } from 'primeng/inputtext'
+import { DropdownModule } from 'primeng/dropdown'
 
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableComponentComponent } from './components/table-component/table-component.component'
@@ -23,7 +26,10 @@ const cgModules = [
 const primeModules = [
   ProgressSpinnerModule,
   ProgressBarModule,
-  TableModule
+  TableModule,
+  ButtonModule,
+  InputTextModule,
+  DropdownModule
 ]
 @NgModule({
   declarations: [

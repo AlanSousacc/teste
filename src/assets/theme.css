@@ -24,6 +24,9 @@ body .ui-chkbox .ui-chkbox-box.ui-state-active.ui-state-focus {
   background-color: #ffc107;
   color: #181818;
 }
+.ui-button.orange-button {
+  background-color: orange;
+}
 body .ui-dropdown:not(.ui-state-disabled).ui-state-focus {
   border-color: #4b4b4b;
 }

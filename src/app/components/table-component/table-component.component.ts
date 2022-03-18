@@ -11,6 +11,8 @@ export class TableComponentComponent implements OnInit {
   @Input() totaldata: number; // -> usado para paginar, recebe o valor total de registros
   @Input() data = [];
   @Input() idsetor:any;
+  cities: any
+  selectedCityCode: string 
 
   @Output() loadnextpage = new EventEmitter<{last: any, table: any}>(); // -> usado emitir evento de next page, para trazer mais dados
   @Output() loadbackpage = new EventEmitter<{last: any, table: any}>(); // -> usado para emitir event de back page, para voltar algums registros
@@ -20,10 +22,19 @@ export class TableComponentComponent implements OnInit {
     this.currentlast = 0
     this.last = 0
     this.totaldata = 0
+    this.selectedCityCode = ''
   }
 
   ngOnInit (): void {
-
+    this.cities = [
+      { name: '11/2021', value: '59' },
+      { name: '10/2021', value: '56' },
+      { name: '7/2021', value: '53' },
+      { name: '7/2021', value: '52' },
+      { name: '7/2021', value: '52' },
+      { name: '7/2021', value: '51' },
+      { name: '7/2021', value: '50' }
+    ]
   }
 
   loadPage (event:any, table:any) {
