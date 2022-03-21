@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   }
 
   async setUpTable () {
+    this.competencias = []
     this.idsetor = 8
     this.dctfWebService.getAllDctfCompetencias().subscribe(
       (competencias: any) => {
@@ -57,6 +58,20 @@ export class DashboardComponent implements OnInit {
           params.table.loading = false
         })
       })
+  }
+
+  searchCompetencia (params: any) {
+    this.competencias = []
+    if (params.value.trim() === '') {
+      this.setUpTable()
+    }
+    this.dctfWebService.searchCompetencias(params.value).subscribe((competencias: any) => {
+      this.assertCountItems(competencias)
+      this.counttotaldata = competencias.total
+      competencias.data.forEach((competencia: Paginator | any) => {
+        this.competencias.push(competencia)
+      })
+    })
   }
 
   loadBackPage (params: any) {

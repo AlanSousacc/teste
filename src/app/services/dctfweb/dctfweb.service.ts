@@ -19,4 +19,8 @@ export class DctfWeb {
     const url = pageurl
     return this.http.get<any>(url)
   }
+
+  searchCompetencias (stringSearch: string):Observable<Paginator> {
+    return this.http.post<any>(environment.base_url + 'dctfweb/search', { stringSearch: stringSearch })
+  }
 }

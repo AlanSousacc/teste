@@ -4,26 +4,27 @@
 
 <div class="container-fluid">
     <p-dropdown  style="padding-bottom: 10px;"  [options]="cities" [(ngModel)]="selectedCityCode" optionLabel="name" optionValue="code"></p-dropdown>
+
     
 <div style="padding-bottom: 10px;padding-top:10px" class="row">
   
     <div class="col-6">
         <span class="p-buttonset">
-            <button pButton type="button"  class="orange-button" label="Copiar" icon="pi pi-check"></button>
-            <button pButton type="button" label="Excel" icon="pi pi-trash"></button>
-            <button pButton type="button" label="Pdf" icon="pi pi-times"></button>
+            <button type="button" pButton pRipple icon="pi pi-file"  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportDataToXlsx()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+            <button type="button" pButton pRipple icon="pi pi-file-pdf"  class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
         </span>
     </div>
     <div class="col-6">
         <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
-            <input type="text" pInputText placeholder="Buscar">         
+            <input type="text" [(ngModel)]="searchValue" (input)="searchData()" pInputText placeholder="Buscar">      
         </div>
 
     </div>
 </div>
 
-<p-table #dt   (onLazyLoad)="loadPage($event, dt)"  
+<p-table  id="excel-table" #dt   (onLazyLoad)="loadPage($event, dt)"  
       [paginator]="true"  
       [rows]="10" 
       [lazy]="true" 
