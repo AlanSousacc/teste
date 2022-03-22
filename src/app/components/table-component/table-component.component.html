@@ -24,6 +24,18 @@
     </div>
 </div>
 
+<p-button (click)="showBasicDialog()" icon="pi pi-external-link" label="Show"></p-button>
+<p-dialog header="Header" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayBasic=false" label="Yes" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-times" (click)="displayBasic=false" label="No"></p-button>
+    </ng-template>
+</p-dialog>
+
 <p-table  id="excel-table" #dt   (onLazyLoad)="loadPage($event, dt)"  
       [paginator]="true"  
       [rows]="10" 
@@ -42,6 +54,7 @@
             <th *ngIf="idsetor == 3 || (idsetor != 3 && idsetor != 2 && idsetor != 8 )">RH - % Completo</th>
             <th *ngIf="idsetor == 2">Fiscal - % Completo</th>
             <th *ngIf="idsetor == 8">Declarações - % Completo</th>
+            <th *ngIf="idsetor == 8">Ações</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-competencia>
@@ -52,10 +65,13 @@
             <td>{{ competencia.data_criacao }}</td>
             <td>{{ competencia.data_limite_execucao }}</td>
             <td>{{ competencia.data_limite_transmissao }}</td>
+            
 
             <td *ngIf="idsetor == 3  || (idsetor != 3 && idsetor != 2 && idsetor != 8 ) "> <p-progressBar [value]="competencia.percDarf"></p-progressBar></td>
             <td *ngIf="idsetor == 2"> <p-progressBar [value]="competencia.percTotalFiscalRet"></p-progressBar> </td>
             <td *ngIf="idsetor == 8">  <p-progressBar [value]="competencia.percTotalDeclaracoes"></p-progressBar> </td>
+            <td>    <button [routerLink]="['/listempresas', competencia.id_empresa_competencia]" type="button" pButton pRipple icon="pi pi-align-justify "  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button type="button" pButton pRipple icon="pi pi-plus"  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button type="button" pButton pRipple icon="pi pi-tags"  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
+            </td>
 
         </tr>
     </ng-template>

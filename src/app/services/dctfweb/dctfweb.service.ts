@@ -23,4 +23,6 @@ export class DctfWeb {
   searchCompetencias (stringSearch: string):Observable<Paginator> {
     return this.http.post<any>(environment.base_url + 'dctfweb/search', { stringSearch: stringSearch })
   }
+
+  getAllDctfCompetenciasReport () { return this.http.get<PaginatorDcftCompetencias>(environment.base_url + 'dctfweb??page=' + '1000') }
 }

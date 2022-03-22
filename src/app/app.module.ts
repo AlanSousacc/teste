@@ -15,8 +15,8 @@ import { GlobalErrorHandler } from './guards/global-error-handler'
 import { ButtonModule } from 'primeng/button'
 import { InputTextModule } from 'primeng/inputtext'
 import { DropdownModule } from 'primeng/dropdown'
-
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DialogModule } from 'primeng/dialog'
+import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { TableComponentComponent } from './components/table-component/table-component.component'
 
 const cgModules = [
@@ -29,7 +29,8 @@ const primeModules = [
   TableModule,
   ButtonModule,
   InputTextModule,
-  DropdownModule
+  DropdownModule,
+  DialogModule
 ]
 @NgModule({
   declarations: [

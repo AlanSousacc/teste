@@ -14,6 +14,12 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'listempresas/:id',
+    loadChildren: () => import('./pages/private/listempresasdctf/listempresasdctf.module').then(
+      module => module.ListempresasdctfModule
+    )
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }
