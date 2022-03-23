@@ -4,7 +4,11 @@
 
 <div class="container-fluid">
     <p-dropdown  style="padding-bottom: 10px;"  [options]="cities" [(ngModel)]="selectedCityCode" optionLabel="name" optionValue="code"></p-dropdown>
+{{inputCompetencia | json}}
 
+<input type="text" [(ngModel)]="modalcreate.competencia"   class="form-control" placeholder="">
+
+{{modalcreate.competencia}}
     
 <div style="padding-bottom: 10px;padding-top:10px" class="row">
   
@@ -24,15 +28,52 @@
     </div>
 </div>
 
-<p-button (click)="showBasicDialog()" icon="pi pi-external-link" label="Show"></p-button>
-<p-dialog header="Header" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p-dialog  [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000" header="Incluir Empresa DCTF-WEB" [(visible)]="displayModalCreateEmpresa"  [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <form>
+        <div class="row">
+            {{modalcreate | json}}
+          <div class="col">
+            <label (click)="go()">Competência</label>
+            <input type="text" #competencia   class="form-control" placeholder="">
+          </div>
+          <div class="col">
+            <label>Empresa</label>
+            <input type="text" #empresa  class="form-control" placeholder="">
+          </div>
+        </div>
+
+       <div style="margin-top: 10px;" class="row">
+            <div class="col">
+                <label>Status</label>
+                <input #status   type="text" class="form-control" placeholder="">
+            </div>
+            <div class="col">
+                 <label>Prioridade</label>
+                <input  #prioridade type="text" class="form-control" placeholder="">
+            </div>
+       </div>
+
+       <div style="margin-top: 10px;" class="row">
+            <div class="col">
+                <label>Faturamento R$</label>
+                <input #faturamento type="number"  class="form-control" placeholder="">
+            </div>
+            <div class="col">
+            </div>
+        </div>
+
+        <div style="margin-top: 10px;" class="row">
+            <div class="col">
+                <label>Comentário</label>
+                <textarea #comentario type="number"  class="form-control" placeholder=""></textarea>
+            </div>
+        </div>
+         
+      </form>
+    
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="displayBasic=false" label="Yes" styleClass="p-button-text"></p-button>
-        <p-button icon="pi pi-times" (click)="displayBasic=false" label="No"></p-button>
+        <p-button icon="pi pi-check" label="Cancelar" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-times" (click)="salvarDctf()" label="Salvar"></p-button>
     </ng-template>
 </p-dialog>
 
@@ -70,7 +111,7 @@
             <td *ngIf="idsetor == 3  || (idsetor != 3 && idsetor != 2 && idsetor != 8 ) "> <p-progressBar [value]="competencia.percDarf"></p-progressBar></td>
             <td *ngIf="idsetor == 2"> <p-progressBar [value]="competencia.percTotalFiscalRet"></p-progressBar> </td>
             <td *ngIf="idsetor == 8">  <p-progressBar [value]="competencia.percTotalDeclaracoes"></p-progressBar> </td>
-            <td>    <button [routerLink]="['/listempresas', competencia.id_empresa_competencia]" type="button" pButton pRipple icon="pi pi-align-justify "  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button type="button" pButton pRipple icon="pi pi-plus"  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button type="button" pButton pRipple icon="pi pi-tags"  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
+            <td>    <button [routerLink]="['/listempresas', competencia.id_empresa_competencia]" type="button" pButton pRipple icon="pi pi-align-justify "  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button type="button" pButton pRipple icon="pi pi-plus"  (click)="openModalNewEmpresaDctf()" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button type="button" pButton pRipple icon="pi pi-tags"  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
             </td>
 
         </tr>

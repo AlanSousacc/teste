@@ -1,5 +1,5 @@
 import { DctfWeb } from './../../services/dctfweb/dctfweb.service'
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core'
 
 import * as XLSX from 'xlsx'
 @Component({
@@ -16,12 +16,19 @@ export class TableComponentComponent implements OnInit {
   cities: any
   selectedCityCode: string
   displayModal: boolean = false;
-  displayBasic: boolean = false ;
-
+  displayModalCreateEmpresa: boolean = false ;
+  modalcreate: any;
   searchValue: string
+
   @Output() loadnextpage = new EventEmitter<{last: any, table: any}>(); // -> usado emitir evento de next page, para trazer mais dados
   @Output() loadbackpage = new EventEmitter<{last: any, table: any}>(); // -> usado para emitir event de back page, para voltar algums registros
   @Output() searchdata = new EventEmitter<{value: any}>(); // -> usado para emitir event de pesquisa de dados
+
+  @ViewChild('competencia') inputCompetencia: any;
+  @ViewChild('empresa') inputEmpresa: any;
+  @ViewChild('status') inputStatus: any;
+  @ViewChild('prioridade') inputPrioridade: any;
+  @ViewChild('faturamento') inputFatramento: any;
 
   constructor (private dctfWebService: DctfWeb) {
     this.totaldata = 0
@@ -30,6 +37,10 @@ export class TableComponentComponent implements OnInit {
     this.totaldata = 0
     this.selectedCityCode = ''
     this.searchValue = ''
+  }
+
+  ngAfterViewInit () {
+    this.inputCompetencia.nativeElement.value = 'lkkkkkk'
   }
 
   ngOnInit (): void {
@@ -42,18 +53,33 @@ export class TableComponentComponent implements OnInit {
       { name: '7/2021', value: '51' },
       { name: '7/2021', value: '50' }
     ]
-  }
 
-  showModalDialog () {
-    this.displayModal = true
+    this.modalcreate = [{
+      competencia: '',
+      empresa: '',
+      status: '',
+      prioridade: '',
+      faturamento: '',
+      comentario: ''
+    }]
   }
 
   searchData () {
     this.searchdata.emit({ value: this.searchValue })
   }
 
-  showBasicDialog () {
-    this.displayBasic = true
+  openModalNewEmpresaDctf () {
+    this.displayModalCreateEmpresa = true
+  }
+
+  salvarDctf () {
+
+  }
+
+  go () {
+    console.log(this.inputCompetencia.nativeElement.value)
+    console.log(this.inputEmpresa.nativeElement.value)
+    console.log(this.inputStatus.nativeElement.value)
   }
 
   exportDataToXlsx () {
