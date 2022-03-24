@@ -1,6 +1,6 @@
 import { DctfWeb } from './../../services/dctfweb/dctfweb.service'
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core'
-
+import { CompetenciasDcft } from 'src/app/interfaces/dctfweb/DctfCompetencias';
 import * as XLSX from 'xlsx'
 @Component({
   selector: 'app-table-component',
@@ -19,6 +19,9 @@ export class TableComponentComponent implements OnInit {
   displayModalCreateEmpresa: boolean = false ;
   modalcreate: any;
   searchValue: string
+  competenciaModal: any ;
+  competenciaModalStatusCompetencia: any ;
+  modalstatusCompetencia: boolean = false ;
 
   @Output() loadnextpage = new EventEmitter<{last: any, table: any}>(); // -> usado emitir evento de next page, para trazer mais dados
   @Output() loadbackpage = new EventEmitter<{last: any, table: any}>(); // -> usado para emitir event de back page, para voltar algums registros
@@ -29,6 +32,7 @@ export class TableComponentComponent implements OnInit {
   @ViewChild('status') inputStatus: any;
   @ViewChild('prioridade') inputPrioridade: any;
   @ViewChild('faturamento') inputFatramento: any;
+  @ViewChild('comentario') inputComentario: any;
 
   constructor (private dctfWebService: DctfWeb) {
     this.totaldata = 0
@@ -37,10 +41,16 @@ export class TableComponentComponent implements OnInit {
     this.totaldata = 0
     this.selectedCityCode = ''
     this.searchValue = ''
+    this.competenciaModal = {
+      id_empresa_competencia: 1
+    }
+    this.competenciaModalStatusCompetencia = {
+      id_empresa_competencia: 1
+    }
   }
 
   ngAfterViewInit () {
-    this.inputCompetencia.nativeElement.value = 'lkkkkkk'
+
   }
 
   ngOnInit (): void {
@@ -68,12 +78,29 @@ export class TableComponentComponent implements OnInit {
     this.searchdata.emit({ value: this.searchValue })
   }
 
-  openModalNewEmpresaDctf () {
+  openModalNewEmpresaDctf (competencia: CompetenciasDcft) {
+    this.competenciaModal = competencia
     this.displayModalCreateEmpresa = true
   }
 
-  salvarDctf () {
+  openModalStatusCompetencia (competencia: CompetenciasDcft) {
+    this.competenciaModalStatusCompetencia = competencia
+    this.modalstatusCompetencia = true
+  }
 
+  salvarDctf () {
+    const objSend = {
+      competencia: this.inputCompetencia.nativeElement.value,
+      empresa: this.inputEmpresa.nativeElement.value,
+      status: this.inputStatus.nativeElement.value,
+      prioridade: this.inputPrioridade.nativeElement.value,
+      faturamento: this.inputFatramento.nativeElement.value,
+      comentario: this.inputComentario.nativeElement.value
+    }
+
+    this.dctfWebService.createEmpresa(objSend).subscribe(
+      (result: any) => {
+      })
   }
 
   go () {

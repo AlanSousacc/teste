@@ -24,5 +24,9 @@ export class DctfWeb {
     return this.http.post<any>(environment.base_url + 'dctfweb/search', { stringSearch: stringSearch })
   }
 
+  createEmpresa (objSend: any):Observable<Paginator> {
+    return this.http.post<any>(environment.base_url + 'dctfweb/createempresa', objSend)
+  }
+
   getAllDctfCompetenciasReport () { return this.http.get<PaginatorDcftCompetencias>(environment.base_url + 'dctfweb??page=' + '1000') }
 }

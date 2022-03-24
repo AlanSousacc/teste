@@ -28,13 +28,44 @@
     </div>
 </div>
 
+
+
+
+
+<p-dialog  [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000" header="Alterar Status da Competência" [(visible)]="modalstatusCompetencia"  [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <form>
+        <div class="row">           
+          <input type="hidden" id="id_empresa_competencia"  [(ngModel)]="competenciaModal.id_empresa_competencia" [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="">
+          <div class="col">
+            <label>Competência</label>
+            <input type="text"   [(ngModel)]="competenciaModalStatusCompetencia.competencia" [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="" disabled="true">
+        </div>
+    
+        <div class="col">
+            <label>Competência</label>
+            <select  [(ngModel)]="competenciaModalStatusCompetencia.prioridade" [ngModelOptions]="{standalone: true}" class="form-control form-control-sm">
+                <option value="1">Ativo</option>
+                <option value="2">Controller</option>
+                <option value="2">fechado</option>
+                <option value="2">excluir</option>
+            </select>
+        </div>
+        </div>   
+      </form>
+    
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" label="Cancelar" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-times" (click)="salvarDctf()" label="Salvar"></p-button>
+    </ng-template>
+</p-dialog>
+
 <p-dialog  [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000" header="Incluir Empresa DCTF-WEB" [(visible)]="displayModalCreateEmpresa"  [style]="{width: '50vw'}" [baseZIndex]="10000">
     <form>
-        <div class="row">
-            {{modalcreate | json}}
+        <div class="row">           
+          <input type="hidden" id="id_empresa_competencia"  [(ngModel)]="competenciaModal.id_empresa_competencia" [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="">
           <div class="col">
-            <label (click)="go()">Competência</label>
-            <input type="text" #competencia   class="form-control" placeholder="">
+            <label>Competência</label>
+            <input type="text"   [(ngModel)]="competenciaModal.competencia" [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="" disabled="true">
           </div>
           <div class="col">
             <label>Empresa</label>
@@ -45,18 +76,25 @@
        <div style="margin-top: 10px;" class="row">
             <div class="col">
                 <label>Status</label>
-                <input #status   type="text" class="form-control" placeholder="">
+                <select  [(ngModel)]="competenciaModal.status" [ngModelOptions]="{standalone: true}" class="form-control form-control-sm">
+                    <option selected value="1">Ativa</option>
+                    <option value="2">Inativa</option>
+                </select>
             </div>
             <div class="col">
                  <label>Prioridade</label>
-                <input  #prioridade type="text" class="form-control" placeholder="">
+                <select  [(ngModel)]="competenciaModal.prioridade" [ngModelOptions]="{standalone: true}" class="form-control form-control-sm">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="2">3</option>
+                </select>
             </div>
        </div>
 
        <div style="margin-top: 10px;" class="row">
             <div class="col">
                 <label>Faturamento R$</label>
-                <input #faturamento type="number"  class="form-control" placeholder="">
+                <input step="0.01"  [(ngModel)]="competenciaModal.faturamento" [ngModelOptions]="{standalone: true}"  type="number"  class="form-control" placeholder="">
             </div>
             <div class="col">
             </div>
@@ -65,7 +103,7 @@
         <div style="margin-top: 10px;" class="row">
             <div class="col">
                 <label>Comentário</label>
-                <textarea #comentario type="number"  class="form-control" placeholder=""></textarea>
+                <textarea [(ngModel)]="competenciaModal.comentario" [ngModelOptions]="{standalone: true}" type="number" class="form-control" placeholder=""></textarea>
             </div>
         </div>
          
@@ -111,8 +149,11 @@
             <td *ngIf="idsetor == 3  || (idsetor != 3 && idsetor != 2 && idsetor != 8 ) "> <p-progressBar [value]="competencia.percDarf"></p-progressBar></td>
             <td *ngIf="idsetor == 2"> <p-progressBar [value]="competencia.percTotalFiscalRet"></p-progressBar> </td>
             <td *ngIf="idsetor == 8">  <p-progressBar [value]="competencia.percTotalDeclaracoes"></p-progressBar> </td>
-            <td>    <button [routerLink]="['/listempresas', competencia.id_empresa_competencia]" type="button" pButton pRipple icon="pi pi-align-justify "  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button type="button" pButton pRipple icon="pi pi-plus"  (click)="openModalNewEmpresaDctf()" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button type="button" pButton pRipple icon="pi pi-tags"  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
+            <td>    <button [routerLink]="['/listempresas', competencia.id_empresa_competencia]" type="button" pButton pRipple icon="pi pi-align-justify "  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button type="button" pButton pRipple icon="pi pi-plus"  (click)="openModalNewEmpresaDctf(competencia)" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button (click)="openModalStatusCompetencia(competencia)" type="button" pButton pRipple icon="pi pi-tags"  class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
             </td>
+
+
+            
 
         </tr>
     </ng-template>
