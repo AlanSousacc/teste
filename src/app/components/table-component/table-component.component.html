@@ -42,7 +42,7 @@
             </div>
             <div class="p-grid p-fluid">
                 <div class="p-col-6">
-                    <button type="button" pButton  label="Yes" class="p-button-success"></button>
+                    <button type="button" pButton   label="Yes" class="p-button-success"></button>
                 </div>
                 <div class="p-col-6">
                     <button type="button" pButton  label="No" class="p-button-secondary"></button>
@@ -55,12 +55,6 @@
 
 
 
-
-
-
-
-
-
 <p-dialog  [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000" header="Alterar Status da Competência" [(visible)]="modalstatusCompetencia"  [style]="{width: '50vw'}" [baseZIndex]="10000">
     <form>
         <div class="row">           
@@ -69,14 +63,13 @@
             <label>Competência</label>
             <input type="text"   [(ngModel)]="competenciaModalStatusCompetencia.competencia" [ngModelOptions]="{standalone: true}"  class="form-control" placeholder="" disabled="true">
         </div>
-    
         <div class="col">
             <label>Competência</label>
-            <select  [(ngModel)]="competenciaModalStatusCompetencia.prioridade" [ngModelOptions]="{standalone: true}" class="form-control form-control-sm">
+            <select  [(ngModel)]="competenciaModalStatusCompetencia.status" [ngModelOptions]="{standalone: true}" class="form-control form-control-sm">
                 <option value="1">Ativo</option>
                 <option value="2">Controller</option>
-                <option value="2">fechado</option>
-                <option value="2">excluir</option>
+                <option value="3">fechado</option>
+                <option value="99">excluir</option>
             </select>
         </div>
         </div>   
@@ -84,10 +77,9 @@
     
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" label="Cancelar" styleClass="p-button-text"></p-button>
-        <p-button icon="pi pi-times" (click)="salvarDctf()" label="Salvar"></p-button>
+        <p-button icon="pi pi-times"  (click)="updateStatusDctf()" label="Salvar"></p-button>
     </ng-template>
 </p-dialog>
-
 
 
 <p-dialog  [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000" header="Incluir Empresa DCTF-WEB" [(visible)]="displayModalCreateEmpresa"  [style]="{width: '50vw'}" [baseZIndex]="10000">

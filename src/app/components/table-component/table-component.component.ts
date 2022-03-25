@@ -87,34 +87,41 @@ export class TableComponentComponent implements OnInit {
     this.displayModalCreateEmpresa = true
   }
 
+  openModalStatusCompetencia (competencia: CompetenciasDcft) {
+    this.competenciaModalStatusCompetencia = competencia
+    this.modalstatusCompetencia = true
+  }
+
   getEmpresasModal () {
     this.dctfWebService.getEmpresasModal({}).toPromise().then(
       (data:any) => { this.empresasModal = data }
     )
   }
 
-  openModalStatusCompetencia (competencia: CompetenciasDcft) {
-    this.competenciaModalStatusCompetencia = competencia
-    this.modalstatusCompetencia = true
-  }
-
   salvarDctf () {
     const objSend = this.competenciaModal
     this.dctfWebService.createEmpresa(objSend).subscribe(
-      data => this.sucessMessage() ,
+      data => this.sucessMessage(),
       err => console.log(err)
     )
+  }
+
+  updateStatusDctf () {
+    const objSend = {
+      id_empresa_competencia: this.competenciaModalStatusCompetencia.id_empresa_competencia,
+      status: this.competenciaModalStatusCompetencia.status
+    }
+
+    this.dctfWebService.updateStatusCompetencias(objSend).subscribe(
+      data => this.sucessMessage(),
+      err => console.log(err)
+    )
+    this.modalstatusCompetencia = false
   }
 
   sucessMessage () {
     this.messageService.add({severity:'success', summary: 'Success', detail: 'Empresa cadastrada no sistema'});
     this.displayModalCreateEmpresa = false
-  }
-
-  go () {
-    console.log(this.inputCompetencia.nativeElement.value)
-    console.log(this.inputEmpresa.nativeElement.value)
-    console.log(this.inputStatus.nativeElement.value)
   }
 
   exportDataToXlsx () {
