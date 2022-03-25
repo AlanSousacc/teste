@@ -25,7 +25,11 @@ export class DctfWeb {
   }
 
   createEmpresa (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.base_url + 'dctfweb/createempresa', objSend)
+    return this.http.post<any>(environment.base_url + 'dctfweb/createempresadctf', objSend)
+  }
+
+  getEmpresasModal (objSend: any):Observable<Paginator> {
+    return this.http.post<any>(environment.base_url + 'dctfweb/empresasmodal', objSend)
   }
 
   getAllDctfCompetenciasReport () { return this.http.get<PaginatorDcftCompetencias>(environment.base_url + 'dctfweb??page=' + '1000') }

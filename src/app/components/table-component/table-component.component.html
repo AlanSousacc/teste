@@ -59,6 +59,8 @@
     </ng-template>
 </p-dialog>
 
+
+
 <p-dialog  [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000" header="Incluir Empresa DCTF-WEB" [(visible)]="displayModalCreateEmpresa"  [style]="{width: '50vw'}" [baseZIndex]="10000">
     <form>
         <div class="row">           
@@ -69,7 +71,11 @@
           </div>
           <div class="col">
             <label>Empresa</label>
-            <input type="text" #empresa  class="form-control" placeholder="">
+            <p-dropdown [filter]="true" filterBy="nome"
+            [showClear]="true" placeholder="Select a Country" 
+            [style]="{'minWidth':'100%'}"  [options]="empresasModal.data" 
+            [(ngModel)]="selectedCityCode" optionLabel="nome"
+            ></p-dropdown>
           </div>
         </div>
 
