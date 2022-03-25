@@ -1,11 +1,14 @@
 import { DctfWeb } from './../../services/dctfweb/dctfweb.service'
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core'
+
 import { CompetenciasDcft } from 'src/app/interfaces/dctfweb/DctfCompetencias'
+import { MessageService, PrimeNGConfig } from 'primeng/api'
 import * as XLSX from 'xlsx'
 @Component({
   selector: 'app-table-component',
   templateUrl: './table-component.component.html',
-  styleUrls: ['./table-component.component.css']
+  styleUrls: ['./table-component.component.css'],
+  providers: [MessageService]
 })
 export class TableComponentComponent implements OnInit {
   @Input() last: number;
@@ -35,7 +38,7 @@ export class TableComponentComponent implements OnInit {
   @ViewChild('faturamento') inputFatramento: any;
   @ViewChild('comentario') inputComentario: any;
 
-  constructor (private dctfWebService: DctfWeb) {
+  constructor (private dctfWebService: DctfWeb, private messageService: MessageService, private primengConfig: PrimeNGConfig) {
     this.totaldata = 0
     this.currentlast = 0
     this.last = 0
@@ -71,6 +74,10 @@ export class TableComponentComponent implements OnInit {
     this.getEmpresasModal()
   }
 
+  showConfirm() {
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'})
+  }
+
   searchData () {
     this.searchdata.emit({ value: this.searchValue })
   }
@@ -94,13 +101,14 @@ export class TableComponentComponent implements OnInit {
   salvarDctf () {
     const objSend = this.competenciaModal
     this.dctfWebService.createEmpresa(objSend).subscribe(
-      data => this.sucessMessage(),
+      data => this.sucessMessage() ,
       err => console.log(err)
     )
   }
 
   sucessMessage () {
-    alert('sucesso')
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Empresa cadastrada no sistema'});
+    this.displayModalCreateEmpresa = false
   }
 
   go () {

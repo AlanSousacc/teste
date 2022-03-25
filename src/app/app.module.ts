@@ -18,6 +18,11 @@ import { DropdownModule } from 'primeng/dropdown'
 import { DialogModule } from 'primeng/dialog'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { TableComponentComponent } from './components/table-component/table-component.component'
+import { ToastModule } from 'primeng/toast'
+import { RippleModule } from 'primeng/ripple'
+
+import { MessagesModule } from 'primeng/messages'
+import { MessageModule } from 'primeng/message'
 
 const cgModules = [
   CgInputTextModule
@@ -30,7 +35,12 @@ const primeModules = [
   ButtonModule,
   InputTextModule,
   DropdownModule,
-  DialogModule
+  DialogModule,
+  ToastModule,
+  ToastModule,
+  RippleModule,
+  MessagesModule,
+  MessageModule
 ]
 @NgModule({
   declarations: [
