@@ -18,6 +18,7 @@ import { DropdownModule } from 'primeng/dropdown'
 import { DialogModule } from 'primeng/dialog'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { TableComponentComponent } from './components/table-component/table-component.component'
+import { ModaisEmpresaComponent } from './components/modais-empresas/modais-empresa.component'
 import { ToastModule } from 'primeng/toast'
 import { RippleModule } from 'primeng/ripple'
 
@@ -47,7 +48,8 @@ const primeModules = [
     AppComponent,
     DashboardComponent,
     PageNotFoundComponent,
-    TableComponentComponent
+    TableComponentComponent,
+    ModaisEmpresaComponent
   ],
   imports: [
     BrowserModule,

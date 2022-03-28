@@ -4,6 +4,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 import { CompetenciasDcft } from 'src/app/interfaces/dctfweb/DctfCompetencias'
 import { MessageService, PrimeNGConfig } from 'primeng/api'
 import * as XLSX from 'xlsx'
+
 @Component({
   selector: 'app-table-component',
   templateUrl: './table-component.component.html',
@@ -30,6 +31,7 @@ export class TableComponentComponent implements OnInit {
   @Output() loadnextpage = new EventEmitter<{last: any, table: any}>(); // -> usado emitir evento de next page, para trazer mais dados
   @Output() loadbackpage = new EventEmitter<{last: any, table: any}>(); // -> usado para emitir event de back page, para voltar algums registros
   @Output() searchdata = new EventEmitter<{value: any}>(); // -> usado para emitir event de pesquisa de dados
+  @Output() onchangData = new EventEmitter<any>(); // -> usado para emitir event para recarregar os dados da tabela
 
   @ViewChild('competencia') inputCompetencia: any;
   @ViewChild('empresa') inputEmpresa: any;
@@ -53,8 +55,12 @@ export class TableComponentComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit () {
+  closedModalCreateEmpresa () {
+    this.displayModalCreateEmpresa = false
+  }
 
+  closeModalstatusCompetencia () {
+    this.modalstatusCompetencia = false
   }
 
   ngOnInit (): void {
@@ -70,12 +76,10 @@ export class TableComponentComponent implements OnInit {
       faturamento: '',
       comentario: ''
     }]
-
-    this.getEmpresasModal()
   }
 
-  showConfirm() {
-    this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'})
+  onChangData () {
+    this.onchangData.emit(true)
   }
 
   searchData () {
@@ -90,38 +94,6 @@ export class TableComponentComponent implements OnInit {
   openModalStatusCompetencia (competencia: CompetenciasDcft) {
     this.competenciaModalStatusCompetencia = competencia
     this.modalstatusCompetencia = true
-  }
-
-  getEmpresasModal () {
-    this.dctfWebService.getEmpresasModal({}).toPromise().then(
-      (data:any) => { this.empresasModal = data }
-    )
-  }
-
-  salvarDctf () {
-    const objSend = this.competenciaModal
-    this.dctfWebService.createEmpresa(objSend).subscribe(
-      data => this.sucessMessage(),
-      err => console.log(err)
-    )
-  }
-
-  updateStatusDctf () {
-    const objSend = {
-      id_empresa_competencia: this.competenciaModalStatusCompetencia.id_empresa_competencia,
-      status: this.competenciaModalStatusCompetencia.status
-    }
-
-    this.dctfWebService.updateStatusCompetencias(objSend).subscribe(
-      data => this.sucessMessage(),
-      err => console.log(err)
-    )
-    this.modalstatusCompetencia = false
-  }
-
-  sucessMessage () {
-    this.messageService.add({severity:'success', summary: 'Success', detail: 'Empresa cadastrada no sistema'});
-    this.displayModalCreateEmpresa = false
   }
 
   exportDataToXlsx () {
@@ -147,8 +119,5 @@ export class TableComponentComponent implements OnInit {
     if (event.first < this.currentlast) {
       this.loadbackpage.emit({ last: event.first, table: table })
     }
-  }
-
-  modalCreate () {
   }
 }

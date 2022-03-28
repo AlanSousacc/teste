@@ -43,6 +43,10 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  onChangData () {
+    this.setUpTable()
+  }
+
   loadNextPage (params: any) {
     this.currentlast = params.last
     this.last += 10
