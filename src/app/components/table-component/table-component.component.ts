@@ -16,6 +16,7 @@ export class TableComponentComponent implements OnInit {
   @Input() currentlast: number;
   @Input() totaldata: number; // -> usado para paginar, recebe o valor total de registros
   @Input() data = [];
+  @Input() idresponsavel: number
   @Input() idsetor:any;
   cities: any
   selectedCityCode: string
@@ -26,7 +27,9 @@ export class TableComponentComponent implements OnInit {
   competenciaModal: any ;
   competenciaModalStatusCompetencia: any ;
   modalstatusCompetencia: boolean = false ;
+  modalGerarCompetencia: boolean = false ;
   empresasModal: any;
+  dadosModalGeralCompetencia: any
 
   @Output() loadnextpage = new EventEmitter<{last: any, table: any}>(); // -> usado emitir evento de next page, para trazer mais dados
   @Output() loadbackpage = new EventEmitter<{last: any, table: any}>(); // -> usado para emitir event de back page, para voltar algums registros
@@ -43,6 +46,7 @@ export class TableComponentComponent implements OnInit {
   constructor (private dctfWebService: DctfWeb, private messageService: MessageService, private primengConfig: PrimeNGConfig) {
     this.totaldata = 0
     this.currentlast = 0
+    this.idresponsavel = 0
     this.last = 0
     this.totaldata = 0
     this.selectedCityCode = ''
@@ -61,6 +65,10 @@ export class TableComponentComponent implements OnInit {
 
   closeModalstatusCompetencia () {
     this.modalstatusCompetencia = false
+  }
+
+  closeModalGerarCompetencia () {
+    this.modalGerarCompetencia = false
   }
 
   ngOnInit (): void {
@@ -94,6 +102,11 @@ export class TableComponentComponent implements OnInit {
   openModalStatusCompetencia (competencia: CompetenciasDcft) {
     this.competenciaModalStatusCompetencia = competencia
     this.modalstatusCompetencia = true
+  }
+
+  openModalGerarCompetencia () {
+    this.dadosModalGeralCompetencia = {}
+    this.modalGerarCompetencia = true
   }
 
   exportDataToXlsx () {

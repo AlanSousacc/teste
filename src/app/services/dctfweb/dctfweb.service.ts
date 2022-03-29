@@ -37,4 +37,8 @@ export class DctfWeb {
   }
 
   getAllDctfCompetenciasReport () { return this.http.get<PaginatorDcftCompetencias>(environment.base_url + 'dctfweb??page=' + '1000') }
+
+  gerarCompetencia (objSend: any):Observable<Paginator> {
+    return this.http.post<any>(environment.base_url + 'dctfweb/gerarcompetencia', objSend)
+  }
 }

@@ -12,12 +12,17 @@ import * as XLSX from 'xlsx'
 export class ModaisEmpresaComponent implements OnInit {
   @Input() displaymodalstatusCompetencia: boolean
   @Input() displayModalCreateEmpresa: boolean
+  @Input() displayModalGerarCompetencia: boolean
+  @Input() idresponsavel: number
+
   @Input() competenciaModal: any
   @Input() competenciaModalStatusCompetencia: any
   @Input() empresasModal: any
   @Output() closedModalCreateEmpresa = new EventEmitter<any>(); // -> usado emitir envento de close do modal create empresa
   @Output() closeModalstatusCompetencia = new EventEmitter<any>(); // -> usado emitir envento de close do modal chang status competencia
-  @Output() onchangData = new EventEmitter<any>();
+  @Output() onchangData = new EventEmitter<any>(); // -> usado para emitir evento de mutacao de dados
+  @Output() closeModalGerarCompetencia = new EventEmitter<any>() // -> usado emitir envento de close do modal gerar competencia;
+  dadosModalGerarCompetencia: any
   loadingProcessingStatus: boolean
   selectedOptionEmpresa: any
   modalcreate: any;
@@ -27,15 +32,14 @@ export class ModaisEmpresaComponent implements OnInit {
     this.competenciaModal = {
       id_empresa_competencia: 1
     }
+    this.idresponsavel = 0
     this.competenciaModalStatusCompetencia = {
       id_empresa_competencia: 1
     }
     this.displaymodalstatusCompetencia = false
     this.displayModalCreateEmpresa = false
     this.loadingProcessingStatus = false
-  }
-
-  ngOnInit (): void {
+    this.displayModalGerarCompetencia = false
     this.empresasModal = [
       { name: '11/2021', value: '59' }
     ]
@@ -48,7 +52,15 @@ export class ModaisEmpresaComponent implements OnInit {
       faturamento: '',
       comentario: ''
     }]
+    this.dadosModalGerarCompetencia = {
+      id_usuario_responsavel: null,
+      competencia: null,
+      data_limite_execucao: null,
+      data_limite_transmissao: null
+    }
+  }
 
+  ngOnInit (): void {
     this.getEmpresasModal()
   }
 
@@ -59,10 +71,18 @@ export class ModaisEmpresaComponent implements OnInit {
     }
     this.loadingProcessingStatus = true
     this.dctfWebService.updateStatusCompetencias(objSend).subscribe(
-      data => this.sucessMessage(),
+      data => this.sucessMessage('Empresa cadastrada no sistema'),
       err => console.log(err)
     )
     this.emitCloseModalStatusEmpresa()
+  }
+
+  gerarCompetencia () {
+    this.dadosModalGerarCompetencia.id_usuario_responsavel = this.idresponsavel
+    this.dctfWebService.gerarCompetencia(this.dadosModalGerarCompetencia).subscribe(
+      data => this.sucessMessage('Competência gerada com sucesso'),
+      err => console.log(err)
+    )
   }
 
   getEmpresasModal () {
@@ -79,8 +99,12 @@ export class ModaisEmpresaComponent implements OnInit {
     this.closeModalstatusCompetencia.emit(true)
   }
 
-  sucessMessage () {
-    this.messageService.add({severity:'success', summary: 'Success', detail: 'Empresa cadastrada no sistema'})
+  emitCloseModalGerarCompetencia () {
+    this.closeModalGerarCompetencia.emit(true)
+  }
+
+  sucessMessage (stringMessage: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: stringMessage })
     this.loadingProcessingStatus = false
     this.emitCloseModalCreateEmpresa()
     this.onchangData.emit(true)
@@ -89,7 +113,7 @@ export class ModaisEmpresaComponent implements OnInit {
   salvarDctf () {
     const objSend = this.competenciaModal
     this.dctfWebService.createEmpresa(objSend).subscribe(
-      data => this.sucessMessage(),
+      data => this.sucessMessage('Empresa cadastrada no sistema'),
       err => console.log(err)
     )
   }

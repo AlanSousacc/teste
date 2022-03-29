@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
   idsetor: any
   last = 0
   currentlast = 0
+  idresponsavel = 1
   counttotaldata=1000
   semdados=false
   constructor (private dctfWebService: DctfWeb) { }
