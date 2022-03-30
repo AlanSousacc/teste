@@ -79,6 +79,9 @@ export class ModaisEmpresaComponent implements OnInit {
 
   gerarCompetencia () {
     this.dadosModalGerarCompetencia.id_usuario_responsavel = this.idresponsavel
+    if (!this.validationGerarCompetencia()) {
+      alert('erro')
+    }
     this.dctfWebService.gerarCompetencia(this.dadosModalGerarCompetencia).subscribe(
       data => this.sucessMessage('Competência gerada com sucesso'),
       err => console.log(err)
@@ -110,8 +113,35 @@ export class ModaisEmpresaComponent implements OnInit {
     this.onchangData.emit(true)
   }
 
+  validationSalvarDctf () {
+    const ValidadeItems = ['id_empresa_competencia', 'competencia']
+    let result = true
+    for (const x of ValidadeItems) {
+      // eslint-disable-next-line no-empty
+      if (this.competenciaModal[x] === null || this.competenciaModal[x].trim() === '') {
+        result = false
+      }
+    }
+    return result
+  }
+
+  validationGerarCompetencia () {
+    const ValidadeItems = ['competencia', 'data_limite_execucao', 'data_limite_transmissao', 'id_usuario_responsavel']
+    let result = true
+    for (const x of ValidadeItems) {
+      // eslint-disable-next-line no-empty
+      if (this.competenciaModalStatusCompetencia[x] === null || this.competenciaModalStatusCompetencia[x].trim() === '') {
+        result = false
+      }
+    }
+    return result
+  }
+
   salvarDctf () {
     const objSend = this.competenciaModal
+    if (!this.validationSalvarDctf()) {
+      alert('erro')
+    }
     this.dctfWebService.createEmpresa(objSend).subscribe(
       data => this.sucessMessage('Empresa cadastrada no sistema'),
       err => console.log(err)

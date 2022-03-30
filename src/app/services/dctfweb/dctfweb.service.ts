@@ -41,4 +41,8 @@ export class DctfWeb {
   gerarCompetencia (objSend: any):Observable<Paginator> {
     return this.http.post<any>(environment.base_url + 'dctfweb/gerarcompetencia', objSend)
   }
+
+  getCompetencia ():Observable<Paginator> {
+    return this.http.get<any>(environment.base_url + 'dctfweb/getcompetencias')
+  }
 }

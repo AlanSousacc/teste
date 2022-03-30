@@ -30,7 +30,7 @@ export class TableComponentComponent implements OnInit {
   modalGerarCompetencia: boolean = false ;
   empresasModal: any;
   dadosModalGeralCompetencia: any
-
+  competenciasFilter: any
   @Output() loadnextpage = new EventEmitter<{last: any, table: any}>(); // -> usado emitir evento de next page, para trazer mais dados
   @Output() loadbackpage = new EventEmitter<{last: any, table: any}>(); // -> usado para emitir event de back page, para voltar algums registros
   @Output() searchdata = new EventEmitter<{value: any}>(); // -> usado para emitir event de pesquisa de dados
@@ -59,6 +59,15 @@ export class TableComponentComponent implements OnInit {
     }
   }
 
+  getCompetencias () {
+    this.dctfWebService.getCompetencia().toPromise().then(
+      (competencias: any) => {
+        this.competenciasFilter = competencias.map((x: any) => {
+          return { name: x.competencia, value: x.id_empresa_competencia }
+        })
+      })
+  }
+
   closedModalCreateEmpresa () {
     this.displayModalCreateEmpresa = false
   }
@@ -84,6 +93,7 @@ export class TableComponentComponent implements OnInit {
       faturamento: '',
       comentario: ''
     }]
+    this.getCompetencias()
   }
 
   onChangData () {
