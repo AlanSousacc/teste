@@ -1,11 +1,8 @@
 <div class="container-fluid">
-
-  <p-dropdown style="padding-bottom: 10px;" [options]="competenciasFilter"  optionLabel="name"
-    optionValue="code"></p-dropdown>
-<p-button label="Pesquisar" ></p-button>
-
+  <p-dropdown style="padding-bottom: 10px;" [options]="competenciasFilter" [ngModelOptions]="{standalone: true}"
+    [(ngModel)]="selectedFilterCompetencia" optionLabel="name"  [style]="{'minWidth':'100%'}"  optionValue="value"></p-dropdown>
+  <p-button (click)="findByCompetencia()" label="Pesquisar"></p-button>
   <div style="padding-bottom: 10px;padding-top:10px" class="row">
-
     <div class="col-3">
       <span class="p-buttonset">
         <button type="button" pButton pRipple icon="pi pi-file" class="mr-2" pTooltip="CSV"

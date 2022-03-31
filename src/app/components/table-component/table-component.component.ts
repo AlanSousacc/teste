@@ -29,6 +29,7 @@ export class TableComponentComponent implements OnInit {
   modalstatusCompetencia: boolean = false ;
   modalGerarCompetencia: boolean = false ;
   empresasModal: any;
+  selectedFilterCompetencia: any
   dadosModalGeralCompetencia: any
   competenciasFilter: any
   @Output() loadnextpage = new EventEmitter<{last: any, table: any}>(); // -> usado emitir evento de next page, para trazer mais dados
@@ -57,6 +58,7 @@ export class TableComponentComponent implements OnInit {
     this.competenciaModalStatusCompetencia = {
       id_empresa_competencia: 1
     }
+    this.selectedFilterCompetencia = {}
   }
 
   getCompetencias () {
@@ -102,6 +104,17 @@ export class TableComponentComponent implements OnInit {
 
   searchData () {
     this.searchdata.emit({ value: this.searchValue })
+  }
+
+  findByCompetencia () {
+    const objSend = {
+      id_empresa_competencia: this.selectedFilterCompetencia
+    }
+    this.idsetor = 8
+    this.dctfWebService.getDctfCompetenciasFindBy(objSend).subscribe(
+      (competencias: any) => {
+        this.data = competencias
+      })
   }
 
   openModalNewEmpresaDctf (competencia: CompetenciasDcft) {
