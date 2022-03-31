@@ -48,6 +48,11 @@ export class DashboardComponent implements OnInit {
     this.setUpTable()
   }
 
+  clearData () {
+    alert('clear')
+    this.competencias = []
+  }
+
   loadNextPage (params: any) {
     this.currentlast = params.last
     this.last += 10

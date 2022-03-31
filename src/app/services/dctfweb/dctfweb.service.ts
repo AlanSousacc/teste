@@ -15,7 +15,9 @@ export class DctfWeb {
 
   getAllDctfCompetencias () { return this.http.get<PaginatorDcftCompetencias>(environment.base_url + 'dctfweb') }
 
-  getDctfCompetenciasFindBy (objSend: any) { return this.http.get<PaginatorDcftCompetencias>(environment.base_url + 'dctfweb', objSend) }
+  getDctfCompetenciasFindBy (objSend: any) {
+    return this.http.get<PaginatorDcftCompetencias>(environment.base_url + 'dctfweb', { params: objSend })
+  }
 
   getPageLink (pageurl: string):Observable<Paginator> {
     const url = pageurl
