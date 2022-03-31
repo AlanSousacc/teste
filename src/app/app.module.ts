@@ -21,6 +21,8 @@ import { TableComponentComponent } from './components/table-component/table-comp
 import { ModaisEmpresaComponent } from './components/modais-empresas/modais-empresa.component'
 import { ToastModule } from 'primeng/toast'
 import { RippleModule } from 'primeng/ripple'
+import { CheckboxModule } from 'primeng/checkbox'
+import { ToggleButtonModule } from 'primeng/togglebutton'
 
 import { MessagesModule } from 'primeng/messages'
 import { MessageModule } from 'primeng/message'
@@ -31,6 +33,8 @@ const cgModules = [
 
 const primeModules = [
   ProgressSpinnerModule,
+  CheckboxModule,
+  ToggleButtonModule,
   ProgressBarModule,
   TableModule,
   ButtonModule,

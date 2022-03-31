@@ -120,9 +120,9 @@
             class="form-control" placeholder="" disabled="true">
         </div>
         <div class="col">
-          <label>Empresa {{selectedEmpresaModalCreate}}</label>
+          <label>Empresa </label>
           <p-dropdown [filter]="true" filterBy="nome" [showClear]="true" placeholder="Select a Country"
-            [style]="{'minWidth':'100%'}" [options]="empresasModal.data" [(ngModel)]="selectedEmpresaModalCreate"
+            [style]="{'minWidth':'100%'}" [options]="empresasModal.data"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedEmpresaModalCreate"
             optionLabel="nome"></p-dropdown>
         </div>
       </div>
@@ -164,6 +164,28 @@
             class="form-control" placeholder=""></textarea>
         </div>
       </div>
+
+      <div style="margin-top: 10px;" class="row">
+        <div class="col">
+          <label>
+            Enviar e-mail para o cliente ao marcar DCTF-WEB
+         </label>
+         <p-toggleButton onLabel="Enviar email" offLabel="Não enviar email" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width': '10em'}"></p-toggleButton>
+        </div>
+
+        <div class="col">
+          <label>
+            Empresa com RH Externo
+         </label>
+         <br>
+         <p-toggleButton  onLabel="Sim" offLabel="Não" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width': '10em'}"></p-toggleButton>
+        </div>
+      </div>
+
+      
+
+  
+
 
     </form>
 

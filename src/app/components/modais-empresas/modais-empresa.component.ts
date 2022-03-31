@@ -1,5 +1,5 @@
 import { DctfWeb } from './../../services/dctfweb/dctfweb.service'
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core'
+import { Component, OnInit, Input, EventEmitter, Output, ComponentFactoryResolver } from '@angular/core'
 import { MessageService, PrimeNGConfig } from 'primeng/api'
 import * as XLSX from 'xlsx'
 
@@ -71,8 +71,8 @@ export class ModaisEmpresaComponent implements OnInit {
     }
     this.loadingProcessingStatus = true
     this.dctfWebService.updateStatusCompetencias(objSend).subscribe(
-      data => this.sucessMessage('Empresa cadastrada no sistema'),
-      err => console.log(err)
+      data => this.sucessMessage('Competência atualizada com sucesso'),
+      () => this.errorMessage('Houve um erro ao atualizar o status da competência')
     )
     this.emitCloseModalStatusEmpresa()
   }
@@ -80,11 +80,11 @@ export class ModaisEmpresaComponent implements OnInit {
   gerarCompetencia () {
     this.dadosModalGerarCompetencia.id_usuario_responsavel = this.idresponsavel
     if (!this.validationGerarCompetencia()) {
-      alert('erro')
+      return
     }
     this.dctfWebService.gerarCompetencia(this.dadosModalGerarCompetencia).subscribe(
       data => this.sucessMessage('Competência gerada com sucesso'),
-      err => console.log(err)
+      () => this.errorMessage('Houve um erro ao gerar a competência')
     )
   }
 
@@ -107,44 +107,61 @@ export class ModaisEmpresaComponent implements OnInit {
   }
 
   sucessMessage (stringMessage: string) {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: stringMessage })
+    this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: stringMessage })
+    this.loadingProcessingStatus = false
+    this.emitCloseModalCreateEmpresa()
+    this.onchangData.emit(true)
+  }
+
+  errorMessage (stringMessage: string) {
+    this.messageService.add({ severity: 'error', summary: 'Erro', detail: stringMessage })
     this.loadingProcessingStatus = false
     this.emitCloseModalCreateEmpresa()
     this.onchangData.emit(true)
   }
 
   validationSalvarDctf () {
-    const ValidadeItems = ['id_empresa_competencia', 'competencia']
+    const ValidadeFields = [{ field: 'id_empresa_competencia', name: 'Empresa' }, { field: 'competencia', name: 'Competencia' }, { field: 'competencia', name: 'Competencia' }]
     let result = true
-    for (const x of ValidadeItems) {
+    for (const x of ValidadeFields) {
       // eslint-disable-next-line no-empty
-      if (this.competenciaModal[x] === null || this.competenciaModal[x].trim() === '') {
+      if (this.competenciaModal[x.field] === null || this.competenciaModal[x.field].trim() === '') {
         result = false
+        this.errorMessage('O campo ' + x.name + ' é obrigatorio')
       }
     }
     return result
   }
 
   validationGerarCompetencia () {
-    const ValidadeItems = ['competencia', 'data_limite_execucao', 'data_limite_transmissao', 'id_usuario_responsavel']
+    const ValidadeFields = [
+      { field: 'competencia', name: 'Competencia' },
+      { field: 'data_limite_execucao', name: 'Limite execução' },
+      { field: 'data_limite_transmissao', name: 'Limite transmissão' },
+      { field: 'id_usuario_responsavel', name: 'Usuario responsavel' }
+    ]
     let result = true
-    for (const x of ValidadeItems) {
+    // eslint-disable-next-line prefer-const
+    for (const x of ValidadeFields) {
       // eslint-disable-next-line no-empty
-      if (this.competenciaModalStatusCompetencia[x] === null || this.competenciaModalStatusCompetencia[x].trim() === '') {
+      this.dadosModalGerarCompetencia[x.field] = typeof this.dadosModalGerarCompetencia[x.field] !== 'number' ? this.dadosModalGerarCompetencia[x.field] : String(this.dadosModalGerarCompetencia[x.field])
+      if (this.dadosModalGerarCompetencia[x.field] === null || this.dadosModalGerarCompetencia[x.field]?.trim() === '') {
         result = false
+        this.errorMessage('O campo ' + x.name + ' é obrigatorio')
       }
     }
     return result
   }
 
   salvarDctf () {
+    this.competenciaModal.empresa = this.selectedEmpresaModalCreate.value
     const objSend = this.competenciaModal
     if (!this.validationSalvarDctf()) {
-      alert('erro')
+      return
     }
     this.dctfWebService.createEmpresa(objSend).subscribe(
       data => this.sucessMessage('Empresa cadastrada no sistema'),
-      err => console.log(err)
+      () => this.errorMessage('Houve um erro ao cadastrar a empresa')
     )
   }
 }
