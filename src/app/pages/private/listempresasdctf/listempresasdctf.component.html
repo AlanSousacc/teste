@@ -1,8 +1,9 @@
 list
 <div class="container-fluid">
-<p-table [value]="data" responsiveLayout="scroll">
+<p-table [value]="data.data" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
+            
             <th colspan="5" style="vertical-align: middle; text-align: center;"></th>
             <th colspan="2" style="text-align: center;">Declarações/RH</th>
             <th colspan="2" style="vertical-align: middle; text-align: center;">RH</th>
@@ -48,16 +49,42 @@ list
 
             
     </ng-template>
-    <ng-template pTemplate="body" let-product>
+    <ng-template pTemplate="body" let-item>
         <tr>
-            <td>{{product.code}}</td>
-            <td>{{product.name}}</td>
-            <td>{{product.category}}</td>
-            <td>{{product.quantity}}</td>
-            <td>{{product.quantity}}</td>
-            <td>{{product.quantity}}</td>
-            <td>{{product.quantity}}</td>
-            <td>{{product.quantity}}</td>
+            <td>{{item.id_dominio}}</td>
+            <td>{{item.nome_emp}}</td>
+            <td>{{item.cnpj}}</td>
+            <td>{{item.regime_tributacao}}</td>
+            <td>{{item.prioridade}}</td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.sem_folha"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.departamento_pessoal"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_ret"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_ret"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_desobrigar"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.conferencia_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_ret"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_desobrigada"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_comp_check"></p-checkbox></td>
+
+
+
+
+            
+            
+
+
+
+            
+
+
+
+            <td>{{item.quantity}}</td>
+            <td>{{item.quantity}}</td>
         </tr>
     </ng-template>
 </p-table>
