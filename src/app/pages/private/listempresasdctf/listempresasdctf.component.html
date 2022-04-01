@@ -1,1 +1,64 @@
 list
+<div class="container-fluid">
+<p-table [value]="data" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            <th colspan="5" style="vertical-align: middle; text-align: center;"></th>
+            <th colspan="2" style="text-align: center;">Declarações/RH</th>
+            <th colspan="2" style="vertical-align: middle; text-align: center;">RH</th>
+            <th colspan="4" style="vertical-align: middle; text-align: center;">Fiscal/Retenções</th>
+            <th colspan="1" style="text-align: center;">RH</th>
+
+            <th colspan="3" style="text-align: center;">Declarações</th>
+            <th colspan="2" style="text-align: center;">RH - Controller</th>
+          
+        </tr>
+        <tr>
+            <th rowspan="2" style="vertical-align: middle; text-align: center;">Cod</th>
+            <th rowspan="2">Empresa</th>
+            <th rowspan="2">CNPJ</th>
+            <th rowspan="2">Tributação</th>
+            <th rowspan="2" style="text-align: center;">Prioridade</th>
+
+            <th rowspan="2" style="text-align: center;">Sem  Folha </th>
+            <th rowspan="2" style="text-align: center;">RH  Externo </th>
+
+            <th colspan="2" style="text-align: center;">E-SOCIAL</th>
+            <th colspan="4" style="text-align: center;">EFD-REINF</th>
+            <th rowspan="2" style="text-align: center;">CONFERÊNCIA</th>
+            <th colspan="3" style="text-align: center;">DCTF WEB</th>
+            <th rowspan="2" style="text-align: center;">DARF</th>
+            <th rowspan="2" style="text-align: center;">DARF COMP</th>
+            
+        </tr>
+        <tr>
+            <th style="text-align: center;">OK</th>
+            <th style="text-align: center;" >Retificação</th>
+            
+            <th style="text-align: center;">OK</th>
+            <th style="text-align: center;" >Sem Retenções de INSS</th>
+            <th style="text-align: center;" >Retificação</th>
+            <th style="text-align: center;">Desobrigar</th>
+            
+            <th style="text-align: center;">OK</th>
+            <th style="text-align: center;">Ret</th>
+            <th style="text-align: center;">Desobrigada</th>
+            
+        </tr>
+
+            
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{product.code}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.quantity}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>

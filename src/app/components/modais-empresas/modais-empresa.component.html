@@ -51,7 +51,6 @@
         </div>
       </div>
     </form>
-
     <ng-template pTemplate="footer">
       <p-button icon="pi pi-check" label="Cancelar" styleClass="p-button-text"></p-button>
       <p-button icon="pi pi-times" [loading]="loadingProcessingStatus" (click)="updateStatusDctf()" label="Salvar">
@@ -120,7 +119,7 @@
             class="form-control" placeholder="" disabled="true">
         </div>
         <div class="col">
-          <label>Empresa </label>
+          <label>Empresa</label>
           <p-dropdown [filter]="true" filterBy="nome" [showClear]="true" placeholder="Select a Country"
             [style]="{'minWidth':'100%'}" [options]="empresasModal.data"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedEmpresaModalCreate"
             optionLabel="nome"></p-dropdown>

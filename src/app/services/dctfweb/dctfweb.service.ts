@@ -49,4 +49,8 @@ export class DctfWeb {
   getCompetencia ():Observable<Paginator> {
     return this.http.get<any>(environment.base_url + 'dctfweb/getcompetencias')
   }
+
+  getListaEmpresasDctf (objSend: any):Observable<Paginator> {
+    return this.http.get<any>(environment.base_url + 'dctfweb/listaempresasdctf', { params: objSend })
+  }
 }

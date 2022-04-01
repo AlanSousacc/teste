@@ -31,10 +31,20 @@
     (closeModalstatusCompetencia)="closeModalstatusCompetencia()"
     (closeModalGerarCompetencia)="closeModalGerarCompetencia()" (onchangData)="onChangData()"></app-modais-empresas>
 
-
   <p-table id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [rows]="10" [lazy]="true"
     [totalRecords]="totaldata" tyle="font-size:16px;padding:20px" [value]="data" responsiveLayout="scroll">
     <ng-template pTemplate="header">
+      
+      <tr>
+        <th></th>
+        <th> Declarações/RH</th>
+        <th>RH</th>
+        <th>Fiscal/Retenções</th>
+        <th>Declarações	RH</th>
+        <th>Controller</th>
+        
+
+      </tr>
       <tr>
         <th>Cod.</th>
         <th>Competência</th>

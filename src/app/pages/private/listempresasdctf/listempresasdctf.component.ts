@@ -1,7 +1,8 @@
 
 import { DctfWeb } from '../../../services/dctfweb/dctfweb.service'
 import { Component, OnInit } from '@angular/core'
-import { Paginator } from 'primeng/paginator'
+import { ActivatedRoute } from '@angular/router'
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './listempresasdctf.component.html',
@@ -9,87 +10,28 @@ import { Paginator } from 'primeng/paginator'
 })
 export class ListempresasdctfComponent implements OnInit {
   currenpage:any
-  competencias: any
-  idsetor: any
-  last = 0
-  currentlast = 0
-  counttotaldata=1000
-  semdados=false
-  constructor (private dctfWebService: DctfWeb) { }
+  data:any
+  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute) { }
 
   async ngOnInit () {
-    await this.setUpTable()
-  }
-
-  async setUpTable () {
-    this.competencias = []
-    this.idsetor = 8
-    this.dctfWebService.getAllDctfCompetencias().subscribe(
-      (competencias: any) => {
-        this.counttotaldata = competencias.total
-        console.log(competencias.data)
-        competencias.data.forEach((competencia: any) => {
-          this.currenpage = competencias
-          this.competencias = competencias.data
-          this.assertCountItems(competencias)
-        })
-      })
-  }
-
-  assertCountItems (topicos: any) {
-    if (topicos.data.length === 0) {
-      this.semdados = true
-    } else {
-      this.semdados = false
-    }
-  }
-
-  loadNextPage (params: any) {
-    this.currentlast = params.last
-    this.last += 10
-    params.table.loading = true
-    this.competencias = []
-    this.dctfWebService.getPageLink(this.currenpage.next_page_url).subscribe(
-      (competencias: any) => {
-        this.assertCountItems(competencias)
-        this.counttotaldata = competencias.total
-        competencias.data.forEach((competencia: Paginator | any) => {
-          this.currenpage = competencias
-          this.competencias.push(competencia)
-          params.table.loading = false
-        })
-      })
-  }
-
-  searchCompetencia (params: any) {
-    this.competencias = []
-    if (params.value.trim() === '') {
-      this.setUpTable()
-    }
-    this.dctfWebService.searchCompetencias(params.value).subscribe((competencias: any) => {
-      this.assertCountItems(competencias)
-      this.counttotaldata = competencias.total
-      competencias.data.forEach((competencia: Paginator | any) => {
-        this.competencias.push(competencia)
-      })
-    })
-  }
-
-  loadBackPage (params: any) {
-    this.currentlast = params.last
-    this.last -= 10
-    params.table.loading = true
-    this.competencias = []
-    this.dctfWebService.getPageLink(this.currenpage.prev_page_url).subscribe(
-      (competencias: any) => {
-        this.assertCountItems(competencias)
-        competencias.data.forEach((competencia: any) => {
-          this.counttotaldata = competencias.total
-          this.currenpage = competencias
-          this.competencias.push(competencia)
-          params.table.loading = false
-        })
+    this.data = [
+      {
+        code: 'dwwd',
+        name: 'sqs',
+        category: 'dwwd',
+        quantity: 'ddwd'
       }
-    )
+    ]
+    this.getList()
+  }
+
+  async getList () {
+    const objSend = {
+      id_empresa_competencia: this.route.snapshot.paramMap.get('id')
+    }
+    this.dctfWebService.getListaEmpresasDctf(objSend).subscribe(
+      (competencias: any) => {
+        this.data = competencias.data
+      })
   }
 }

@@ -1,3 +1,4 @@
+import { ListempresasdctfComponent } from './pages/private/listempresasdctf/listempresasdctf.component';
 import { NgModule, ErrorHandler } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -52,6 +53,7 @@ const primeModules = [
     AppComponent,
     DashboardComponent,
     PageNotFoundComponent,
+    ListempresasdctfComponent,
     TableComponentComponent,
     ModaisEmpresaComponent
   ],
