@@ -4,19 +4,21 @@ import { HttpClient } from '@angular/common/http'
 import { PaginatorDcftCompetencias } from 'src/app/interfaces/dctfweb/DctfCompetencias'
 import { Paginator } from 'primeng/paginator'
 import { Observable } from 'rxjs'
+import { SessionService } from '../global/session.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DctfWeb {
-  constructor (private http: HttpClient) {
-
+  session: any
+  constructor (private http: HttpClient, private sessionService: SessionService) {
+    this.session = this.sessionService.session
   }
 
   getAllDctfCompetencias () { return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb') }
 
   getDctfCompetenciasFindBy (objSend: any) {
-    return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb', { params: objSend })
+    return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb', { params: objSend, headers: { user_id: this.session.id_usuario }})
   }
 
   getPageLink (pageurl: string):Observable<Paginator> {
@@ -25,29 +27,31 @@ export class DctfWeb {
   }
 
   searchCompetencias (stringSearch: string):Observable<Paginator> {
-    return this.http.post<any>(environment.apiUrl + 'dctfweb/search', { stringSearch: stringSearch })
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/search', { stringSearch: stringSearch}, {headers: { user_id: this.session.id_usuario }})
   }
 
   updateStatusCompetencias (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.apiUrl + 'dctfweb/updatestatuscompetencia', objSend)
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/updatestatuscompetencia', objSend,  { headers: { user_id: this.session.id_usuario } })
   }
 
   createEmpresa (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.apiUrl + 'dctfweb/createempresadctf', objSend)
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/createempresadctf', objSend,  { headers: { user_id: this.session.id_usuario } })
   }
 
   updateEmpresaDctf (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.apiUrl + 'dctfweb/updateempresadctf', objSend)
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/updateempresadctf', objSend, { headers: { user_id: this.session.id_usuario } })
   }
 
   getEmpresasModal (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.apiUrl + 'dctfweb/empresasmodal', objSend)
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/empresasmodal', objSend, { headers: { user_id: this.session.id_usuario } })
   }
 
-  getAllDctfCompetenciasReport () { return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb??page=' + '1000') }
+  getAllDctfCompetenciasReport () {
+    return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb??page=' + '1000', { headers: { user_id: this.session.id_usuario } })
+  }
 
   gerarCompetencia (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.apiUrl + 'dctfweb/gerarcompetencia', objSend)
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/gerarcompetencia', objSend, { headers: { user_id: this.session.id_usuario } })
   }
 
   getCompetencia ():Observable<Paginator> {
