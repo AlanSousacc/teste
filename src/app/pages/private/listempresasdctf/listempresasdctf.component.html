@@ -1,58 +1,62 @@
-list
+{{ displaymodalEdicaoEmpresaDctf }}
+
 <div class="container-fluid">
 <p-table [value]="data.data" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
             
-            <th colspan="5" style="vertical-align: middle; text-align: center;"></th>
-            <th colspan="2" style="text-align: center;">Declarações/RH</th>
-            <th colspan="2" style="vertical-align: middle; text-align: center;">RH</th>
-            <th colspan="4" style="vertical-align: middle; text-align: center;">Fiscal/Retenções</th>
-            <th colspan="1" style="text-align: center;">RH</th>
+            <th colspan="5" ></th>
+            <th colspan="2" >Declarações/RH</th>
+            <th colspan="2" >RH</th>
+            <th colspan="4" >Fiscal/Retenções</th>
+            <th colspan="1" >RH</th>
 
-            <th colspan="3" style="text-align: center;">Declarações</th>
-            <th colspan="2" style="text-align: center;">RH - Controller</th>
+            <th colspan="3" >Declarações</th>
+            <th colspan="2">RH - Controller</th>
           
         </tr>
         <tr>
-            <th rowspan="2" style="vertical-align: middle; text-align: center;">Cod</th>
+            <th rowspan="2" >Cod</th>
             <th rowspan="2">Empresa</th>
             <th rowspan="2">CNPJ</th>
             <th rowspan="2">Tributação</th>
-            <th rowspan="2" style="text-align: center;">Prioridade</th>
+            <th rowspan="2" >Prioridade</th>
 
-            <th rowspan="2" style="text-align: center;">Sem  Folha </th>
-            <th rowspan="2" style="text-align: center;">RH  Externo </th>
+            <th rowspan="2" >Sem  Folha </th>
+            <th rowspan="2" >RH  Externo </th>
 
-            <th colspan="2" style="text-align: center;">E-SOCIAL</th>
-            <th colspan="4" style="text-align: center;">EFD-REINF</th>
-            <th rowspan="2" style="text-align: center;">CONFERÊNCIA</th>
-            <th colspan="3" style="text-align: center;">DCTF WEB</th>
-            <th rowspan="2" style="text-align: center;">DARF</th>
-            <th rowspan="2" style="text-align: center;">DARF COMP</th>
+            <th colspan="2" >E-SOCIAL</th>
+            <th colspan="4" >EFD-REINF</th>
+            <th rowspan="2" >CONFERÊNCIA</th>
+            <th colspan="3" >DCTF WEB</th>
+            <th rowspan="2" >DARF</th>
+            <th rowspan="2">DARF COMP</th>
+            <th rowspan="3">AÇÕES</th>
             
         </tr>
         <tr>
-            <th style="text-align: center;">OK</th>
-            <th style="text-align: center;" >Retificação</th>
+            <th >OK</th>
+            <th >Retificação</th>
             
-            <th style="text-align: center;">OK</th>
-            <th style="text-align: center;" >Sem Retenções de INSS</th>
-            <th style="text-align: center;" >Retificação</th>
-            <th style="text-align: center;">Desobrigar</th>
+            <th >OK</th>
+            <th  >Sem Retenções de INSS</th>
+            <th  >Retificação</th>
+            <th >Desobrigar</th>
             
-            <th style="text-align: center;">OK</th>
+            <th>OK</th>
             <th style="text-align: center;">Ret</th>
             <th style="text-align: center;">Desobrigada</th>
             
         </tr>
 
+       
+
             
     </ng-template>
-    <ng-template pTemplate="body" let-item>
+    <ng-template pTemplate="body" let-item let-expanded="expanded">
         <tr>
-            <td>{{item.id_dominio}}</td>
-            <td>{{item.nome_emp}}</td>
+            <td>{{item.id_dominio}} {{item.id_empresa}}</td>
+            <td>{{item.nome_emp}}</td> 
             <td>{{item.cnpj}}</td>
             <td>{{item.regime_tributacao}}</td>
             <td>{{item.prioridade}}</td>
@@ -70,22 +74,25 @@ list
             <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_desobrigada"></p-checkbox></td>
             <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_check"></p-checkbox></td>
             <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_comp_check"></p-checkbox></td>
-
-
-
-
-            
-            
-
-
-
-            
-
-
-
-            <td>{{item.quantity}}</td>
-            <td>{{item.quantity}}</td>
+            <td>
+  
+                <button type="button" pButton pRipple
+                icon="pi pi-pencil" class="mr-2" pTooltip="CSV" (click)="showModalEdit(item)" tooltipPosition="bottom"></button> 
+                <button type="button" pButton pRipple
+                icon="pi pi-envelope" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
+                <button type="button" pButton pRipple
+                icon="pi pi-trash" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
+            </td>
         </tr>
     </ng-template>
+
+   
 </p-table>
+
+{{payloadModalEditEmpresaDctf}}
+<app-modais-listagem-empresas
+  [displaymodalEdicaoEmpresaDctf]="displaymodalEdicaoEmpresaDctf"
+  (closedModalEditDctf)="closedModalEditDctf()"
+  [payloadModalEditEmpresaDctf]="payloadModalEditEmpresaDctf"
+></app-modais-listagem-empresas>
 </div>

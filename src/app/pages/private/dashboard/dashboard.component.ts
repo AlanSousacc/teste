@@ -1,6 +1,8 @@
 import { DctfWeb } from './../../../services/dctfweb/dctfweb.service'
 import { Component, OnInit } from '@angular/core'
 import { Paginator } from 'primeng/paginator'
+import { SessionService } from 'src/app/services/global/session.service'
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,7 +17,7 @@ export class DashboardComponent implements OnInit {
   idresponsavel = 1
   counttotaldata=1000
   semdados=false
-  constructor (private dctfWebService: DctfWeb) { }
+  constructor (private dctfWebService: DctfWeb, private sessionService: SessionService) { }
 
   async ngOnInit () {
     await this.setUpTable()

@@ -2,6 +2,7 @@
 import { DctfWeb } from '../../../services/dctfweb/dctfweb.service'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { SessionService } from 'src/app/services/global/session.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,11 @@ import { ActivatedRoute } from '@angular/router'
 export class ListempresasdctfComponent implements OnInit {
   currenpage:any
   data:any
-  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute) { }
+  displaymodalEdicaoEmpresaDctf:boolean
+  payloadModalEditEmpresaDctf:any
+  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService) { 
+    this.displaymodalEdicaoEmpresaDctf = false
+  }
 
   async ngOnInit () {
     this.data = [
@@ -48,5 +53,14 @@ export class ListempresasdctfComponent implements OnInit {
         })
         this.data = data
       })
+  }
+
+  showModalEdit (rowData: any) {
+    this.payloadModalEditEmpresaDctf = rowData
+    this.displaymodalEdicaoEmpresaDctf = true
+  }
+
+  closedModalEditDctf () {
+    this.displaymodalEdicaoEmpresaDctf = false
   }
 }

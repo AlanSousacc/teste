@@ -1,6 +1,6 @@
 export const environment = {
-  production: true,
+  production: false,
   siteUrl: 'http://localhost/',
-  apiUrl: 'http://localhost/api/',
+  apiUrl: 'http://localhost:8034/',
   isMobile: window.screen.width < 768
 }

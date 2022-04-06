@@ -1,0 +1,112 @@
+<div>
+
+  <!-- Toast componente utilizado para mostrar mensagems -->
+  <p-toast></p-toast>
+
+
+  <!-- Toast de questão, utilizado para fazer um perguta ao usuario -->
+  <p-toast position="bottom-center" key="c" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+      <div class="p-flex p-flex-column" style="flex: 1">
+        <div class="p-text-center">
+          <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+          <h4>{{message.summary}}</h4>
+          <p>{{message.detail}}</p>
+        </div>
+        <div class="p-grid p-fluid">
+          <div class="p-col-6">
+            <button type="button" pButton label="Yes" class="p-button-success"></button>
+          </div>
+          <div class="p-col-6">
+            <button type="button" pButton label="No" class="p-button-secondary"></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+
+  <!-- Modal de alteração do status da competencia -->
+  <p-dialog [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" (onHide)="emitCloseModalEditEmpresaDctf()"
+    [baseZIndex]="10000" header="Edição de Empresa DCTF-WEB" [(visible)]="displaymodalEdicaoEmpresaDctf"
+    [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <form>
+      <div class="row">
+        <input type="hidden" id="id_empresa_competencia" class="form-control" placeholder="">
+        <input type="hidden" id="empresa"  [(ngModel)]="payloadModalEditEmpresaDctf.id_empresa" class="form-control" placeholder="">
+        <div class="col">
+          <label>Competência payloadModalEditEmpresaDctf{{payloadModalEditEmpresaDctf.id_empresa_dctf}}</label>
+          <input type="text"   [(ngModel)]="payloadModalEditEmpresaDctf.competencia" [ngModelOptions]="{standalone: true}"
+            class="form-control" placeholder="" disabled="true">
+        </div>
+        <div class="col">
+          <label>Empresa</label>
+            <input type="text"    [(ngModel)]="payloadModalEditEmpresaDctf.razao_social" [ngModelOptions]="{standalone: true}"
+            class="form-control" placeholder="" disabled="true">
+        </div>
+      </div>
+
+      <div style="margin-top: 10px;" class="row">
+        <div class="col">
+          <label>Status</label>
+          <select 
+            class="form-control form-control-sm">
+            <option selected value="1">Ativa</option>
+            <option value="2">Inativa</option>
+          </select>
+        </div>
+
+        <!--
+        <div class="col">
+          <label>Prioridade</label>
+          <select 
+            class="form-control form-control-sm">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="2">3</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-top: 10px;" class="row">
+        <div class="col">
+          <label>Faturamento R$</label>
+          <input step="0.01"
+            type="number" class="form-control" placeholder="">
+        </div>
+        <div class="col">
+        </div>-->
+      </div>
+
+      <div style="margin-top: 10px;" class="row">
+        <div class="col">
+          <label>Comentário</label>
+          <textarea type="number"
+            class="form-control"  [(ngModel)]="payloadModalEditEmpresaDctf.comentario" [ngModelOptions]="{standalone: true}" placeholder=""></textarea>
+        </div>
+      </div>
+
+      <div style="margin-top: 10px;" class="row">
+        <div class="col">
+          <label>
+            Enviar e-mail para o cliente ao marcar DCTF-WEB
+         </label>
+         <p-toggleButton onLabel="Enviar email" offLabel="Não enviar email" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width': '10em'}"></p-toggleButton>
+        </div>
+
+        <div class="col">
+          <label>
+            Empresa com RH Externo
+         </label>
+         <br>
+         <p-toggleButton  onLabel="Sim" offLabel="Não" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width': '10em'}"></p-toggleButton>
+        </div>
+      </div>
+    </form>
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" label="Cancelar" styleClass="p-button-text"></p-button>
+      <p-button icon="pi pi-times" [loading]="loadingProcessingStatus" (click)="updateEmpresaDctf()" label="Salvar">
+      </p-button>
+    </ng-template>
+  </p-dialog>
+
+</div>

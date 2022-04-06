@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+.p-datatable .p-datatable-thead > tr > th {
+    text-align: left;
+    padding: 0.571rem 0.857rem;
+    border: 1px solid #c8c8c8;
+    border-width: 1px 1px 1px 1px;
+    font-weight: 700;
+    color: #333333;
+    background: #f4f4f4;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    font-size: 10px
+}

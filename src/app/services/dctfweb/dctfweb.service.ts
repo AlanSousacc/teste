@@ -13,10 +13,10 @@ export class DctfWeb {
 
   }
 
-  getAllDctfCompetencias () { return this.http.get<PaginatorDcftCompetencias>(environment.base_url + 'dctfweb') }
+  getAllDctfCompetencias () { return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb') }
 
   getDctfCompetenciasFindBy (objSend: any) {
-    return this.http.get<PaginatorDcftCompetencias>(environment.base_url + 'dctfweb', { params: objSend })
+    return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb', { params: objSend })
   }
 
   getPageLink (pageurl: string):Observable<Paginator> {
@@ -25,32 +25,36 @@ export class DctfWeb {
   }
 
   searchCompetencias (stringSearch: string):Observable<Paginator> {
-    return this.http.post<any>(environment.base_url + 'dctfweb/search', { stringSearch: stringSearch })
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/search', { stringSearch: stringSearch })
   }
 
   updateStatusCompetencias (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.base_url + 'dctfweb/updatestatuscompetencia', objSend)
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/updatestatuscompetencia', objSend)
   }
 
   createEmpresa (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.base_url + 'dctfweb/createempresadctf', objSend)
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/createempresadctf', objSend)
+  }
+
+  updateEmpresaDctf (objSend: any):Observable<Paginator> {
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/updateempresadctf', objSend)
   }
 
   getEmpresasModal (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.base_url + 'dctfweb/empresasmodal', objSend)
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/empresasmodal', objSend)
   }
 
-  getAllDctfCompetenciasReport () { return this.http.get<PaginatorDcftCompetencias>(environment.base_url + 'dctfweb??page=' + '1000') }
+  getAllDctfCompetenciasReport () { return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb??page=' + '1000') }
 
   gerarCompetencia (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.base_url + 'dctfweb/gerarcompetencia', objSend)
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/gerarcompetencia', objSend)
   }
 
   getCompetencia ():Observable<Paginator> {
-    return this.http.get<any>(environment.base_url + 'dctfweb/getcompetencias')
+    return this.http.get<any>(environment.apiUrl + 'dctfweb/getcompetencias')
   }
 
   getListaEmpresasDctf (objSend: any):Observable<Paginator> {
-    return this.http.get<any>(environment.base_url + 'dctfweb/listaempresasdctf', { params: objSend })
+    return this.http.get<any>(environment.apiUrl + 'dctfweb/listaempresasdctf', { params: objSend })
   }
 }

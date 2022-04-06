@@ -1,9 +1,11 @@
+
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ListempresasdctfComponent } from './pages/private/listempresasdctf/listempresasdctf.component';
 import { NgModule, ErrorHandler } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { TableModule } from 'primeng/table'
 import { CgInputTextModule } from './components/cg-input-text/cg-input-text.module'
 import { ProgressBarModule } from 'primeng/progressbar'
@@ -20,6 +22,7 @@ import { DialogModule } from 'primeng/dialog'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { TableComponentComponent } from './components/table-component/table-component.component'
 import { ModaisEmpresaComponent } from './components/modais-empresas/modais-empresa.component'
+import { ModaisListagemEmpresasComponent } from './components/modais-listagem-empresas/modais-listagem-empresas.component'
 import { ToastModule } from 'primeng/toast'
 import { RippleModule } from 'primeng/ripple'
 import { CheckboxModule } from 'primeng/checkbox'
@@ -55,7 +58,8 @@ const primeModules = [
     PageNotFoundComponent,
     ListempresasdctfComponent,
     TableComponentComponent,
-    ModaisEmpresaComponent
+    ModaisEmpresaComponent,
+    ModaisListagemEmpresasComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +72,7 @@ const primeModules = [
     ...primeModules
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ],
   bootstrap: [AppComponent]
