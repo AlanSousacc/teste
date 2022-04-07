@@ -30,6 +30,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton'
 
 import { MessagesModule } from 'primeng/messages'
 import { MessageModule } from 'primeng/message'
+import { FiltrosListagemEmpresasComponent } from './components/filtros-listagem-empresas/modais-empresas/filtros-listagem-empresas.component'
 
 const cgModules = [
   CgInputTextModule
@@ -59,7 +60,8 @@ const primeModules = [
     ListempresasdctfComponent,
     TableComponentComponent,
     ModaisEmpresaComponent,
-    ModaisListagemEmpresasComponent
+    ModaisListagemEmpresasComponent,
+    FiltrosListagemEmpresasComponent
   ],
   imports: [
     BrowserModule,

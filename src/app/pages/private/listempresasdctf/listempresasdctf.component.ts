@@ -14,6 +14,7 @@ export class ListempresasdctfComponent implements OnInit {
   data:any
   displaymodalEdicaoEmpresaDctf:boolean
   payloadModalEditEmpresaDctf:any
+  filterEmpresas:any
   constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService) { 
     this.displaymodalEdicaoEmpresaDctf = false
   }
@@ -28,6 +29,19 @@ export class ListempresasdctfComponent implements OnInit {
       }
     ]
     this.getList()
+    this.getFilterEmpresas()
+  }
+
+  async getFilterEmpresas () {
+    const objSend = {
+      id_empresa_competencia: this.route.snapshot.paramMap.get('id')
+    }
+    this.dctfWebService.getListaEmpresasDctf(objSend).subscribe(
+      (data: any) => {
+        this.filterEmpresas = data.data.map((x: any) => {
+          return { name: x.nome_emp, value: x.id_empresa }
+        })
+      })
   }
 
   async getList () {

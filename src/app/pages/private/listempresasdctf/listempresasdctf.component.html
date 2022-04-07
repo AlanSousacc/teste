@@ -1,6 +1,12 @@
-{{ displaymodalEdicaoEmpresaDctf }}
-
+  
 <div class="container-fluid">
+
+    <app-filtros-listagem-empresas class="filtros"
+       [filtroEmpresas]="filterEmpresas"
+    >
+    </app-filtros-listagem-empresas>
+
+    
 <p-table [value]="data.data" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
