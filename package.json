@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "homologation": "ng build --configuration hml",
     "test": "ng test",
-    "lint": "npx eslint --fix src/**/*.ts"
+    "lint": "npx eslint --fix src/**/*.ts",
+    "jenkins-hml": "ng build --configuration jenkins-hml",
+    "jf": "ng build --configuration jf"
   },
   "private": true,
   "dependencies": {
