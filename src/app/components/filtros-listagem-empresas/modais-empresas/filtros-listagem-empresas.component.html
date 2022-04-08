@@ -1,36 +1,34 @@
 <div>
  
   <div class="row">
-
     <div class="col-lg-2">
-      <label>Empresa</label>
+      <label>Empresa {{filters | json}}</label>
       <div class="input-group">
         <p-dropdown [filter]="true" filterBy="name"  placeholder="Select a Country"
-        [style]="{'minWidth':'100%'}" [options]="filtroEmpresas"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedEmpresaFiltro"   [showClear]="true" placeholder="Select a Country" optionLabel="name"></p-dropdown>
+        [style]="{'minWidth':'100%'}" [options]="filtroEmpresas"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedEmpresaFiltro" (onChange)="setFilter('empresa', selectedEmpresaFiltro.value)"  [showClear]="true" placeholder="Select a Country" optionLabel="name"></p-dropdown>
       </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
     
     <div class="col-lg-2">
-      <label>Código</label>
+      <label>Código {{filters.codigo}}</label>
       <div class="input-group">
         <input [(ngModel)]="filters.codigo" type="text"
-        [ngModelOptions]="{standalone: true}" class="form-control" placeholder="">
+        [ngModelOptions]="{standalone: true}" (change)="setFilter('codigo', filters.codigo)"  class="form-control" placeholder="">
       </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
     <div class="col-lg-2">
       <label>Tarefa</label>
       <div class="input-group">
-        <p-dropdown [filter]="true" filterBy="name" [options]="tarefas"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTarefaFiltro"   [showClear]="true" placeholder="Select a Country"
+        <p-dropdown [filter]="true" filterBy="name" [options]="tarefas" (onChange)="setFilter('tarefa', selectedTarefaFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTarefaFiltro"   [showClear]="true" placeholder="Select a Country"
         [style]="{'minWidth':'100%'}" 
         optionLabel="name"></p-dropdown>
       </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
   
-
     <div class="col-lg-2">
       <label>Status</label>
       <div class="input-group">
-        <p-dropdown [filter]="true" filterBy="name" [options]="status"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedStatusFiltro"   [showClear]="true" placeholder="Select a Country"
+        <p-dropdown [filter]="true" filterBy="name" [options]="status" (onChange)="setFilter('status', selectedStatusFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedStatusFiltro"   [showClear]="true" placeholder="Select a Country"
         [style]="{'minWidth':'100%'}" 
         optionLabel="name"></p-dropdown>
       </div><!-- /input-group -->
@@ -39,7 +37,7 @@
     <div class="col-lg-2">
       <label>Tributação</label>
       <div class="input-group">
-        <p-dropdown [filter]="true" filterBy="name"  [options]="tributacao"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTributacaoFiltro"  [showClear]="true" placeholder="Select a Country"
+        <p-dropdown [filter]="true" filterBy="name"  [options]="tributacao" (onChange)="setFilter('tributacao', selectedTributacaoFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTributacaoFiltro"  [showClear]="true" placeholder="Select a Country"
         [style]="{'minWidth':'100%'}" 
         optionLabel="name"></p-dropdown>
       </div><!-- /input-group -->
@@ -47,7 +45,7 @@
 
     <div class="col-lg-2">
       <div  style="padding: 35px; padding-left: 0px;" class="input-group">
-        <button  pButton type="button" label="Filtrar" ></button>
+        <button (click)="search()"  pButton type="button" label="Filtrar" ></button>
       </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
     

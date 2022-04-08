@@ -1,7 +1,8 @@
 
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import * as XLSX from 'xlsx'
-
+import { DctfWeb } from 'src/app/services/dctfweb/dctfweb.service'
+import { Tributacoes } from 'src/app/services/dctfweb/tributacoes.service'
 @Component({
   selector: 'app-filtros-listagem-empresas',
   templateUrl: './filtros-listagem-empresas.component.html',
@@ -9,6 +10,9 @@ import * as XLSX from 'xlsx'
 })
 export class FiltrosListagemEmpresasComponent implements OnInit {
   @Input() filtroEmpresas: any
+  @Input() idEmpresaCompetencia: any
+  @Output() onFiltred = new EventEmitter<any>();
+
   selectedEmpresaFiltro:any
   selectedTarefaFiltro:any
   selectedStatusFiltro:any
@@ -17,10 +21,8 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
   tarefas: any
   status: any
   tributacao: any
-  constructor () {
-    this.filters = {
-
-    }
+  constructor (private dctfWebService: DctfWeb, private tributacoesService: Tributacoes) {
+    this.filters = {}
     this.tarefas = [
       { name: 'Conferência', value: '1' },
       { name: 'DARF', value: '2' },
@@ -40,15 +42,41 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
     ]
 
     this.tributacao = [
-      { name: 'Estimativa', value: '1' },
-      { name: 'Imune do IRPJ', value: '2' },
-      { name: 'Lucro Arbitrado', value: '3' },
-      { name: 'Lucro Presumido', value: '4' },
-      { name: 'Não Configurado', value: '5' },
-      { name: 'Regime Especial de Tributação', value: '6' }
     ]
   }
 
   ngOnInit (): void {
+    this.getTributacoes()
+    this.setFilter('id_empresa_competencia', this.idEmpresaCompetencia)
+  }
+
+  getTributacoes () {
+    this.tributacoesService.getTributacoes(this.filters).subscribe(
+      (data: any) => {
+        this.tributacao = data.data.map((x: any) => {
+          return { name: x.regime_tributacao, value: x.id_regime_tributacao }
+        })
+      })
+  }
+
+  setClear (setClear: any) {
+    alert('clear')
+    delete this.filters[setClear]
+  }
+
+  search () {
+    this.dctfWebService.getListaEmpresasDctf(this.filters).subscribe(
+      (data: any) => {
+        this.onFiltred.emit(data)
+      })
+  }
+
+  setFilter (nameFilter: string, value:any) {
+    alert(value)
+    // eslint-disable-next-line prefer-const
+    if (value == null) {
+      this.filters[nameFilter] = delete this.filters[nameFilter]
+    }
+    this.filters[nameFilter] = value
   }
 }

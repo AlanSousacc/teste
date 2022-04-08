@@ -15,7 +15,8 @@ export class ListempresasdctfComponent implements OnInit {
   displaymodalEdicaoEmpresaDctf:boolean
   payloadModalEditEmpresaDctf:any
   filterEmpresas:any
-  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService) { 
+  idEmpresaCompetencia:any
+  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService) {
     this.displaymodalEdicaoEmpresaDctf = false
   }
 
@@ -30,6 +31,7 @@ export class ListempresasdctfComponent implements OnInit {
     ]
     this.getList()
     this.getFilterEmpresas()
+    this.idEmpresaCompetencia = this.route.snapshot.paramMap.get('id')
   }
 
   async getFilterEmpresas () {
@@ -51,18 +53,7 @@ export class ListempresasdctfComponent implements OnInit {
     this.dctfWebService.getListaEmpresasDctf(objSend).subscribe(
       (data: any) => {
         data.data.map((x: any) => {
-          x.sem_folha = x.sem_folha === '1'
-          x.departamento_pessoal = x.departamento_pessoal === '1'
-          x.esocial_check = x.esocial_check === '1'
-          x.esocial_ret = x.esocial_ret === '1'
-          x.efd_check = x.efd_check === '1'
-          x.efd_desobrigar = x.efd_desobrigar === '1'
-          x.conferencia_check = x.conferencia_check === '1'
-          x.dctf_check = x.dctf_check === '1'
-          x.dctf_ret = x.dctf_ret === '1'
-          x.dctf_desobrigada = x.dctf_desobrigada === '1'
-          x.darf_check = x.darf_check === '1'
-          x.darf_comp_check = x.darf_comp_check === '1'
+          x = this.parseBooleanChecks(x)
           return x
         })
         this.data = data
@@ -76,5 +67,29 @@ export class ListempresasdctfComponent implements OnInit {
 
   closedModalEditDctf () {
     this.displaymodalEdicaoEmpresaDctf = false
+  }
+
+  parseBooleanChecks (x: any) {
+    x.sem_folha = x.sem_folha === '1'
+    x.departamento_pessoal = x.departamento_pessoal === '1'
+    x.esocial_check = x.esocial_check === '1'
+    x.esocial_ret = x.esocial_ret === '1'
+    x.efd_check = x.efd_check === '1'
+    x.efd_desobrigar = x.efd_desobrigar === '1'
+    x.conferencia_check = x.conferencia_check === '1'
+    x.dctf_check = x.dctf_check === '1'
+    x.dctf_ret = x.dctf_ret === '1'
+    x.dctf_desobrigada = x.dctf_desobrigada === '1'
+    x.darf_check = x.darf_check === '1'
+    x.darf_comp_check = x.darf_comp_check === '1'
+    return x
+  }
+
+  setFiltredData (data: any) {
+    data.data.map((x: any) => {
+      x = this.parseBooleanChecks(x)
+      return x
+    })
+    this.data = data
   }
 }

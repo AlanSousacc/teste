@@ -61,6 +61,6 @@ export class DctfWeb {
   }
 
   getListaEmpresasDctf (objSend: any):Observable<Paginator> {
-    return this.http.get<any>(environment.apiUrl + 'dctfweb/listaempresasdctf', { params: objSend })
+    return this.http.get<any>(environment.apiUrl + 'dctfweb/listaempresasdctf', { params: objSend, headers: { userid: this.session.id_usuario } })
   }
 }

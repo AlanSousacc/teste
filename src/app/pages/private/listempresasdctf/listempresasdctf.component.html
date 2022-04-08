@@ -3,6 +3,8 @@
 
     <app-filtros-listagem-empresas class="filtros"
        [filtroEmpresas]="filterEmpresas"
+       [idEmpresaCompetencia]="idEmpresaCompetencia"
+       (onFiltred)="setFiltredData($event)"
     >
     </app-filtros-listagem-empresas>
 
