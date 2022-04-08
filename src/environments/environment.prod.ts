@@ -1,6 +1,5 @@
 export const environment = {
-  production: false,
-  siteUrl: 'http://localhost/',
-  apiUrl: 'http://localhost:8034/',
-  isMobile: window.screen.width < 768
+  production: true,
+  siteUrl: 'https://intranet.cg.local/',
+  apiUrl: 'https://intranet.cg.local:8034/api/'
 }
