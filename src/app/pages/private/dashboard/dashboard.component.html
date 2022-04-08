@@ -1,1 +1,8 @@
 <p>dashboard works!</p>
+
+<app-table-component [data]="competencias" [idsetor]="idsetor" [idresponsavel]="idresponsavel"
+  [totaldata]="counttotaldata" (loadnextpage)="loadNextPage($event)" (loadbackpage)="loadBackPage($event)"
+  [currentlast]="currentlast" (searchdata)="searchCompetencia($event)" (onchangData)="onChangData()"
+  (clearData)="clearData()"
+  >
+</app-table-component>

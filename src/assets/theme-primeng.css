@@ -1,0 +1,290 @@
+.p-datatable table {
+  border-collapse: collapse;
+  min-width: 100%;
+  font-size: 10px;
+  table-layout: fixed;
+}
+
+
+/*Input*/
+body .ui-inputtext:enabled:focus:not(.ui-state-error) {
+  border-color: orange !important;
+}
+
+/*Checkbox*/
+body .ui-chkbox .ui-chkbox-box.ui-state-focus {
+  border-color: #ffc107 !important;
+  background-color: #181818 !important;
+  color: #ffc107 !important;
+  -webkit-box-shadow: 0 0 0 0.2em #fdd661 !important;
+  -moz-box-shadow: 0 0 0 0.2em #fdd661 !important;
+  box-shadow: 0 0 0 0.2em #fdd661 !important;
+}
+body .ui-chkbox .ui-chkbox-box.ui-state-active {
+  border-color: #ffc107 !important;
+  background-color: #ffc107 !important;
+  color: #181818 !important;
+}
+body .ui-chkbox .ui-chkbox-box.ui-state-active:not(.ui-state-disabled):hover {
+  border-color: orange !important;
+  background-color: #ffc107 !important;
+  color: #181818 !important;
+}
+body .ui-chkbox .ui-chkbox-box.ui-state-active.ui-state-focus {
+  border-color: #ffc107 !important;
+  background-color: #ffc107 !important;
+  color: #181818 !important;
+}
+
+/*Dropdown*/
+body .ui-dropdown:not(.ui-state-disabled).ui-state-focus {
+  border-color: #4b4b4b !important;
+}
+body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight, body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group.ui-state-highlight {
+  background-color: #4b4b4b !important;
+}
+
+/*Multiselect*/
+body .ui-multiselect:not(.ui-state-disabled).ui-state-focus {
+  border-color: #4b4b4b !important;
+}
+body .ui-multiselect-panel .ui-multiselect-items .ui-multiselect-item.ui-state-highlight {
+  background-color: #4b4b4b !important;
+}
+
+/*Datepicker*/
+body .ui-datepicker table td > a.ui-state-active, body .ui-datepicker table td > span.ui-state-active {
+  color: #ffffff !important;
+  background-color: #ffc107 !important;
+}
+body .ui-datepicker table td.ui-datepicker-today > a.ui-state-active, body .ui-datepicker table td.ui-datepicker-today > span.ui-state-active {
+  color: #ffffff !important;
+  background-color: #ffc107 !important;
+}
+body .ui-datepicker .ui-timepicker a:hover {
+  color: #ffc107 !important;
+}
+body .ui-datepicker .ui-monthpicker .ui-monthpicker-month.ui-state-active {
+  color: #ffffff !important;
+  background-color: #ffc107 !important;
+}
+
+/*Button*/
+body .ui-button {
+  color: #000 !important;
+  background-color: #ffc107 !important;
+  border: 1px solid #ffc107 !important;
+}
+body .ui-button:enabled:hover {
+  background-color: orange !important;
+  color: #000 !important;
+  border-color: #ffc107 !important;
+}
+
+/*Accordion*/
+body .ui-accordion .ui-accordion-header a {
+  border: 1px solid #888 !important;
+  color: #fff !important;
+  background-color: #555 !important;
+  color: #fff !important;
+  font-weight: 400 !important;
+}
+body .ui-accordion .ui-accordion-header a .ui-accordion-toggle-icon {
+  color: #fff !important;
+}
+body .ui-accordion .ui-accordion-header:not(.ui-state-active):not(.ui-state-disabled):hover a {
+  background-color: #333 !important;
+  border: 1px solid #333 !important;
+  color: #fff !important;
+}
+body .ui-accordion .ui-accordion-header:not(.ui-state-active):not(.ui-state-disabled):hover a .ui-accordion-toggle-icon {
+  color: #fff !important;
+}
+body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active a {
+  background-color: #fabb00 !important;
+  border: 1px solid #fabb00 !important;
+  color: #181818 !important;
+}
+body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active a .ui-accordion-toggle-icon {
+  color: #181818 !important;
+}
+body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active:hover a {
+  border: 1px solid #fabb00 !important;
+  background-color: #fabb00 !important;
+  color: #181818 !important;
+}
+body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active:hover a .ui-accordion-toggle-icon {
+  color: #181818 !important;
+}
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+  background-color: #ffc107 !important;
+  color: #333 !important;
+}
+
+/*Table*/
+body .ui-table .ui-table-thead > tr > th {
+  color: #fff !important;
+  background-color: #555 !important;
+}
+body .ui-table .ui-sortable-column.ui-state-highlight {
+  background-color: #eb9c0b !important;
+}
+body .ui-table .ui-editable-column input:focus {
+  outline: 1px solid #eb9c0b !important;
+}
+body .ui-table .ui-table-tbody > tr.ui-state-highlight {
+  background-color: #eb9c0b !important;
+}
+body .ui-table .ui-table-tbody > tr.ui-contextmenu-selected {
+  background-color: #eb9c0b !important;
+}
+body .ui-table .ui-table-tbody > tr.ui-table-dragpoint-bottom > td {
+  -webkit-box-shadow: inset 0 -2px 0 0 #eb9c0b !important;
+  -moz-box-shadow: inset 0 -2px 0 0 #eb9c0b !important;
+  box-shadow: inset 0 -2px 0 0 #eb9c0b !important;
+}
+body .ui-table .ui-table-tbody > tr:nth-child(even).ui-state-highlight {
+  background-color: #eb9c0b !important;
+}
+body .ui-table .ui-table-tbody > tr:nth-child(even).ui-contextmenu-selected {
+  background-color: #eb9c0b !important;
+}
+body .ui-table .ui-column-resizer-helper {
+  background-color: #eb9c0b !important;
+}
+
+/*Treetable*/
+body .ui-treetable .ui-treetable-thead > tr > th {
+  color: #fff !important;
+  background-color: #555 !important;
+}
+body .ui-treetable .ui-sortable-column.ui-state-highlight {
+  background-color: #eb9c0b !important;
+  color: rgb(75, 71, 71) !important;
+}
+body .ui-treetable .ui-sortable-column.ui-state-highlight .ui-sortable-column-icon {
+  color: #ffffff !important;
+}
+body .ui-treetable .ui-treetable-tbody > tr > td .ui-treetable-toggler {
+  color: #333 !important;
+}
+body .ui-treetable .ui-treetable-tbody > tr.ui-state-highlight {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+body .ui-treetable .ui-treetable-tbody > tr.ui-contextmenu-selected {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+/*Carousel*/
+body .ui-carousel .ui-carousel-header {
+  background-color: #ffc107 !important;  
+  color: #000 !important;
+  font-weight: 400 !important;
+}
+
+/*Toast*/
+body .ui-toast .ui-toast-message.ui-toast-message-warn {
+  background-color: #fff !important;
+}
+
+/*Dialog*/
+body .ui-dialog .ui-dialog-titlebar {
+  border: 1px solid #ffc107 !important;
+  background-color: #ffc107 !important;
+  color: #000 !important;
+  font-weight: bold !important;
+}
+body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon {
+  color: #000 !important;
+}
+
+/*Tab Menu*/
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem {
+  background-color: #555 !important;
+}
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem .ui-menuitem-link {
+  color: #ffc107 !important;
+}
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem .ui-menuitem-link .ui-menuitem-text {
+  color: #fff !important;
+}
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem .ui-menuitem-link .ui-menuitem-icon {
+  color: #ffc107 !important;
+}
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:not(.ui-state-active):not(.ui-state-disabled):hover {
+  background-color: #222 !important;
+  color: #ffc107 !important;
+}
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:not(.ui-state-active):not(.ui-state-disabled):hover .ui-menuitem-link .ui-menuitem-text {
+  color: #fff !important;
+}
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:not(.ui-state-active):not(.ui-state-disabled):hover .ui-menuitem-link .ui-menuitem-icon {
+  color: #ffc107 !important;
+}
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active {
+  background-color: #ffc107 !important;
+  border: 1px solid #ffc107 !important;
+}
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active .ui-menuitem-link .ui-menuitem-text {
+  color: #212529 !important;
+}
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active .ui-menuitem-link .ui-menuitem-icon {
+  color: #212529 !important;
+}
+
+/*Panel menu*/
+body .ui-panelmenu .ui-panelmenu-header.ui-state-active > a {
+  border: 1px solid #000 !important;
+  background-color: #000 !important;
+  color: #ffc107 !important;
+}
+body .ui-panelmenu .ui-panelmenu-header.ui-state-active > a:hover {
+  border: 1px solid #000 !important;
+  background-color: #000 !important;
+  color: #ffc107 !important;
+}
+body .ui-progressbar .ui-progressbar-value {
+  background: #ffc107 !important;
+}
+
+/*Panel*/
+body .ui-panel .ui-panel-titlebar {
+  background-color: #555 !important;
+  color: #FFF !important;
+}
+
+/*TabView*/
+/*Não Selecionado*/
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li, body .ui-tabview.ui-tabview-left .ui-tabview-nav li, body .ui-tabview.ui-tabview-right .ui-tabview-nav li {
+  border: 1px solid #555 !important;
+  background-color: #555 !important;
+}
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li a, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li a, body .ui-tabview.ui-tabview-left .ui-tabview-nav li a, body .ui-tabview.ui-tabview-right .ui-tabview-nav li a{
+  color: #fff  !important;
+}
+/*Não Selecionado - Mouse em cima*/
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li .ui-tabview-close, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li .ui-tabview-close, body .ui-tabview.ui-tabview-left .ui-tabview-nav li .ui-tabview-close, body .ui-tabview.ui-tabview-right .ui-tabview-nav li .ui-tabview-close {
+  color: #fff !important;
+}
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li:not(.ui-state-active):not(.ui-state-disabled):hover, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li:not(.ui-state-active):not(.ui-state-disabled):hover, body .ui-tabview.ui-tabview-left .ui-tabview-nav li:not(.ui-state-active):not(.ui-state-disabled):hover, body .ui-tabview.ui-tabview-right .ui-tabview-nav li:not(.ui-state-active):not(.ui-state-disabled):hover {
+  background-color: #222 !important;
+  border: 1px solid #222 !important;
+}
+/*Selecionado*/
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li.ui-state-active, body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active, body .ui-tabview.ui-tabview-right .ui-tabview-nav li.ui-state-active {
+  background-color: #ffc107 !important;
+  border: 1px solid #ffc107 !important;
+}
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li.ui-state-active a, body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active a, body .ui-tabview.ui-tabview-right .ui-tabview-nav li.ui-state-active a {
+  color: #000 !important;
+}
+/*Selecionado - Mouse em cima*/
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active:hover, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li.ui-state-active:hover, body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active:hover, body .ui-tabview.ui-tabview-right .ui-tabview-nav li.ui-state-active:hover {
+  border: 1px solid #eb9c0b !important;
+  background-color: #eb9c0b !important;
+}
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active:hover a, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li.ui-state-active:hover a, body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active:hover a, body .ui-tabview.ui-tabview-right .ui-tabview-nav li.ui-state-active:hover a {
+  color: #000 !important;
+}

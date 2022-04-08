@@ -1,0 +1,106 @@
+  
+<div class="container-fluid">
+
+    <app-filtros-listagem-empresas class="filtros"
+       [filtroEmpresas]="filterEmpresas"
+       [idEmpresaCompetencia]="idEmpresaCompetencia"
+       (onFiltred)="setFiltredData($event)"
+    >
+    </app-filtros-listagem-empresas>
+
+    
+<p-table [value]="data.data" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            
+            <th colspan="5" ></th>
+            <th colspan="2" >Declarações/RH</th>
+            <th colspan="2" >RH</th>
+            <th colspan="4" >Fiscal/Retenções</th>
+            <th colspan="1" >RH</th>
+
+            <th colspan="3" >Declarações</th>
+            <th colspan="2">RH - Controller</th>
+          
+        </tr>
+        <tr>
+            <th rowspan="2" >Cod</th>
+            <th rowspan="2">Empresa</th>
+            <th rowspan="2">CNPJ</th>
+            <th rowspan="2">Tributação</th>
+            <th rowspan="2" >Prioridade</th>
+
+            <th rowspan="2" >Sem  Folha </th>
+            <th rowspan="2" >RH  Externo </th>
+
+            <th colspan="2" >E-SOCIAL</th>
+            <th colspan="4" >EFD-REINF</th>
+            <th rowspan="2" >CONFERÊNCIA</th>
+            <th colspan="3" >DCTF WEB</th>
+            <th rowspan="2" >DARF</th>
+            <th rowspan="2">DARF COMP</th>
+            <th rowspan="3">AÇÕES</th>
+            
+        </tr>
+        <tr>
+            <th >OK</th>
+            <th >Retificação</th>
+            
+            <th >OK</th>
+            <th  >Sem Retenções de INSS</th>
+            <th  >Retificação</th>
+            <th >Desobrigar</th>
+            
+            <th>OK</th>
+            <th style="text-align: center;">Ret</th>
+            <th style="text-align: center;">Desobrigada</th>
+            
+        </tr>
+
+       
+
+            
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-expanded="expanded">
+        <tr>
+            <td>{{item.id_dominio}} {{item.id_empresa}}</td>
+            <td>{{item.nome_emp}}</td> 
+            <td>{{item.cnpj}}</td>
+            <td>{{item.regime_tributacao}}</td>
+            <td>{{item.prioridade}}</td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.sem_folha"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.departamento_pessoal"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_ret"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_ret"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_desobrigar"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.conferencia_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_ret"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_desobrigada"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_check"></p-checkbox></td>
+            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_comp_check"></p-checkbox></td>
+            <td>
+  
+                <button type="button" pButton pRipple
+                icon="pi pi-pencil" class="mr-2" pTooltip="CSV" (click)="showModalEdit(item)" tooltipPosition="bottom"></button> 
+                <button type="button" pButton pRipple
+                icon="pi pi-envelope" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
+                <button type="button" pButton pRipple
+                icon="pi pi-trash" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
+            </td>
+        </tr>
+    </ng-template>
+
+   
+</p-table>
+
+{{payloadModalEditEmpresaDctf}}
+<app-modais-listagem-empresas
+  [displaymodalEdicaoEmpresaDctf]="displaymodalEdicaoEmpresaDctf"
+  (closedModalEditDctf)="closedModalEditDctf()"
+  [payloadModalEditEmpresaDctf]="payloadModalEditEmpresaDctf"
+></app-modais-listagem-empresas>
+</div>

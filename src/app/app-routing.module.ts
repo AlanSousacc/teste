@@ -6,12 +6,18 @@ import { PageNotFoundComponent } from './pages/public/page-not-found/page-not-fo
 const routes: Routes = [
 
   {
-    path: 'dashboard',
+    path: 'home',
     loadChildren: () => import('./pages/private/dashboard/dashboard.module').then(
       module => module.DashboardModule
     ),
     canActivate: [AuthGuard],
     canLoad: [AuthGuard]
+  },
+  {
+    path: 'listempresas/:id',
+    loadChildren: () => import('./pages/private/listempresasdctf/listempresasdctf.module').then(
+      module => module.ListempresasdctfModule
+    )
   },
   {
     path: '**',
