@@ -26,6 +26,7 @@ import { ModaisListagemEmpresasComponent } from './components/modais-listagem-em
 import { ToastModule } from 'primeng/toast'
 import { RippleModule } from 'primeng/ripple'
 import { CheckboxModule } from 'primeng/checkbox'
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToggleButtonModule } from 'primeng/togglebutton'
 
 import { MessagesModule } from 'primeng/messages'
@@ -39,6 +40,7 @@ const cgModules = [
 const primeModules = [
   ProgressSpinnerModule,
   CheckboxModule,
+  NgxSpinnerModule,
   ToggleButtonModule,
   ProgressBarModule,
   TableModule,

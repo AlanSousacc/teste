@@ -1,5 +1,15 @@
 <p>dashboard works!</p>
 
+
+<ngx-spinner
+  name="loading"
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fcca43"
+  type="ball-spin-clockwise-fade">
+  <p class="p-customizado">Carregando...</p>
+</ngx-spinner>
+
 <app-table-component [data]="competencias" [idsetor]="idsetor" [idresponsavel]="idresponsavel"
   [totaldata]="counttotaldata" (loadnextpage)="loadNextPage($event)" (loadbackpage)="loadBackPage($event)"
   [currentlast]="currentlast" (searchdata)="searchCompetencia($event)" (onchangData)="onChangData()"
