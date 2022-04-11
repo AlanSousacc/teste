@@ -1,0 +1,18 @@
+<div>
+  <p-sidebar [style]="{'height':'50000px',  'z-index':'10000'}" (onHide)="onHide()" [(visible)]="showFilters">
+    <p-accordion>
+      <p-accordionTab header="Busca por competência">
+        <p-dropdown style="padding-bottom: 10px;" [options]="competenciasFilter" [ngModelOptions]="{standalone: true}"
+          [(ngModel)]="selectedFilterCompetencia" optionLabel="name" [style]="{'minWidth':'100%'}" optionValue="value">
+        </p-dropdown>
+        <p-button (click)="findByCompetencia()" label="Pesquisar"></p-button>
+      </p-accordionTab>
+      <p-accordionTab header="Header 2">
+        Content 2
+      </p-accordionTab>
+      <p-accordionTab header="Header 3">
+        Content 3
+      </p-accordionTab>
+    </p-accordion>
+  </p-sidebar>
+</div>

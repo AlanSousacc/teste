@@ -1,3 +1,8 @@
+.p-dropdown-panel .p-dropdown-items.p-dropdown-virtualscroll .cdk-virtual-scroll-content-wrapper, .p-dropdown-panel .p-dropdown-items:not(.p-dropdown-virtualscroll) {
+  padding: 0;
+  z-index: 10000
+}
+
 body .ui-inputtext:enabled:focus:not(.ui-state-error) {
   border-color: orange;
 }

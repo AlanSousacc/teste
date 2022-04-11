@@ -3,20 +3,19 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import * as XLSX from 'xlsx'
 import { DctfWeb } from 'src/app/services/dctfweb/dctfweb.service'
 import { Tributacoes } from 'src/app/services/dctfweb/tributacoes.service'
-import { NgxSpinnerService } from 'ngx-spinner'
 
 @Component({
-  selector: 'app-filtros-listagem-empresas',
-  templateUrl: './filtros-listagem-empresas.component.html',
-  styleUrls: ['./filtros-listagem-empresas.component.css'],
-  providers: [NgxSpinnerService]
+  selector: 'app-filtros-tela-principal',
+  templateUrl: './filtros-tela-principal.component.html',
+  styleUrls: ['./filtros-tela-principal.component.css']
 })
-export class FiltrosListagemEmpresasComponent implements OnInit {
+export class FiltrosTelaPrincipalComponent implements OnInit {
   @Input() filtroEmpresas: any
+  @Input() idsetor: any
   @Input() idEmpresaCompetencia: any
-  @Input() showFilters: any
+  @Input() competenciasFilter: any
   @Output() onOpened = new EventEmitter<any>();
-  @Output() onFiltred = new EventEmitter<any>();
+  @Input() showFilters: any
 
   selectedEmpresaFiltro:any
   selectedTarefaFiltro:any
@@ -26,7 +25,11 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
   tarefas: any
   status: any
   tributacao: any
-  constructor (private dctfWebService: DctfWeb, private tributacoesService: Tributacoes, private loading: NgxSpinnerService) {
+  displayFilters: boolean
+  selectedFilterCompetencia: any
+  data: any
+
+  constructor (private dctfWebService: DctfWeb, private tributacoesService: Tributacoes) {
     this.filters = {}
     this.tarefas = [
       { name: 'Conferência', value: '1' },
@@ -48,7 +51,7 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
 
     this.tributacao = [
     ]
-    this.showFilters = false
+    this.displayFilters = false
   }
 
   ngOnInit (): void {
@@ -65,29 +68,38 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
       })
   }
 
-  onClearFields (setClear: any) {
+  setClear (setClear: any) {
     delete this.filters[setClear]
-    this.search()
+  }
+
+  search () {
+    this.dctfWebService.getListaEmpresasDctf(this.filters).subscribe(
+      (data: any) => {
+
+      })
+  }
+
+  showFitlers () {
+    this.displayFilters = !this.displayFilters
+    this.onOpened.emit(this.displayFilters)
   }
 
   onHide () {
     this.onOpened.emit(false)
   }
 
-  showFiltersTrigger () {
-    this.showFilters = !this.showFilters
-  }
-
-  search (showLoading: boolean = false) {
-    if (showLoading) {
-      this.loading.show('loading')
+  findByCompetencia () {
+    this.data = []
+    const objSend = {
+      id_empresa_competencia: this.selectedFilterCompetencia
     }
-    this.dctfWebService.getListaEmpresasDctf(this.filters).subscribe(
-      (data: any) => {
-        this.loading.hide('loading')
-        this.onFiltred.emit(data)
+    this.idsetor = 8
+    this.dctfWebService.getDctfCompetenciasFindBy(objSend).subscribe(
+      (competencias: any) => {
+        this.data = competencias.data
       })
   }
+
 
   setFilter (nameFilter: string, value:any) {
     // eslint-disable-next-line prefer-const
@@ -95,6 +107,5 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
       this.filters[nameFilter] = delete this.filters[nameFilter]
     }
     this.filters[nameFilter] = value
-    this.search()
   }
 }

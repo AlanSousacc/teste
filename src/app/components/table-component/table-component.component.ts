@@ -32,6 +32,7 @@ export class TableComponentComponent implements OnInit {
   selectedFilterCompetencia: any
   dadosModalGeralCompetencia: any
   competenciasFilter: any
+  showFilters: boolean
   @Output() loadnextpage = new EventEmitter<{last: any, table: any}>(); // -> usado emitir evento de next page, para trazer mais dados
   @Output() loadbackpage = new EventEmitter<{last: any, table: any}>(); // -> usado para emitir event de back page, para voltar algums registros
   @Output() searchdata = new EventEmitter<{value: any}>(); // -> usado para emitir event de pesquisa de dados
@@ -60,12 +61,13 @@ export class TableComponentComponent implements OnInit {
       id_empresa_competencia: 1
     }
     this.selectedFilterCompetencia = {}
+    this.showFilters = false
   }
 
   getCompetencias () {
     this.dctfWebService.getCompetencia().toPromise().then(
       (competencias: any) => {
-        this.competenciasFilter = competencias.map((x: any) => {
+        this.competenciasFilter = competencias.data.map((x: any) => {
           return { name: x.competencia, value: x.id_empresa_competencia }
         })
       })
@@ -75,12 +77,20 @@ export class TableComponentComponent implements OnInit {
     this.displayModalCreateEmpresa = false
   }
 
+  onOpenedFiltersScreen (value: boolean) {
+    this.showFilters = value
+  }
+
   closeModalstatusCompetencia () {
     this.modalstatusCompetencia = false
   }
 
   closeModalGerarCompetencia () {
     this.modalGerarCompetencia = false
+  }
+
+  showFiltersTrigger () {
+    this.showFilters = !this.showFilters
   }
 
   ngOnInit (): void {

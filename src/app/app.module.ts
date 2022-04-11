@@ -32,6 +32,10 @@ import { ToggleButtonModule } from 'primeng/togglebutton'
 import { MessagesModule } from 'primeng/messages'
 import { MessageModule } from 'primeng/message'
 import { FiltrosListagemEmpresasComponent } from './components/filtros-listagem-empresas/modais-empresas/filtros-listagem-empresas.component'
+import { FiltrosTelaPrincipalComponent } from './components/filtros-tela-principal/filtros-listagem-empresas/modais-empresas/filtros-tela-principal.component'
+import { SidebarModule } from 'primeng/sidebar'
+import { AccordionModule } from 'primeng/accordion'
+import { TooltipModule } from 'primeng/tooltip'
 
 const cgModules = [
   CgInputTextModule
@@ -39,10 +43,12 @@ const cgModules = [
 
 const primeModules = [
   ProgressSpinnerModule,
+  SidebarModule,
   CheckboxModule,
   NgxSpinnerModule,
   ToggleButtonModule,
   ProgressBarModule,
+  AccordionModule,
   TableModule,
   ButtonModule,
   InputTextModule,
@@ -52,7 +58,8 @@ const primeModules = [
   ToastModule,
   RippleModule,
   MessagesModule,
-  MessageModule
+  MessageModule,
+  TooltipModule
 ]
 @NgModule({
   declarations: [
@@ -63,7 +70,8 @@ const primeModules = [
     TableComponentComponent,
     ModaisEmpresaComponent,
     ModaisListagemEmpresasComponent,
-    FiltrosListagemEmpresasComponent
+    FiltrosListagemEmpresasComponent,
+    FiltrosTelaPrincipalComponent
   ],
   imports: [
     BrowserModule,

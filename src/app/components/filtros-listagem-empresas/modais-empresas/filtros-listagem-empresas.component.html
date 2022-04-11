@@ -1,62 +1,64 @@
 <div>
- 
-  <div class="row">
-    <div class="col-lg-2">
-      <label>Empresa {{filters | json}}</label>
-      <div class="input-group">
+
+  <p-sidebar  [style]="{'height':'50000px',  'z-index':'10000'}" (onHide)="onHide()"  [(visible)]="showFilters">
+    <p-accordion>
+      <p-accordionTab header="Filtrar por Empresas">
         <p-dropdown [filter]="true" filterBy="name"  placeholder="Select a Country"
-        [style]="{'minWidth':'100%'}" [options]="filtroEmpresas"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedEmpresaFiltro" (onChange)="setFilter('empresa', selectedEmpresaFiltro.value)"  [showClear]="true" placeholder="Select a Country" optionLabel="name"></p-dropdown>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
-    
-    <div class="col-lg-2">
-      <label>Código {{filters.codigo}}</label>
-      <div class="input-group">
+        [style]="{'minWidth':'100%'}" (onClear)="onClearFields('empresa')"  [options]="filtroEmpresas"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedEmpresaFiltro" (onChange)="setFilter('empresa', selectedEmpresaFiltro.value)"  [showClear]="true" placeholder="Select a Country" optionLabel="name"></p-dropdown>
+      </p-accordionTab>
+      <p-accordionTab header="Filtrar por Código">
         <input [(ngModel)]="filters.codigo" type="text"
-        [ngModelOptions]="{standalone: true}" (change)="setFilter('codigo', filters.codigo)"  class="form-control" placeholder="">
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
-    <div class="col-lg-2">
-      <label>Tarefa</label>
-      <div class="input-group">
-        <p-dropdown [filter]="true" filterBy="name" [options]="tarefas" (onChange)="setFilter('tarefa', selectedTarefaFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTarefaFiltro"   [showClear]="true" placeholder="Select a Country"
+        [ngModelOptions]="{standalone: true}"  (onClear)="onClearFields('codigo')" (change)="search"  class="form-control" placeholder="">
+      </p-accordionTab>
+      <p-accordionTab header="Filtrar por Tarefa">
+        <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tarefa')" [options]="tarefas" (onChange)="setFilter('tarefa', selectedTarefaFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTarefaFiltro"   [showClear]="true" placeholder="Select a Country"
+        [style]="{'minWidth':'100%'}" 
+        optionLabel="name"></p-dropdown>   
+      </p-accordionTab>
+      <p-accordionTab header="Filtrar por Status da tarefa">
+        <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('status')"  [options]="status" (onChange)="setFilter('status', selectedStatusFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedStatusFiltro"   [showClear]="true" placeholder="Select a Country"
         [style]="{'minWidth':'100%'}" 
         optionLabel="name"></p-dropdown>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
+      </p-accordionTab>
+      <p-accordionTab header="Filtrar por Tributação">
+        <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tributacao')" [options]="tributacao" (onChange)="setFilter('tributacao', selectedTributacaoFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTributacaoFiltro"  [showClear]="true" placeholder="Select a Country"
+        [style]="{'minWidth':'100%'}" 
+        optionLabel="name"></p-dropdown>
+      </p-accordionTab>
+   </p-accordion>
+  </p-sidebar>
   
-    <div class="col-lg-2">
-      <label>Status</label>
-      <div class="input-group">
-        <p-dropdown [filter]="true" filterBy="name" [options]="status" (onChange)="setFilter('status', selectedStatusFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedStatusFiltro"   [showClear]="true" placeholder="Select a Country"
-        [style]="{'minWidth':'100%'}" 
-        optionLabel="name"></p-dropdown>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
-
-    <div class="col-lg-2">
-      <label>Tributação</label>
-      <div class="input-group">
-        <p-dropdown [filter]="true" filterBy="name"  [options]="tributacao" (onChange)="setFilter('tributacao', selectedTributacaoFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTributacaoFiltro"  [showClear]="true" placeholder="Select a Country"
-        [style]="{'minWidth':'100%'}" 
-        optionLabel="name"></p-dropdown>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
-
-    <div class="col-lg-2">
-      <div  style="padding: 35px; padding-left: 0px;" class="input-group">
-        <button (click)="search()"  pButton type="button" label="Filtrar" ></button>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
-    
-
-  </div><!-- /.row -->
-
+  <ngx-spinner
+  name="loading"
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fcca43"
+  type="ball-spin-clockwise-fade">
+  <p class="p-customizado">Carregando...</p>
+</ngx-spinner>
 
   
-  <div style="padding:10" class="row">
-    
-
+  <div style="padding-bottom: 10px;padding-top:10px" class="row">
+    <div class="col-3">
+      <span class="p-buttonset">
+        <button (click)="showFiltersTrigger()" type="button" pButton pRipple icon="pi pi-filter" class="mr-2" pTooltip="Mostrar filtros"
+        tooltipPosition="bottom"></button>
+        <button type="button" pButton pRipple (click)="search(true)" icon="pi pi-refresh" class="mr-2" pTooltip="Recarregar registros mantendo os filtros"
+        tooltipPosition="bottom"></button>
+        <button type="button" pButton pRipple icon="pi pi-file" class="mr-2" pTooltip="Baixar registros em formato CSV"
+          tooltipPosition="bottom"></button>
+        <button type="button" pButton pRipple icon="pi pi-file-excel" 
+          class="p-button-success mr-2" pTooltip="Baixar registros em formato XLS" tooltipPosition="bottom"></button>
+        <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning mr-2" pTooltip="Baixar registros em formato PDF"
+          tooltipPosition="bottom"></button>
+      </span>
+    </div>
+    <div class="col-6">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+        <input type="text"  pInputText placeholder="Buscar">
+      </div>
+    </div>
   </div>
 
 </div>

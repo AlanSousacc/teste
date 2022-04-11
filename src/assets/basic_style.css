@@ -128,3 +128,13 @@ i{
   text-decoration: none;
   color: #ffc107;
 }
+
+.ui-dropdown-panel .ui-dropdown-items-wrapper {
+  overflow: auto;
+  min-width: 360px;
+}
+
+.p-sidebar .p-sidebar-header+.p-sidebar-content {
+  padding-top: 0;
+  height: 1000px;
+}

@@ -1,18 +1,27 @@
 <div class="container-fluid">
-  <p-dropdown style="padding-bottom: 10px;" [options]="competenciasFilter" [ngModelOptions]="{standalone: true}"
-    [(ngModel)]="selectedFilterCompetencia" optionLabel="name"  [style]="{'minWidth':'100%'}"  optionValue="value"></p-dropdown>
-  <p-button (click)="findByCompetencia()" label="Pesquisar"></p-button>
+  <app-filtros-tela-principal 
+    [showFilters]="showFilters"
+    (onOpened)="onOpenedFiltersScreen($event)"
+    [idsetor]="idsetor"
+    [competenciasFilter]="competenciasFilter"
+  >
+  </app-filtros-tela-principal>
+
+ 
+
   <div style="padding-bottom: 10px;padding-top:10px" class="row">
     <div class="col-3">
       <span class="p-buttonset">
-        <button type="button" pButton pRipple icon="pi pi-file" class="mr-2" pTooltip="CSV"
+        <button (click)="showFiltersTrigger()" type="button" pButton pRipple icon="pi pi-filter" class="mr-2" pTooltip="Mostar filtros"
+        tooltipPosition="bottom"></button>
+        <button type="button" pButton pRipple icon="pi pi-file" class="mr-2" pTooltip="Baixar registros em formato CSV"
           tooltipPosition="bottom"></button>
-        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportDataToXlsx()"
-          class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
-        <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning mr-2" pTooltip="PDF"
+        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportDataToXlsx()" pTooltip="Baixar registros em formato XLS"
+          class="p-button-success mr-2"  tooltipPosition="bottom"></button>
+        <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning mr-2" pTooltip="Baixar registros em formato PDF"
           tooltipPosition="bottom"></button>
 
-        <p-button (click)="openModalGerarCompetencia()">Gerar Competencia</p-button>
+        <p-button  pTooltip="Gerar competencia"  tooltipPosition="bottom" (click)="openModalGerarCompetencia()">Gerar Competencia</p-button>
       </span>
     </div>
 

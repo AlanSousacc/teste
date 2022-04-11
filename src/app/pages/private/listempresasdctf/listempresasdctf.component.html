@@ -4,11 +4,14 @@
     <app-filtros-listagem-empresas class="filtros"
        [filtroEmpresas]="filterEmpresas"
        [idEmpresaCompetencia]="idEmpresaCompetencia"
+       (onOpened)="onOpenedFiltersScreen($event)"
        (onFiltred)="setFiltredData($event)"
+       [showFilters]="showFilters"
     >
     </app-filtros-listagem-empresas>
 
-    
+
+ 
 <p-table [value]="data.data" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
