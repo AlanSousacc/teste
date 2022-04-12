@@ -3,21 +3,25 @@ import { DctfWeb } from '../../../services/dctfweb/dctfweb.service'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { SessionService } from 'src/app/services/global/session.service'
+import { MessageService } from 'primeng/api'
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './listempresasdctf.component.html',
-  styleUrls: ['./listempresasdctf.component.css']
+  styleUrls: ['./listempresasdctf.component.css'],
+  providers: [MessageService]
 })
 export class ListempresasdctfComponent implements OnInit {
   currenpage:any
   data:any
   displaymodalEdicaoEmpresaDctf:boolean
   payloadModalEditEmpresaDctf:any
+  showFilters:boolean
   filterEmpresas:any
   idEmpresaCompetencia:any
-  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService) {
+  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService, private messageService: MessageService) {
     this.displaymodalEdicaoEmpresaDctf = false
+    this.showFilters = false
   }
 
   async ngOnInit () {
@@ -36,13 +40,17 @@ export class ListempresasdctfComponent implements OnInit {
 
   async getFilterEmpresas () {
     const objSend = {
-      id_empresa_competencia: this.route.snapshot.paramMap.get('id')
+      id_empresa_competencia: this.route.snapshot.paramMap.get('id'),
+      allitems: true
     }
     this.dctfWebService.getListaEmpresasDctf(objSend).subscribe(
       (data: any) => {
         this.filterEmpresas = data.data.map((x: any) => {
           return { name: x.nome_emp, value: x.id_empresa }
         })
+      },
+      () => {
+        this.errorMessage('Um erro ocorreu ao se conectar com o servidor.')
       })
   }
 
@@ -55,9 +63,20 @@ export class ListempresasdctfComponent implements OnInit {
         data.data.map((x: any) => {
           x = this.parseBooleanChecks(x)
           return x
+        },
+        () => {
+          this.errorMessage('Um erro ocorreu ao se conectar com o servidor.')
         })
         this.data = data
       })
+  }
+
+  showFiltersTrigger () {
+    this.showFilters = !this.showFilters
+  }
+
+  onOpenedFiltersScreen (value: boolean) {
+    this.showFilters = value
   }
 
   showModalEdit (rowData: any) {
@@ -91,5 +110,9 @@ export class ListempresasdctfComponent implements OnInit {
       return x
     })
     this.data = data
+  }
+
+  errorMessage (errorMessage: string) {
+    this.messageService.add({ severity: 'error', summary: 'Erro', detail: errorMessage })
   }
 }

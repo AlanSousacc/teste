@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { Paginator } from 'primeng/paginator'
 import { SessionService } from 'src/app/services/global/session.service'
 import { NgxSpinnerService } from 'ngx-spinner'
-import { MessageService} from 'primeng/api'
+import { MessageService } from 'primeng/api'
 
 @Component({
   selector: 'app-dashboard',
@@ -60,7 +60,6 @@ export class DashboardComponent implements OnInit {
   }
 
   clearData () {
-    alert('clear')
     this.competencias = []
   }
 

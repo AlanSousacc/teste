@@ -88,7 +88,7 @@
                   "with": "src/environments/environment.hml.ts"
                 }
               ]
-            },
+              },
             "jenkins-hml": {
               "outputPath": "/var/www/html/intranet/app/dctfweb",
               "fileReplacements": [
