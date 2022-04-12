@@ -1,31 +1,105 @@
 <div>
 
   <p-sidebar  [style]="{'height':'50000px',  'z-index':'10000'}" (onHide)="onHide()"  [(visible)]="showFilters">
-    <p-accordion>
-      <p-accordionTab header="Filtrar por Empresas">
-        <p-dropdown [filter]="true" filterBy="name"  placeholder="Select a Country"
-        [style]="{'minWidth':'100%'}" (onClear)="onClearFields('empresa')"  [options]="filtroEmpresas"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedEmpresaFiltro" (onChange)="setFilter('empresa', selectedEmpresaFiltro.value)"  [showClear]="true" placeholder="Select a Country" optionLabel="name"></p-dropdown>
-      </p-accordionTab>
-      <p-accordionTab header="Filtrar por Código">
-        <input [(ngModel)]="filters.codigo" type="text"
-        [ngModelOptions]="{standalone: true}"  (onClear)="onClearFields('codigo')" (change)="search"  class="form-control" placeholder="">
-      </p-accordionTab>
-      <p-accordionTab header="Filtrar por Tarefa">
-        <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tarefa')" [options]="tarefas" (onChange)="setFilter('tarefa', selectedTarefaFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTarefaFiltro"   [showClear]="true" placeholder="Select a Country"
-        [style]="{'minWidth':'100%'}" 
-        optionLabel="name"></p-dropdown>   
-      </p-accordionTab>
-      <p-accordionTab header="Filtrar por Status da tarefa">
-        <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('status')"  [options]="status" (onChange)="setFilter('status', selectedStatusFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedStatusFiltro"   [showClear]="true" placeholder="Select a Country"
-        [style]="{'minWidth':'100%'}" 
-        optionLabel="name"></p-dropdown>
-      </p-accordionTab>
-      <p-accordionTab header="Filtrar por Tributação">
-        <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tributacao')" [options]="tributacao" (onChange)="setFilter('tributacao', selectedTributacaoFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTributacaoFiltro"  [showClear]="true" placeholder="Select a Country"
-        [style]="{'minWidth':'100%'}" 
-        optionLabel="name"></p-dropdown>
-      </p-accordionTab>
-   </p-accordion>
+    <h4><i class="fa fa-filter mb-3"></i> Filtro
+      <button  class="btn btn-outline-danger btn-sm float-right"
+      style="margin: auto!important;">
+      <i class="fa fa-eraser"></i> Limpar</button>
+    </h4>
+
+
+    <div class="row mx-1 mt-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 px-1" style="padding: 0;">
+          <div class="ui-grid ui-grid-responsive ui-fluid">
+              <label for="responsavel">Empresa</label>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                  <p-dropdown [filter]="true" filterBy="name"  placeholder="Select a Country"
+                  [style]="{'minWidth':'100%'}" (onClear)="onClearFields('empresa')"  [options]="filtroEmpresas"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedEmpresaFiltro" (onChange)="setFilter('empresa', selectedEmpresaFiltro.value)"  [showClear]="true" placeholder="Select a Country" optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+    <div class="row mx-1 mt-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 px-1" style="padding: 0;">
+          <div class="ui-grid ui-grid-responsive ui-fluid">
+              <label for="responsavel">Código</label>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                  <input [(ngModel)]="filters.codigo" type="text"
+                  [ngModelOptions]="{standalone: true}"  (onClear)="onClearFields('codigo')" (change)="search"  class="form-control" placeholder="">
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+    <div class="row mx-1 mt-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 px-1" style="padding: 0;">
+          <div class="ui-grid ui-grid-responsive ui-fluid">
+              <label for="responsavel">Tarefa</label>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                  <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tarefa')" [options]="tarefas" (onChange)="setFilter('tarefa', selectedTarefaFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTarefaFiltro"   [showClear]="true" placeholder="Select a Country"
+                  [style]="{'minWidth':'100%'}" 
+                  optionLabel="name"></p-dropdown>  
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="row mx-1 mt-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 px-1" style="padding: 0;">
+          <div class="ui-grid ui-grid-responsive ui-fluid">
+              <label for="responsavel">Status</label>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                  <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('status')"  [options]="status" (onChange)="setFilter('status', selectedStatusFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedStatusFiltro"   [showClear]="true" placeholder="Select a Country"
+                  [style]="{'minWidth':'100%'}" 
+                  optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+    <div class="row mx-1 mt-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 px-1" style="padding: 0;">
+          <div class="ui-grid ui-grid-responsive ui-fluid">
+              <label for="responsavel">Tributação</label>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                  <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tributacao')" [options]="tributacao" (onChange)="setFilter('tributacao', selectedTributacaoFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTributacaoFiltro"  [showClear]="true" placeholder="Select a Country"
+                  [style]="{'minWidth':'100%'}" 
+                  optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+    <div class="row mx-1 mt-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 px-1" style="padding: 0;">
+          <div class="ui-grid ui-grid-responsive ui-fluid">
+              <label for="responsavel">Usuário Executor</label>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                  <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tributacao')" [options]="tributacao" (onChange)="setFilter('tributacao', selectedTributacaoFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTributacaoFiltro"  [showClear]="true" placeholder="Select a Country"
+                  [style]="{'minWidth':'100%'}" 
+                  optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+   
   </p-sidebar>
   
   <ngx-spinner
@@ -38,27 +112,25 @@
 </ngx-spinner>
 
   
-  <div style="padding-bottom: 10px;padding-top:10px" class="row">
-    <div class="col-3">
-      <span class="p-buttonset">
-        <button (click)="showFiltersTrigger()" type="button" pButton pRipple icon="pi pi-filter" class="mr-2" pTooltip="Mostrar filtros"
-        tooltipPosition="bottom"></button>
-        <button type="button" pButton pRipple (click)="search(true)" icon="pi pi-refresh" class="mr-2" pTooltip="Recarregar registros mantendo os filtros"
-        tooltipPosition="bottom"></button>
-        <button type="button" pButton pRipple icon="pi pi-file" class="mr-2" pTooltip="Baixar registros em formato CSV"
-          tooltipPosition="bottom"></button>
-        <button type="button" pButton pRipple icon="pi pi-file-excel" 
-          class="p-button-success mr-2" pTooltip="Baixar registros em formato XLS" tooltipPosition="bottom"></button>
-        <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning mr-2" pTooltip="Baixar registros em formato PDF"
-          tooltipPosition="bottom"></button>
-      </span>
-    </div>
-    <div class="col-6">
-      <div class="p-inputgroup">
-        <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
-        <input type="text"  pInputText placeholder="Buscar">
+<div class="row">
+  <div class="col-12 px-0" style="display: flex;justify-content: space-between;align-items: flex-end;">
+    <div class="ui-g ui-fluid">
+      <div class="ui-inputgroup">
+        <button (click)="showFiltersTrigger()" class="btn btn-sm btn-warning mb-1 ml-1">
+          <i class="fa fa-filter" title="Filtrar dados"></i></button>
+
+        <button class="btn btn-sm btn-outline-dark mb-1 mx-1" >
+          <i class="fa fa-file-excel" title="Exportar para Excel"></i></button>
+
+         
+          <div _ngcontent-otj-c64="" class="p-inputgroup"><span _ngcontent-otj-c64="" class="p-inputgroup-addon"><i _ngcontent-otj-c64="" class="pi pi-search"></i></span><input _ngcontent-otj-c64="" type="text" pinputtext="" placeholder="Buscar" class="p-inputtext p-component p-element ng-untouched ng-pristine ng-valid"></div>
       </div>
+    
+  
     </div>
   </div>
+
+
+
 
 </div>

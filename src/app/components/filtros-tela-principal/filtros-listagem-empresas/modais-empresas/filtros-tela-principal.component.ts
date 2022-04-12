@@ -15,6 +15,8 @@ export class FiltrosTelaPrincipalComponent implements OnInit {
   @Input() idEmpresaCompetencia: any
   @Input() competenciasFilter: any
   @Output() onOpened = new EventEmitter<any>();
+  @Output() searchedData = new EventEmitter<any>();
+
   @Input() showFilters: any
 
   selectedEmpresaFiltro:any
@@ -96,10 +98,9 @@ export class FiltrosTelaPrincipalComponent implements OnInit {
     this.idsetor = 8
     this.dctfWebService.getDctfCompetenciasFindBy(objSend).subscribe(
       (competencias: any) => {
-        this.data = competencias.data
+        this.searchedData.emit(competencias.data)
       })
   }
-
 
   setFilter (nameFilter: string, value:any) {
     // eslint-disable-next-line prefer-const

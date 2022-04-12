@@ -77,6 +77,10 @@ export class TableComponentComponent implements OnInit {
     this.displayModalCreateEmpresa = false
   }
 
+  searchedData (data: any) {
+    this.data = data
+  }
+
   onOpenedFiltersScreen (value: boolean) {
     this.showFilters = value
   }
