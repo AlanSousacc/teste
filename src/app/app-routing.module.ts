@@ -6,7 +6,7 @@ import { PageNotFoundComponent } from './pages/public/page-not-found/page-not-fo
 const routes: Routes = [
 
   {
-    path: 'home',
+    path: '',
     loadChildren: () => import('./pages/private/dashboard/dashboard.module').then(
       module => module.DashboardModule
     ),
