@@ -59,6 +59,10 @@ export class DashboardComponent implements OnInit {
     this.setUpTable()
   }
 
+  restoreSearchEvent () {
+    this.setUpTable()
+  }
+
   clearData () {
     this.competencias = []
   }

@@ -1,7 +1,7 @@
 <div>
   <p-sidebar [style]="{'height':'50000px',  'z-index':'10000'}" (onHide)="onHide()" [(visible)]="showFilters">
     <h4><i class="fa fa-filter mb-3"></i> Filtro
-      <button  class="btn btn-outline-danger btn-sm float-right"
+      <button (click)="clearFilter()"  class="btn btn-outline-danger btn-sm float-right"
       style="margin: auto!important;">
       <i class="fa fa-eraser"></i> Limpar</button>
     </h4>
@@ -11,11 +11,11 @@
             <div class="ui-grid ui-grid-responsive ui-fluid">
                 <label for="responsavel">Competência</label>
               <div class="ui-grid-row">
-                  <div class="ui-grid-col-12">
+                  <div class="ui-grid-col-12"> 
                     <p-dropdown style="padding-bottom: 10px;" [options]="competenciasFilter" [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="selectedFilterCompetencia" optionLabel="name" [style]="{'minWidth':'100%'}" optionValue="value">
                   </p-dropdown>
-                  <p-button (click)="findByCompetencia()" label="Pesquisar"></p-button>
+                  <p-button style="padding:10px"  (click)="findByCompetencia()" label="Pesquisar"></p-button>
                   </div>
               </div>
             </div>

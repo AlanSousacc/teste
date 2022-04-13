@@ -74,8 +74,13 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
     this.onOpened.emit(false)
   }
 
+  clearFilter () {
+    this.filters = {}
+  }
+
   showFiltersTrigger () {
     this.showFilters = !this.showFilters
+    this.selectedEmpresaFiltro = {}
   }
 
   search (showLoading: boolean = false) {

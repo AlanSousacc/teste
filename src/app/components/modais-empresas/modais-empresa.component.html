@@ -95,6 +95,11 @@
           <input type="date" [(ngModel)]="dadosModalGerarCompetencia.data_limite_transmissao"
             [ngModelOptions]="{standalone: true}" class="form-control" placeholder="">
         </div>
+        <div class="col">
+          <label>Ano competência</label>
+          <input [(ngModel)]="dadosModalGerarCompetencia.ano_competencia" type="date"
+            [ngModelOptions]="{standalone: true}" class="form-control" placeholder="">
+        </div>
       </div>
     </form>
 
@@ -128,6 +133,7 @@
       </div>
 
       <div style="margin-top: 10px;" class="row">
+        <!--
         <div class="col">
           <label>Status</label>
           <select [(ngModel)]="competenciaModal.status" [ngModelOptions]="{standalone: true}"
@@ -164,6 +170,8 @@
             class="form-control" placeholder=""></textarea>
         </div>
       </div>
+      -->
+    </div>
 
       <div style="margin-top: 10px;" class="row">
         <div class="col">

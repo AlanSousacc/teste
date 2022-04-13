@@ -38,6 +38,8 @@ export class TableComponentComponent implements OnInit {
   @Output() searchdata = new EventEmitter<{value: any}>(); // -> usado para emitir event de pesquisa de dados
   @Output() onchangData = new EventEmitter<any>(); // -> usado para emitir event para recarregar os dados da tabela
   @Output() clearData = new EventEmitter<any>(); // -> usado para emitir event para limpar data
+  @Output() restoreSearchEvent = new EventEmitter<any>(); // -> usado para emitir evento para restaura pesquisa primaria
+
 
   @ViewChild('competencia') inputCompetencia: any;
   @ViewChild('empresa') inputEmpresa: any;
@@ -79,6 +81,10 @@ export class TableComponentComponent implements OnInit {
 
   searchedData (data: any) {
     this.data = data
+  }
+
+  restoreSearch () {
+    this.restoreSearchEvent.emit(true)
   }
 
   onOpenedFiltersScreen (value: boolean) {

@@ -16,6 +16,7 @@ export class FiltrosTelaPrincipalComponent implements OnInit {
   @Input() competenciasFilter: any
   @Output() onOpened = new EventEmitter<any>();
   @Output() searchedData = new EventEmitter<any>();
+  @Output() restoreSearch = new EventEmitter<any>();
 
   @Input() showFilters: any
 
@@ -79,6 +80,16 @@ export class FiltrosTelaPrincipalComponent implements OnInit {
       (data: any) => {
 
       })
+  }
+
+  clearFilter () {
+    this.filters = {}
+    this.selectedFilterCompetencia = {}
+    this.restaurarConsultaInicial()
+  }
+
+  restaurarConsultaInicial () {
+    this.restoreSearch.emit(true)
   }
 
   showFitlers () {

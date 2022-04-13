@@ -83,7 +83,10 @@ export class ModaisEmpresaComponent implements OnInit {
       return
     }
     this.dctfWebService.gerarCompetencia(this.dadosModalGerarCompetencia).subscribe(
-      data => this.sucessMessage('Competência gerada com sucesso'),
+      (data) => {
+        this.displayModalGerarCompetencia = false
+        this.sucessMessage('Competência gerada com sucesso')
+      },
       () => this.errorMessage('Houve um erro ao gerar a competência')
     )
   }
