@@ -1,0 +1,15 @@
+.cardInner {
+  display: grid;
+  grid-template-areas: "header" "content" "footer";
+  grid-template-rows: 50px auto 1px;
+  /* grid-template-areas: "menu" "header" "content" "footer";
+  grid-template-rows: 60px 50px auto 7px; */
+  grid-row-gap: 1px;
+  grid-column-gap: 1px;
+  min-height: 96vh;
+}
+
+.page-footer {
+  font-size: 12px;
+  height: 30px;
+}

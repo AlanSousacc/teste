@@ -11,7 +11,7 @@ export class JWTService {
     ) { }
 
     public token (): string {
-      return localStorage.getItem('token') ?? ''
+      return localStorage.getItem('token_laravel') ?? ''
     }
 
     public isExpired (): boolean {

@@ -1,10 +1,10 @@
-import { Component } from '@angular/core'
-import { Router } from '@angular/router'
-import { environment } from 'src/environments/environment'
-import { AuthService } from './services/global/auth.service'
-import { SpinnerService } from './services/global/spinner.service'
-import { DynamicScriptLoaderService } from './services/global/dynamic-script-loader.service'
-import { ISpinner } from './interfaces/global/ISpinner'
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { AuthService } from './services/global/auth.service';
+import { SpinnerService } from './services/global/spinner.service';
+import { DynamicScriptLoaderService } from './services/global/dynamic-script-loader.service';
+import { ISpinner } from './interfaces/global/ISpinner';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,8 @@ import { ISpinner } from './interfaces/global/ISpinner'
 export class AppComponent {
   title: string = 'admin';
   spinner: ISpinner = { title: '', show: false }
+  public version = '0.1.0';
+  public currentYear = new Date().getFullYear();
 
   constructor (
     private dynamicScriptLoader: DynamicScriptLoaderService,
@@ -39,7 +41,7 @@ export class AppComponent {
   }
 
   private loadScripts () {
-    this.dynamicScriptLoader.load('fontawesome')
+    this.dynamicScriptLoader.load('menuheaderjs', 'menuheadercss', 'fontawesome')
       .then((data: any) => {
         console.log('LoadScripts complete', environment.production ? '' : data)
       })

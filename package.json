@@ -1,6 +1,6 @@
 {
-  "name": "admin",
-  "version": "0.0.0",
+  "name": "dctfweb",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "gd": "ng build --configuration ga",
@@ -17,7 +17,6 @@
   "dependencies": {
     "@angular/animations": "~12.1.0",
     "@angular/cdk": "^13.2.6",
-    "ngx-spinner": "^7.2.0",
     "@angular/common": "~12.1.0",
     "@angular/compiler": "~12.1.0",
     "@angular/core": "~12.1.0",
@@ -29,6 +28,8 @@
     "bootstrap": "^4.2.1",
     "date-fns": "^2.16.1",
     "date-fns-tz": "^1.0.12",
+    "jquery": "^3.4.0",
+    "ngx-spinner": "^7.2.0",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primeng": "^12.0.0",

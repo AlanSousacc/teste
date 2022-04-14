@@ -1,4 +1,26 @@
-<router-outlet></router-outlet>
+<div class="cardInner">
+  <div [style.grid-area]="'header'">
+    <div class="d-flex justify-content-center barra_cg">
+      <h4 class="text-center">DCTFWEB</h4>
+    </div>
+  </div>
+  <div [style.grid-area]="'content'">
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div [style.grid-area]="'footer'">
+    <footer class="page-footer">
+      <div class="footer-copyright">© {{currentYear}} Copyright:
+        <a href="https://intranet.cg.local"> CG Contadores</a>
+      </div>
+      <div style="margin-left: 20px;">
+        <small>{{version}}</small>
+      </div>
+    </footer>
+  </div>
+</div>
+
 <div id="spinnerBox" *ngIf="spinner.show">
   <div id="login" class="p-d-flex p-jc-center">
     <div class="p-grid vh100 p-ai-center vertical-container">
