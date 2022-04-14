@@ -17,6 +17,6 @@ export class Usuarios {
   }
 
   getUsuariosAtivosBySetor (objSend: any):Observable<Paginator> {
-    return this.http.post<any>(environment.apiUrl + 'dctfweb/getusuariosativosbysetor', objSend, { headers: { userid: this.session.id_usuario } })
+    return this.http.post<any>(environment.apiUrl + 'users/getusuariosativosbysetor', objSend, { headers: { userid: this.session.id_usuario } })
   }
 }

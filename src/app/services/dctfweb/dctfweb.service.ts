@@ -23,9 +23,9 @@ export class DctfWeb {
     return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb', { params: objSend, headers: { userid: this.session.id_usuario }})
   }
 
-  getPageLink (pageurl: string):Observable<Paginator> {
+  getPageLink (pageurl: string, objSend = {}):Observable<Paginator> {
     const url = pageurl
-    return this.http.get<any>(url)
+    return this.http.get<any>(url, { params: objSend, headers: { userid: this.session.id_usuario }})
   }
 
   searchCompetencias (stringSearch: string):Observable<Paginator> {

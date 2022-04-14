@@ -36,6 +36,7 @@ import { FiltrosTelaPrincipalComponent } from './components/filtros-tela-princip
 import { SidebarModule } from 'primeng/sidebar'
 import { AccordionModule } from 'primeng/accordion'
 import { TooltipModule } from 'primeng/tooltip'
+import { MultiSelectModule } from 'primeng/multiselect'
 
 const cgModules = [
   CgInputTextModule
@@ -59,7 +60,8 @@ const primeModules = [
   RippleModule,
   MessagesModule,
   MessageModule,
-  TooltipModule
+  TooltipModule,
+  MultiSelectModule
 ]
 @NgModule({
   declarations: [

@@ -4,7 +4,7 @@ import * as XLSX from 'xlsx'
 import { DctfWeb } from 'src/app/services/dctfweb/dctfweb.service'
 import { Tributacoes } from 'src/app/services/dctfweb/tributacoes.service'
 import { NgxSpinnerService } from 'ngx-spinner'
-
+import { Usuarios } from 'src/app/services/dctfweb/usuarios.service'
 @Component({
   selector: 'app-filtros-listagem-empresas',
   templateUrl: './filtros-listagem-empresas.component.html',
@@ -15,6 +15,7 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
   @Input() filtroEmpresas: any
   @Input() idEmpresaCompetencia: any
   @Input() showFilters: any
+  @Input() idsetor: any
   @Output() onOpened = new EventEmitter<any>();
   @Output() onFiltred = new EventEmitter<any>();
 
@@ -22,11 +23,16 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
   selectedTarefaFiltro:any
   selectedStatusFiltro:any
   selectedTributacaoFiltro:any
+  selectedUsuarioExecutor:any
+
+  setoresVisibilidade: any
+
   filters: any
   tarefas: any
   status: any
   tributacao: any
-  constructor (private dctfWebService: DctfWeb, private tributacoesService: Tributacoes, private loading: NgxSpinnerService) {
+  usuariosExecutores: any
+  constructor (private dctfWebService: DctfWeb, private tributacoesService: Tributacoes, private loading: NgxSpinnerService, private usuariosService: Usuarios) {
     this.filters = {}
     this.tarefas = [
       { name: 'Conferência', value: '1' },
@@ -46,6 +52,15 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
       { name: 'Não marcados/Não Concluidos', value: '2' }
     ]
 
+    this.setoresVisibilidade = [
+      { name: 'Declarações/RH', value: '1' },
+      { name: 'RH', value: '1' },
+      { name: 'Fiscal/Retenções', value: '1' },
+      { name: 'RH', value: '1' },
+      { name: 'Declarações', value: '1' },
+      { name: 'RH - Controller', value: '1' }
+    ]
+
     this.tributacao = [
     ]
     this.showFilters = false
@@ -53,6 +68,7 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
 
   ngOnInit (): void {
     this.getTributacoes()
+    this.getUsuariosExecutor()
     this.setFilter('id_empresa_competencia', this.idEmpresaCompetencia)
   }
 
@@ -61,6 +77,18 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
       (data: any) => {
         this.tributacao = data.data.map((x: any) => {
           return { name: x.regime_tributacao, value: x.id_regime_tributacao }
+        })
+      })
+  }
+
+  getUsuariosExecutor () {
+    const objSend = {
+      id_setor: this.idsetor
+    }
+    this.usuariosService.getUsuariosAtivosBySetor(objSend).subscribe(
+      (data: any) => {
+        this.usuariosExecutores = data.data.map((x: any) => {
+          return { name: x.nome, value: x.id_usuarios }
         })
       })
   }
@@ -76,6 +104,11 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
 
   clearFilter () {
     this.filters = {}
+    this.selectedEmpresaFiltro = []
+    this.selectedTarefaFiltro = []
+    this.selectedStatusFiltro = []
+    this.selectedTributacaoFiltro = []
+    this.selectedUsuarioExecutor = []
   }
 
   showFiltersTrigger () {

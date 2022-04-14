@@ -125,7 +125,7 @@
         </div>
         <div class="col">
 
-          <label>Empresa {{ selectedEmpresaModalCreate | json}}</label>
+          <label>Empresa</label>
           <p-dropdown [filter]="true" filterBy="nome" [showClear]="true" placeholder="Select a Country"
             [style]="{'minWidth':'100%'}" [options]="empresasModal.data"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedEmpresaModalCreate"
             optionLabel="nome"></p-dropdown>

@@ -12,6 +12,7 @@ import * as XLSX from 'xlsx'
 export class ModaisListagemEmpresasComponent implements OnInit {
   @Input() displaymodalEdicaoEmpresaDctf: boolean
   @Input() payloadModalEditEmpresaDctf: any
+  @Output() onchangData = new EventEmitter<any>(); // -> usado para emitir evento de mutacao de dados
 
   @Output() closedModalEditDctf = new EventEmitter<any>();
   loadingProcessingStatus: boolean
@@ -32,8 +33,22 @@ export class ModaisListagemEmpresasComponent implements OnInit {
   updateEmpresaDctf () {
     const objSend = this.payloadModalEditEmpresaDctf
     this.dctfWebService.updateEmpresaDctf(objSend).subscribe(
-      data => alert('suceso'),
-      () => alert('erro')
+      data => this.sucessMessage('Empresa atualiza com sucesso.'),
+      () => this.errorMessage('Houve um erro ao editar a empresa')
     )
+  }
+
+  sucessMessage (stringMessage: string) {
+    this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: stringMessage })
+    this.loadingProcessingStatus = false
+    this.emitCloseModalEditEmpresaDctf()
+    this.onchangData.emit(true)
+  }
+
+  errorMessage (stringMessage: string) {
+    this.messageService.add({ severity: 'error', summary: 'Erro', detail: stringMessage })
+    this.loadingProcessingStatus = false
+    this.emitCloseModalEditEmpresaDctf()
+    this.onchangData.emit(true)
   }
 }
