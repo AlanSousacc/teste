@@ -1,18 +1,20 @@
   
 <div class="container-fluid">
-
     <app-filtros-listagem-empresas class="filtros"
        [filtroEmpresas]="filterEmpresas"
        [idEmpresaCompetencia]="idEmpresaCompetencia"
        (onOpened)="onOpenedFiltersScreen($event)"
+       (onchangData)="onchangData()"
        (onFiltred)="setFiltredData($event)"
+       [idsetor]="8"
        [showFilters]="showFilters"
     >
     </app-filtros-listagem-empresas>
 
-
- 
-<p-table [value]="data.data" responsiveLayout="scroll">
+<p-table [value]="data.data" responsiveLayout="scroll"
+id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [rows]="10" [lazy]="true"
+[totalRecords]="totaldata"
+>
     <ng-template pTemplate="header">
         <tr>
             
@@ -100,7 +102,6 @@
    
 </p-table>
 
-{{payloadModalEditEmpresaDctf}}
 <app-modais-listagem-empresas
   [displaymodalEdicaoEmpresaDctf]="displaymodalEdicaoEmpresaDctf"
   (closedModalEditDctf)="closedModalEditDctf()"
