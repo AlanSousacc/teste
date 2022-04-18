@@ -10,8 +10,12 @@ export class JWTService {
     constructor (
     ) { }
 
-    public token (): string {
+    public tokenLaravel (): string {
       return localStorage.getItem('token_laravel') ?? ''
+    }
+
+    public token (): string {
+      return localStorage.getItem('token') ?? ''
     }
 
     public isExpired (): boolean {

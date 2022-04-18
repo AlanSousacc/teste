@@ -12,7 +12,7 @@ export class JwtInterceptor implements HttpInterceptor {
       // TODO: redirecionar login
     // return
     }
-    const token = this.jwtService.token()
+    const token = this.jwtService.tokenLaravel()
     request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`
