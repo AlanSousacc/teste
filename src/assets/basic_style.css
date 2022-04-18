@@ -1,4 +1,17 @@
 html, body { height: 100%; }
+
+.p-component, .p-component * {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+.p-buttonset .p-button:last-of-type {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin: 5px !important;
+}
+
+
 body { margin: 0 !important; padding:0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 label { font-weight:bold; color:#666; }
 .barra_titulos {

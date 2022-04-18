@@ -1,5 +1,4 @@
 <div>
-
   <p-sidebar  [style]="{'height':'50000px',  'z-index':'10000'}" (onHide)="onHide()"  [(visible)]="showFilters">
     <h4><i class="fa fa-filter mb-3"></i> Filtro
       <button (click)="clearFilter()"   class="btn btn-outline-danger btn-sm float-right"
@@ -22,7 +21,6 @@
       </div>
     </div>
 
-
     <div class="row mx-1 mt-3">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 px-1" style="padding: 0;">
           <div class="ui-grid ui-grid-responsive ui-fluid">
@@ -44,7 +42,7 @@
               <label for="responsavel">Tarefa</label>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-12">
-                  <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tarefa')" [options]="tarefas" (onChange)="setFilter('tarefa', selectedTarefaFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTarefaFiltro"   [showClear]="true" placeholder="Selecione a Tarefa"
+                  <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tarefa')" [options]="tarefas" (onChange)="setFilter('tarefa', selectedTarefaFiltro.value);setDefaultStatusTarefa()"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedTarefaFiltro"   [showClear]="true" placeholder="Selecione a Tarefa"
                   [style]="{'minWidth':'100%'}" 
                   optionLabel="name"></p-dropdown>  
                 </div>
@@ -91,7 +89,7 @@
               <label for="responsavel">Usuário Executor</label>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-12">
-                  <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tributacao')" [options]="usuariosExecutores" (onChange)="setFilter('tributacao', selectedTributacaoFiltro.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedUsuarioExecutor"  [showClear]="true" placeholder="Selecionae o usuario executor"
+                  <p-dropdown [filter]="true" filterBy="name"  (onClear)="onClearFields('tributacao')" [options]="usuariosExecutores" (onChange)="setFilter('usuario_executor', selectedUsuarioExecutor.value)"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedUsuarioExecutor"  [showClear]="true" placeholder="Selecionae o usuario executor"
                   [style]="{'minWidth':'100%'}" 
                   optionLabel="name"></p-dropdown>
                 </div>
@@ -123,16 +121,16 @@
 
   <div class="col-6">
     <div  style="padding: 4px;" class="p-inputgroup">
-      <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-      <input type="text" pInputText placeholder="Username">         
+      <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+      <input type="text" [(ngModel)]="searchString" (input)="searchData()" pInputText placeholder="Pesquisar">         
     </div>
    
   </div>
-
   <div class="col-3">
       <p-multiSelect  optionLabel="header" 
       selectedItemsLabel="Exibindo {0} campos"
-    
+      (onChange)="setVisibilidateColunas(setoresVisibilidade)"
+      [(ngModel)]="selectedColumnsTable"
       [options]="setoresVisibilidade"
       optionLabel="name"
       [style]="{minWidth: '200px', minHeight: '40px', height: '100%', borderRadius: '5px;'}"

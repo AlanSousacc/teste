@@ -6,6 +6,7 @@
        (onOpened)="onOpenedFiltersScreen($event)"
        (onchangData)="onchangData()"
        (onFiltred)="setFiltredData($event)"
+       (changedTableColumns)="changedTableColumns()"
        [idsetor]="8"
        [showFilters]="showFilters"
     >
@@ -19,13 +20,13 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
         <tr>
             
             <th colspan="5" ></th>
-            <th colspan="2" >Declarações/RH</th>
-            <th colspan="2" >RH</th>
-            <th colspan="4" >Fiscal/Retenções</th>
-            <th colspan="1" >RH</th>
+            <th colspan="2"  *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" >Declarações/RH</th>
+            <th colspan="2"  *ngIf="setoresVisibilidadeValues['rh'] == true" >RH</th>
+            <th colspan="4"  *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >Fiscal/Retenções</th>
+            <th colspan="1"  *ngIf="setoresVisibilidadeValues['rh'] == true" >RH</th>
 
-            <th colspan="3" >Declarações</th>
-            <th colspan="2">RH - Controller</th>
+            <th colspan="3"  *ngIf="setoresVisibilidadeValues['declaracoes'] == true" >Declarações</th>
+            <th colspan="2"  *ngIf="setoresVisibilidadeValues['rh-controller'] == true" >RH - Controller</th>
           
         </tr>
         <tr>
@@ -35,36 +36,33 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             <th rowspan="2">Tributação</th>
             <th rowspan="2" >Prioridade</th>
 
-            <th rowspan="2" >Sem  Folha </th>
-            <th rowspan="2" >RH  Externo </th>
+            <th rowspan="2" *ngIf="setoresVisibilidadeValues['declaracoes-rh']" >Sem Folha</th>
+            <th rowspan="2" *ngIf="setoresVisibilidadeValues['declaracoes-rh']" >RH Externo</th>
 
-            <th colspan="2" >E-SOCIAL</th>
-            <th colspan="4" >EFD-REINF</th>
-            <th rowspan="2" >CONFERÊNCIA</th>
-            <th colspan="3" >DCTF WEB</th>
-            <th rowspan="2" >DARF</th>
-            <th rowspan="2">DARF COMP</th>
+            <th colspan="2" *ngIf="setoresVisibilidadeValues['rh'] == true">E-SOCIAL</th>
+            <th colspan="4" *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >EFD-REINF</th>
+            <th rowspan="2" *ngIf="setoresVisibilidadeValues['rh'] == true" >CONFERÊNCIA</th>
+            <th colspan="3" *ngIf="setoresVisibilidadeValues['declaracoes'] == true"  >DCTF WEB</th>
+            <th rowspan="2" *ngIf="setoresVisibilidadeValues['rh-controller'] == true"  >DARF</th>
+            <th rowspan="2" *ngIf="setoresVisibilidadeValues['rh-controller'] == true" >DARF COMP</th>
             <th rowspan="3">AÇÕES</th>
             
         </tr>
         <tr>
-            <th >OK</th>
-            <th >Retificação</th>
+            <th *ngIf="setoresVisibilidadeValues['rh'] == true">OK</th>
+            <th *ngIf="setoresVisibilidadeValues['rh'] == true">Retificação</th>
             
-            <th >OK</th>
-            <th  >Sem Retenções de INSS</th>
-            <th  >Retificação</th>
-            <th >Desobrigar</th>
+            <th *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >OK</th>
+            <th *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >Sem Retenções de INSS</th>
+            <th *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"  >Retificação</th>
+            <th *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >Desobrigar</th>
             
-            <th>OK</th>
-            <th style="text-align: center;">Ret</th>
-            <th style="text-align: center;">Desobrigada</th>
+            <th *ngIf="setoresVisibilidadeValues['declaracoes'] == true" >OK</th>
+            <th *ngIf="setoresVisibilidadeValues['declaracoes'] == true"  style="text-align: center;">Ret</th>
+            <th *ngIf="setoresVisibilidadeValues['declaracoes'] == true"  style="text-align: center;">Desobrigada</th>
             
         </tr>
 
-       
-
-            
     </ng-template>
     <ng-template pTemplate="body" let-item let-expanded="expanded">
         <tr>
@@ -73,28 +71,27 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             <td>{{item.cnpj}}</td>
             <td>{{item.regime_tributacao}}</td>
             <td>{{item.prioridade}}</td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.sem_folha"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.departamento_pessoal"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_check"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_ret"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_check"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_check"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_ret"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_desobrigar"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.conferencia_check"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_check"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_ret"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_desobrigada"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_check"></p-checkbox></td>
-            <td><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_comp_check"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" ><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.sem_folha"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" ><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.departamento_pessoal"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['rh'] == true"><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_check"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['rh'] == true"><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_ret"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_check"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_check"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_ret"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_desobrigar"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['rh'] == true"><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.conferencia_check"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true"><p-checkbox [binary]="true"  [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_check"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true"><p-checkbox [binary]="true"  [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_ret"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true"><p-checkbox [binary]="true"  [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_desobrigada"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true"><p-checkbox [binary]="true"  [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_check"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true"><p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_comp_check"></p-checkbox></td>
             <td>
-  
                 <button type="button" pButton pRipple
                 icon="pi pi-pencil" class="mr-2" pTooltip="CSV" (click)="showModalEdit(item)" tooltipPosition="bottom"></button> 
                 <button type="button" pButton pRipple
                 icon="pi pi-envelope" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
                 <button type="button" pButton pRipple
-                icon="pi pi-trash" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
+                icon="pi pi-trash" (click)="deleteEmpresaDctf(item)" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> 
             </td>
         </tr>
     </ng-template>
@@ -104,7 +101,9 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
 
 <app-modais-listagem-empresas
   [displaymodalEdicaoEmpresaDctf]="displaymodalEdicaoEmpresaDctf"
+  [displaymodalEdicaoEmpresaDctf]="displaymodalEdicaoEmpresaDctf"
   (closedModalEditDctf)="closedModalEditDctf()"
+  (closedModalEmailEmpresas)="closedModalEmailEmpresas()"
   [payloadModalEditEmpresaDctf]="payloadModalEditEmpresaDctf"
 ></app-modais-listagem-empresas>
 </div>

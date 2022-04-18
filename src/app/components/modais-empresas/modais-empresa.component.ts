@@ -65,19 +65,27 @@ export class ModaisEmpresaComponent implements OnInit {
   }
 
   updateStatusDctf () {
+    this.loadingProcessingStatus = true
     const objSend = {
       id_empresa_competencia: this.competenciaModalStatusCompetencia.id_empresa_competencia,
       status: this.competenciaModalStatusCompetencia.status
     }
     this.loadingProcessingStatus = true
     this.dctfWebService.updateStatusCompetencias(objSend).subscribe(
-      data => this.sucessMessage('Competência atualizada com sucesso'),
-      () => this.errorMessage('Houve um erro ao atualizar o status da competência')
+      data => {
+        this.sucessMessage('Competência atualizada com sucesso')
+        this.loadingProcessingStatus = false
+      },
+      () => {
+        this.loadingProcessingStatus = false
+        this.errorMessage('Houve um erro ao atualizar o status da competência')
+      }
     )
     this.emitCloseModalStatusEmpresa()
   }
 
   gerarCompetencia () {
+    this.loadingProcessingStatus = true
     this.dadosModalGerarCompetencia.id_usuario_responsavel = this.idresponsavel
     if (!this.validationGerarCompetencia()) {
       return
@@ -86,8 +94,12 @@ export class ModaisEmpresaComponent implements OnInit {
       (data) => {
         this.displayModalGerarCompetencia = false
         this.sucessMessage('Competência gerada com sucesso')
+        this.loadingProcessingStatus = false
       },
-      () => this.errorMessage('Houve um erro ao gerar a competência')
+      () => {
+        this.loadingProcessingStatus = false
+        this.errorMessage('Houve um erro ao gerar a competência')
+      }
     )
   }
 
@@ -157,14 +169,21 @@ export class ModaisEmpresaComponent implements OnInit {
   }
 
   salvarDctf () {
+    this.loadingProcessingStatus = true
     this.competenciaModal.empresa = this.selectedEmpresaModalCreate.value
     const objSend = this.competenciaModal
     if (!this.validationSalvarDctf()) {
       return
     }
     this.dctfWebService.createEmpresa(objSend).subscribe(
-      data => this.sucessMessage('Empresa cadastrada no sistema'),
-      () => this.errorMessage('Houve um erro ao cadastrar a empresa')
+      data => {
+        this.sucessMessage('Empresa cadastrada no sistema')
+        this.loadingProcessingStatus = false
+      },
+      () => {
+        this.errorMessage('Houve um erro ao cadastrar a empresa')
+        this.loadingProcessingStatus = false
+      }
     )
   }
 }
