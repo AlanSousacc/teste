@@ -53,7 +53,7 @@
     </form>
     <ng-template pTemplate="footer">
       <p-button icon="pi pi-check" label="Cancelar" styleClass="p-button-text"></p-button>
-      <p-button icon="pi pi-times" [loading]="loadingProcessingStatus" (click)="updateStatusDctf()" label="Salvar">
+      <p-button icon="pi pi-times" *ngIf="!loadingProcessingStatus" [loading]="loadingProcessingStatus" (click)="updateStatusDctf()" label="Salvar">
       </p-button>
     </ng-template>
   </p-dialog>
@@ -105,7 +105,7 @@
 
     <ng-template pTemplate="footer">
       <p-button icon="pi pi-check" label="Cancelar" styleClass="p-button-text"></p-button>
-      <p-button icon="pi pi-times" [loading]="loadingProcessingStatus" (click)="gerarCompetencia()" label="Salvar">
+      <p-button icon="pi pi-times" *ngIf="!loadingProcessingStatus" [loading]="loadingProcessingStatus" (click)="gerarCompetencia()" label="Salvar">
       </p-button>
     </ng-template>
   </p-dialog>
@@ -190,16 +190,11 @@
         </div>
       </div>
 
-      
-
-  
-
-
     </form>
 
     <ng-template pTemplate="footer">
       <p-button icon="pi pi-check" label="Cancelar" styleClass="p-button-text"></p-button>
-      <p-button icon="pi pi-times" (click)="salvarDctf()" label="Salvar"></p-button>
+      <p-button icon="pi pi-times" *ngIf="!loadingProcessingStatus" (click)="salvarDctf()" label="Salvar"></p-button>
     </ng-template>
   </p-dialog>
 

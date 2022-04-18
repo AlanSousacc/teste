@@ -20,16 +20,16 @@ export class DctfWeb {
   getAllDctfCompetencias () { return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb') }
 
   getDctfCompetenciasFindBy (objSend: any) {
-    return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb', { params: objSend, headers: { userid: this.session.id_usuario }})
+    return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'dctfweb', { params: objSend, headers: { userid: this.session.id_usuario } })
   }
 
   getPageLink (pageurl: string, objSend = {}):Observable<Paginator> {
     const url = pageurl
-    return this.http.get<any>(url, { params: objSend, headers: { userid: this.session.id_usuario }})
+    return this.http.get<any>(url, { params: objSend, headers: { userid: this.session.id_usuario } })
   }
 
   searchCompetencias (stringSearch: string):Observable<Paginator> {
-    return this.http.post<any>(environment.apiUrl + 'dctfweb/search', { stringSearch: stringSearch }, { headers: { userid: this.session.id_usuario }})
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/search', { stringSearch: stringSearch }, { headers: { userid: this.session.id_usuario } })
   }
 
   updateStatusCompetencias (objSend: any):Observable<Paginator> {
@@ -60,11 +60,17 @@ export class DctfWeb {
     return this.http.get<any>(environment.apiUrl + 'dctfweb/getcompetencias')
   }
 
-  getListaEmpresasDctf (objSend: any):Observable<Paginator> {
+  getListaEmpresasDctf (objSend: any, searchString = ''):Observable<Paginator> {
+    // eslint-disable-next-line dot-notation
+    objSend['searchstring'] = searchString
     return this.http.get<any>(environment.apiUrl + 'dctfweb/listaempresasdctf', { params: objSend, headers: { userid: this.session.id_usuario } })
   }
 
   getUsuariosAtivosBySetor (objSend: any):Observable<Paginator> {
     return this.http.get<any>(environment.apiUrl + 'dctfweb/listaempresasdctf', { params: objSend, headers: { userid: this.session.id_usuario } })
+  }
+
+  deleteEmpresaDctf (objSend: any) {
+    return this.http.delete<any>(environment.apiUrl + 'dctfweb/deleteempresadctf', { params: objSend, headers: { userid: this.session.id_usuario } })
   }
 }

@@ -6,6 +6,7 @@ import { SessionService } from 'src/app/services/global/session.service'
 import { MessageService } from 'primeng/api'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { Paginator } from 'primeng/paginator'
+import { LocalStorageService } from 'src/app/services/dctfweb/localstorage.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,7 @@ export class ListempresasdctfComponent implements OnInit {
   data: any
   totaldata: number
   displaymodalEdicaoEmpresaDctf: boolean
+  displaydModalEmailEmpresas: boolean
   payloadModalEditEmpresaDctf: any
   showFilters: boolean
   filterEmpresas: any
@@ -25,14 +27,24 @@ export class ListempresasdctfComponent implements OnInit {
   currentlast = 0
   semdados: boolean
   idEmpresaCompetencia: any
-  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService, private messageService: MessageService, private spinner: NgxSpinnerService) {
+  setoresVisibilidade: any
+  setoresVisibilidadeValues: any
+  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService, private messageService: MessageService, private spinner: NgxSpinnerService, private localStorage: LocalStorageService) {
     this.displaymodalEdicaoEmpresaDctf = false
+    this.displaydModalEmailEmpresas = false
     this.showFilters = false
     this.totaldata = 0
     this.semdados = false
   }
 
   async ngOnInit () {
+    this.setoresVisibilidade = [
+      { name: 'Declarações/RH', value: '1', kay: 'declaracoes-rh' },
+      { name: 'RH', value: '2', kay: 'rh' },
+      { name: 'Fiscal/Retenções', value: '3', kay: 'fiscal-retencao' },
+      { name: 'Declarações', value: '4', kay: 'declaracoes' },
+      { name: 'RH - Controller', value: '5', kay: 'rh-controller' }
+    ]
     this.data = [
       {
         code: 'dwwd',
@@ -41,12 +53,14 @@ export class ListempresasdctfComponent implements OnInit {
         quantity: 'ddwd'
       }
     ]
+    this.setoresVisibilidadeValues = {}
     this.getList()
     this.getFilterEmpresas()
     this.idEmpresaCompetencia = this.route.snapshot.paramMap.get('id')
+    this.checkVisibilidadeSetores()
   }
 
-  async getFilterEmpresas() {
+  async getFilterEmpresas () {
     const objSend = {
       id_empresa_competencia: this.route.snapshot.paramMap.get('id'),
       allitems: true
@@ -81,7 +95,20 @@ export class ListempresasdctfComponent implements OnInit {
       })
   }
 
-  showFiltersTrigger  () {
+  checkVisibilidadeSetores () {
+    // Função responsavel por processar a visibilidade das colunas da tabela
+    for (const x of this.setoresVisibilidade) {
+      this.setoresVisibilidadeValues[x.kay] = this.findVisibilidade(x.kay)
+    }
+  }
+
+  findVisibilidade (setor :string) {
+    // Função responsavel por verificar se esta habilitado a exibição da coluna em questão
+    const objStore = this.localStorage.get('colunas_listagem_empresas')
+    return !!objStore.find((x: any) => x.kay === setor)
+  }
+
+  showFiltersTrigger () {
     this.showFilters = !this.showFilters
   }
 
@@ -161,17 +188,38 @@ export class ListempresasdctfComponent implements OnInit {
     this.showFilters = value
   }
 
+  closedModalEditDctf () {
+    this.displaymodalEdicaoEmpresaDctf = false
+  }
+
+  closedModalEmailEmpresas () {
+    this.displaydModalEmailEmpresas = false
+  }
+
+  onchangData () {
+
+  }
+
   showModalEdit (rowData: any) {
     this.payloadModalEditEmpresaDctf = rowData
     this.displaymodalEdicaoEmpresaDctf = true
   }
 
-  closedModalEditDctf () {
-    this.displaymodalEdicaoEmpresaDctf = false
+  deleteEmpresaDctf (rowData: any) {
+    const objSend = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.dctfWebService.deleteEmpresaDctf(objSend).subscribe(() => {
+      this.sucessMessage('Empresa excluida com sucesso.')
+    },
+    () => {
+      this.errorMessage('Ouve um erro ao excluir a empresa.')
+    }
+    )
   }
 
-  onchangData () {
-
+  changedTableColumns () {
+    this.checkVisibilidadeSetores()
   }
 
   parseBooleanChecks (x: any) {
@@ -190,7 +238,7 @@ export class ListempresasdctfComponent implements OnInit {
     return x
   }
 
-  setFiltredData(data: any) {
+  setFiltredData (data: any) {
     data.data.map((x: any) => {
       x = this.parseBooleanChecks(x)
       return x
@@ -198,7 +246,11 @@ export class ListempresasdctfComponent implements OnInit {
     this.data = data
   }
 
-  errorMessage(errorMessage: string) {
+  errorMessage (errorMessage: string) {
     this.messageService.add({ severity: 'error', summary: 'Erro', detail: errorMessage })
+  }
+
+  sucessMessage (stringMessage: string) {
+    this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: stringMessage })
   }
 }

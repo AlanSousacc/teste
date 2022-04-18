@@ -11,15 +11,18 @@ import * as XLSX from 'xlsx'
 })
 export class ModaisListagemEmpresasComponent implements OnInit {
   @Input() displaymodalEdicaoEmpresaDctf: boolean
+  @Input() displaymodalEmailsEmpresas: boolean
   @Input() payloadModalEditEmpresaDctf: any
   @Output() onchangData = new EventEmitter<any>(); // -> usado para emitir evento de mutacao de dados
 
   @Output() closedModalEditDctf = new EventEmitter<any>();
+  @Output() closedModalEmailEmpresas = new EventEmitter<any>();
   loadingProcessingStatus: boolean
 
   constructor (private dctfWebService: DctfWeb, private messageService: MessageService, private primengConfig: PrimeNGConfig) {
     this.displaymodalEdicaoEmpresaDctf = false
     this.loadingProcessingStatus = false
+    this.displaymodalEmailsEmpresas = false
   }
 
   ngOnInit (): void {
@@ -36,6 +39,10 @@ export class ModaisListagemEmpresasComponent implements OnInit {
       data => this.sucessMessage('Empresa atualiza com sucesso.'),
       () => this.errorMessage('Houve um erro ao editar a empresa')
     )
+  }
+
+  emitCloseModalEmailEmpresas () {
+    this.closedModalEmailEmpresas.emit(true)
   }
 
   sucessMessage (stringMessage: string) {
