@@ -40,7 +40,6 @@ export class TableComponentComponent implements OnInit {
   @Output() clearData = new EventEmitter<any>(); // -> usado para emitir event para limpar data
   @Output() restoreSearchEvent = new EventEmitter<any>(); // -> usado para emitir evento para restaura pesquisa primaria
 
-
   @ViewChild('competencia') inputCompetencia: any;
   @ViewChild('empresa') inputEmpresa: any;
   @ViewChild('status') inputStatus: any;

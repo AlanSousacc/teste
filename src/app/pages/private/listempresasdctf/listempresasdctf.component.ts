@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { Paginator } from 'primeng/paginator'
 import { LocalStorageService } from 'src/app/services/dctfweb/localstorage.service'
+import { CheckService } from 'src/app/services/dctfweb/checkservice.sevice'
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,7 @@ export class ListempresasdctfComponent implements OnInit {
   idEmpresaCompetencia: any
   setoresVisibilidade: any
   setoresVisibilidadeValues: any
-  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService, private messageService: MessageService, private spinner: NgxSpinnerService, private localStorage: LocalStorageService) {
+  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService, private messageService: MessageService, private spinner: NgxSpinnerService, private localStorage: LocalStorageService, private checkService: CheckService) {
     this.displaymodalEdicaoEmpresaDctf = false
     this.displaydModalEmailEmpresas = false
     this.showFilters = false
@@ -188,14 +189,6 @@ export class ListempresasdctfComponent implements OnInit {
     this.showFilters = value
   }
 
-  closedModalEditDctf () {
-    this.displaymodalEdicaoEmpresaDctf = false
-  }
-
-  closedModalEmailEmpresas () {
-    this.displaydModalEmailEmpresas = false
-  }
-
   onchangData () {
 
   }
@@ -203,6 +196,19 @@ export class ListempresasdctfComponent implements OnInit {
   showModalEdit (rowData: any) {
     this.payloadModalEditEmpresaDctf = rowData
     this.displaymodalEdicaoEmpresaDctf = true
+  }
+
+  showModalEmailsEmpresa (rowData: any) {
+    this.payloadModalEditEmpresaDctf = rowData
+    this.displaydModalEmailEmpresas = true
+  }
+
+  closedModalEditDctf () {
+    this.displaymodalEdicaoEmpresaDctf = false
+  }
+
+  closedModalEmailEmpresas () {
+    this.displaydModalEmailEmpresas = false
   }
 
   deleteEmpresaDctf (rowData: any) {
@@ -224,7 +230,7 @@ export class ListempresasdctfComponent implements OnInit {
 
   parseBooleanChecks (x: any) {
     x.sem_folha = x.sem_folha === '1'
-    x.departamento_pessoal = x.departamento_pessoal === '1'
+    x.esocial_rh_interno = x.esocial_rh_interno === '1'
     x.esocial_check = x.esocial_check === '1'
     x.esocial_ret = x.esocial_ret === '1'
     x.efd_check = x.efd_check === '1'
@@ -252,5 +258,32 @@ export class ListempresasdctfComponent implements OnInit {
 
   sucessMessage (stringMessage: string) {
     this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: stringMessage })
+  }
+
+  setSemfolha (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.gravarCheckSemFolha(sendObj).subscribe(() => {
+      alert('sucesso')
+    })
+  }
+
+  setDeparamentoPessoal (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarRhInterno(sendObj).subscribe(() => {
+      alert('sucesso')
+    })
+  }
+
+  setCheckEsocial (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarCheckEsocial(sendObj).subscribe(() => {
+      alert('sucesso')
+    })
   }
 }

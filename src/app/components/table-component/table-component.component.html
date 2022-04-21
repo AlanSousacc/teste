@@ -63,7 +63,7 @@
         <td>{{ competencia.data_criacao }}</td>
         <td>{{ competencia.data_limite_execucao }}</td>
         <td>{{ competencia.data_limite_transmissao }}</td>
-
+        
 
         <td *ngIf="idsetor == 3  || (idsetor != 3 && idsetor != 2 && idsetor != 8 ) ">
           <p-progressBar [value]="competencia.percDarf"></p-progressBar>
@@ -74,12 +74,9 @@
         <td *ngIf="idsetor == 8">
           <p-progressBar [value]="competencia.percTotalDeclaracoes"></p-progressBar>
         </td>
-        <td> <button [routerLink]="['/listempresas', competencia.id_empresa_competencia]" type="button" pButton pRipple
-            icon="pi pi-align-justify " class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button> <button
-            type="button" pButton pRipple icon="pi pi-plus" (click)="openModalNewEmpresaDctf(competencia)" class="mr-2"
-            pTooltip="CSV" tooltipPosition="bottom"></button> <button (click)="openModalStatusCompetencia(competencia)"
-            type="button" pButton pRipple icon="pi pi-tags" class="mr-2" pTooltip="CSV"
-            tooltipPosition="bottom"></button>
+        <td> <button [routerLink]="['/listempresas', competencia.id_empresa_competencia]" type="button" pButton pRipple icon="pi pi-align-justify " class="mr-2" pTooltip="Empresas DCTF-WEB" tooltipPosition="bottom"></button> 
+            <button type="button" pButton pRipple icon="pi pi-plus"  pTooltip="Incluir Empresa DCTF-WEB" (click)="openModalNewEmpresaDctf(competencia)" class="mr-2" tooltipPosition="bottom"></button>
+            <button (click)="openModalStatusCompetencia(competencia)" type="button" pButton pRipple icon="pi pi-tags" class="mr-2" pTooltip="Status" tooltipPosition="bottom"></button>
         </td>
 
       </tr>

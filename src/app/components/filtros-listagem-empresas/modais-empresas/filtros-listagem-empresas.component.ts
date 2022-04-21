@@ -41,16 +41,16 @@ export class FiltrosListagemEmpresasComponent implements OnInit {
   constructor (private dctfWebService: DctfWeb, private tributacoesService: Tributacoes, private loading: NgxSpinnerService, private usuariosService: Usuarios, private localStorage: LocalStorageService) {
     this.filters = {}
     this.tarefas = [
-      { name: 'Conferência', value: '1' },
-      { name: 'DARF', value: '2' },
-      { name: 'DARF Complementar', value: '3' },
-      { name: 'EFD-REINF', value: '4' },
-      { name: 'DCTF-WEB', value: '5' },
-      { name: 'eSocial', value: '6' },
+      { name: 'Conferência (RH)', value: '1' },
+      { name: 'DARF (RH - Controller)', value: '2' },
+      { name: 'DARF Complementar (RH - Controller)', value: '3' },
+      { name: 'EFD-REINF (Fiscal)', value: '4' },
+      { name: 'DCTF-WEB (Declarações)', value: '5' },
+      { name: 'eSocial (RH)', value: '6' },
       { name: 'Desobrigada (Declarações)', value: '7' },
-      { name: 'RH Externo', value: '8' },
-      { name: 'Sem Folha', value: '9' },
-      { name: 'Sem retenção de INSS', value: '10' }
+      { name: 'RH Externo (RH)', value: '8' },
+      { name: 'Sem Folha (RH)', value: '9' },
+      { name: 'Sem retenção de INSS (Fiscal)', value: '10' }
     ]
 
     this.status = [

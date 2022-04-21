@@ -19,7 +19,7 @@ export class CheckService {
 
   getAllDctfCompetencias () { return this.http.get<PaginatorDcftCompetencias>(environment.apiUrl + 'check') }
 
-  checkSemFolha (objSend: any) {
+  gravarCheckSemFolha (objSend: any) {
     // Params id_empresa_dctf,sem_folha
     return this.http.post<any>(environment.apiUrl + 'check/setsemfolha', objSend, { headers: { userid: this.session.id_usuario } })
   }
@@ -55,6 +55,4 @@ export class CheckService {
     const url = pageurl
     return this.http.get<any>(url, { params: objSend, headers: { userid: this.session.id_usuario } })
   }
-
-  
 }
