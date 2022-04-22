@@ -40,7 +40,7 @@ export class CheckService {
   }
 
   checkGravarCheckEfd (objSend: any) {
-    return this.http.post<any>(environment.apiUrl + 'check/setretesocial', objSend, { headers: { userid: this.session.id_usuario } })
+    return this.http.post<any>(environment.apiUrl + 'check/setcheckefd', objSend, { headers: { userid: this.session.id_usuario } })
   }
 
   gravarCheckEfd (objSend: any) {
@@ -48,7 +48,11 @@ export class CheckService {
   }
 
   gravarCheckEmpresaSemRetencaoINSS (objSend: any) {
-    return this.http.post<any>(environment.apiUrl + 'check/setchecksemretencainss', objSend, { headers: { userid: this.session.id_usuario } })
+    return this.http.post<any>(environment.apiUrl + 'check/setchecksemretencaoinss', objSend, { headers: { userid: this.session.id_usuario } })
+  }
+
+  gravarRetEfd (objSend: any) {
+    return this.http.post<any>(environment.apiUrl + 'check/setretefd', objSend, { headers: { userid: this.session.id_usuario } })
   }
 
   getPageLink (pageurl: string, objSend = {}):Observable<Paginator> {

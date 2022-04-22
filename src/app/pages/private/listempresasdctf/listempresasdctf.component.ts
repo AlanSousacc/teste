@@ -217,6 +217,7 @@ export class ListempresasdctfComponent implements OnInit {
     }
     this.dctfWebService.deleteEmpresaDctf(objSend).subscribe(() => {
       this.sucessMessage('Empresa excluida com sucesso.')
+      this.getList()
     },
     () => {
       this.errorMessage('Ouve um erro ao excluir a empresa.')
@@ -234,6 +235,7 @@ export class ListempresasdctfComponent implements OnInit {
     x.esocial_check = x.esocial_check === '1'
     x.esocial_ret = x.esocial_ret === '1'
     x.efd_check = x.efd_check === '1'
+    x.sem_ret_inss = x.sem_ret_inss === '1'
     x.efd_desobrigar = x.efd_desobrigar === '1'
     x.conferencia_check = x.conferencia_check === '1'
     x.dctf_check = x.dctf_check === '1'
@@ -265,7 +267,10 @@ export class ListempresasdctfComponent implements OnInit {
       id_empresa_dctf: rowData.id_empresa_dctf
     }
     this.checkService.gravarCheckSemFolha(sendObj).subscribe(() => {
-      alert('sucesso')
+      this.sucessMessage('Dados atualizados com sucesso.')
+    },
+    () => {
+      this.sucessMessage('Houve um erro na atualização dos dados.')
     })
   }
 
@@ -273,17 +278,77 @@ export class ListempresasdctfComponent implements OnInit {
     const sendObj = {
       id_empresa_dctf: rowData.id_empresa_dctf
     }
-    this.checkService.checkGravarRhInterno(sendObj).subscribe(() => {
-      alert('sucesso')
-    })
+    this.checkService.checkGravarRhInterno(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
   }
 
   setCheckEsocial (rowData: any) {
     const sendObj = {
       id_empresa_dctf: rowData.id_empresa_dctf
     }
-    this.checkService.checkGravarCheckEsocial(sendObj).subscribe(() => {
-      alert('sucesso')
-    })
+    this.checkService.checkGravarCheckEsocial(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setRetEsocial (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarRetEsocial(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setCheckEfd (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarCheckEfd(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setSemRetencoes (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.gravarCheckEmpresaSemRetencaoINSS(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setEfdRet (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.gravarRetEfd(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
   }
 }
