@@ -69,26 +69,113 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
 
     </ng-template>
     <ng-template pTemplate="body" let-item let-expanded="expanded">
-        <tr> 
+        <tr>
             <td>{{item.id_dominio}}</td>
             <td>{{item.nome_emp}}</td>
             <td>{{item.cnpj}}</td>
             <td>{{item.regime_tributacao}}</td>
             <td>{{item.prioridade}}</td>
-            <td *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" ><p-checkbox (onChange)="setSemfolha(item)" [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.sem_folha"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" ><p-checkbox (onChange)="setDeparamentoPessoal(item)" [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_rh_interno"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['rh'] == true"><p-checkbox [binary]="true" (onChange)="setCheckEsocial(item)" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_check"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['rh'] == true"><p-checkbox [binary]="true" (onChange)="setRetEsocial(item)" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.esocial_ret"></p-checkbox></td> 
-            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"><p-checkbox (onChange)="setCheckEfd(item)" [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_check"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"><p-checkbox (onChange)="setSemRetencoes(item)" [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.sem_ret_inss"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"><p-checkbox (onChange)="setEfdRet(item)" [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_ret"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"><p-checkbox (onChange)="setSemfolha(item)" [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.efd_desobrigar"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['rh'] == true"><p-checkbox [binary]="true" (onChange)="setSemfolha(item)" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.conferencia_check"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true"><p-checkbox  (onChange)="setSemfolha(item)" [binary]="true"  [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_check"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true"><p-checkbox (onChange)="setSemfolha(item)" [binary]="true"  [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_ret"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true"><p-checkbox (onChange)="setSemfolha(item)" [binary]="true"  [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.dctf_desobrigada"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true"><p-checkbox (onChange)="setSemfolha(item)" [binary]="true"  [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_check"></p-checkbox></td>
-            <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true"><p-checkbox  (onChange)="setSemfolha(item)" [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" [(ngModel)]="item.darf_comp_check"></p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" >
+                <p-checkbox (onChange)="setSemfolha(item)"
+                            [binary]="true" 
+                            [style]="{'text-align': 'center','align-content': 'center'}" 
+                            [(ngModel)]="item.sem_folha">
+                </p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" >
+                <p-checkbox (onChange)="setDeparamentoPessoal(item)" 
+                            [binary]="true" 
+                            [style]="{'text-align': 'center','align-content': 'center'}" 
+                            [(ngModel)]="item.esocial_rh_interno">
+                </p-checkbox>
+            </td>
+            <td *ngIf="setoresVisibilidadeValues['rh'] == true">
+                <p-checkbox 
+                    [binary]="true" 
+                    [pTooltip]="item.esocial_usuario_nome ? 'Usuário ' + item.esocial_usuario_nome : '' "  
+                    (onChange)="setCheckEsocial(item)" 
+                    [style]="{'text-align': 'center','align-content': 'center'}" 
+                    [(ngModel)]="item.esocial_check">
+                 </p-checkbox>
+            </td>
+            <td *ngIf="setoresVisibilidadeValues['rh'] == true">
+                <p-checkbox [binary]="true"
+                    [pTooltip]="item.esocial_ret_usuario_nome ? 'Usuário ' + item.esocial_ret_usuario_nome : '' "  
+                    (onChange)="setRetEsocial(item)" 
+                    [style]="{'text-align': 'center','align-content': 'center'}" 
+                    [(ngModel)]="item.esocial_ret">
+                </p-checkbox>
+            </td> 
+            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true">
+                <p-checkbox [pTooltip]="item.efd_usuario_nome ? 'Usuário ' + item.efd_usuario_nome : '' " 
+                    (onChange)="setCheckEfd(item)" 
+                    [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" 
+                    [(ngModel)]="item.efd_check">
+                </p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true">
+                <p-checkbox [pTooltip]="item.efd_usuario_nome ? 'Usuário ' + item.efd_usuario_nome : '' "
+                    (onChange)="setSemRetencoes(item)" [binary]="true" 
+                    [style]="{'text-align': 'center','align-content': 'center'}" 
+                    [(ngModel)]="item.sem_ret_inss">
+                </p-checkbox>
+            </td>
+            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true">
+                <p-checkbox 
+                     [pTooltip]="item.efd_usuario_nome ? 'Usuário ' + item.efd_ret_usuario_nome : '' "
+                     (onChange)="setEfdRet(item)" 
+                     [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}"
+                     [(ngModel)]="item.efd_ret">
+                </p-checkbox>
+            </td>
+            <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true">
+                <p-checkbox 
+                    (onChange)="setDesobrigarEfd(item)" 
+                    [binary]="true" 
+                    [style]="{'text-align': 'center','align-content': 'center'}" 
+                    [(ngModel)]="item.efd_desobrigar">
+                </p-checkbox>
+            </td>
+            <td *ngIf="setoresVisibilidadeValues['rh'] == true">
+                <p-checkbox [binary]="true" 
+                     (onChange)="setSemfolha(item)" 
+                     [style]="{'text-align': 'center','align-content': 'center'}" 
+                     [(ngModel)]="item.conferencia_check">
+                </p-checkbox>
+            </td>
+            <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true">
+                <p-checkbox  
+                    (onChange)="setSemfolha(item)" 
+                    [binary]="true"  [style]="{'text-align': 'center','align-content': 'center'}" 
+                    [(ngModel)]="item.dctf_check">
+                </p-checkbox>
+            </td>
+            <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true">
+                <p-checkbox 
+                    (onChange)="setSemfolha(item)" 
+                    [binary]="true"  
+                    [style]="{'text-align': 'center','align-content': 'center'}" 
+                    [(ngModel)]="item.dctf_ret">
+                </p-checkbox>
+            </td>
+            <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true">
+                <p-checkbox 
+                (onChange)="setSemfolha(item)" 
+                [binary]="true"  
+                [style]="{'text-align': 'center','align-content': 'center'}" 
+                [(ngModel)]="item.dctf_desobrigada">
+            </p-checkbox></td>
+            <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true">
+                <p-checkbox (onChange)="setSemfolha(item)" 
+                            [binary]="true"  
+                            [style]="{'text-align': 'center','align-content': 'center'}" 
+                            [(ngModel)]="item.darf_check">
+                </p-checkbox>
+            </td>
+            <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true"><p-checkbox  
+                (onChange)="setSemfolha(item)" 
+                [binary]="true" 
+                [style]="{'text-align': 'center','align-content': 'center'}" 
+                [(ngModel)]="item.darf_comp_check">
+            </p-checkbox></td>
             <td>
                 <button type="button" pButton pRipple
                 icon="pi pi-pencil" class="mr-2" pTooltip="Editar DCTF WEB" (click)="showModalEdit(item)" tooltipPosition="bottom"></button> 
@@ -109,5 +196,6 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
   (closedModalEditDctf)="closedModalEditDctf()"
   (closedModalEmailEmpresas)="closedModalEmailEmpresas()"
   [payloadModalEditEmpresaDctf]="payloadModalEditEmpresaDctf"
+  [payloadModalEmailEpresas]="payloadModalEmailEpresas"
 ></app-modais-listagem-empresas>
 </div>

@@ -73,4 +73,8 @@ export class DctfWeb {
   deleteEmpresaDctf (objSend: any) {
     return this.http.delete<any>(environment.apiUrl + 'dctfweb/deleteempresadctf', { params: objSend, headers: { userid: this.session.id_usuario } })
   }
+
+  getEmailEmpresa (objSend: any) {
+    return this.http.get<any>(environment.apiUrl + 'dctfweb/getemailsempresa', { params: objSend, headers: { userid: this.session.id_usuario } })
+  }
 }

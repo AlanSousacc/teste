@@ -22,6 +22,7 @@ export class ListempresasdctfComponent implements OnInit {
   displaymodalEdicaoEmpresaDctf: boolean
   displaydModalEmailEmpresas: boolean
   payloadModalEditEmpresaDctf: any
+  payloadModalEmailEpresas: any
   showFilters: boolean
   filterEmpresas: any
   last = 0
@@ -29,12 +30,14 @@ export class ListempresasdctfComponent implements OnInit {
   semdados: boolean
   idEmpresaCompetencia: any
   setoresVisibilidade: any
+  incluir: boolean
   setoresVisibilidadeValues: any
   constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService, private messageService: MessageService, private spinner: NgxSpinnerService, private localStorage: LocalStorageService, private checkService: CheckService) {
     this.displaymodalEdicaoEmpresaDctf = false
     this.displaydModalEmailEmpresas = false
     this.showFilters = false
     this.totaldata = 0
+    this.incluir = false
     this.semdados = false
   }
 
@@ -198,8 +201,18 @@ export class ListempresasdctfComponent implements OnInit {
     this.displaymodalEdicaoEmpresaDctf = true
   }
 
-  showModalEmailsEmpresa (rowData: any) {
+  async showModalEmailsEmpresa (rowData: any) {
     this.payloadModalEditEmpresaDctf = rowData
+    this.payloadModalEmailEpresas = rowData
+
+    const objSend = {
+      id_empresa: rowData.id_empresa_dctf
+    }
+
+    const response = await this.dctfWebService.getEmailEmpresa(objSend).toPromise()
+
+    this.payloadModalEmailEpresas = response
+
     this.displaydModalEmailEmpresas = true
   }
 
@@ -235,6 +248,7 @@ export class ListempresasdctfComponent implements OnInit {
     x.esocial_check = x.esocial_check === '1'
     x.esocial_ret = x.esocial_ret === '1'
     x.efd_check = x.efd_check === '1'
+    x.efd_ret = x.efd_ret === '1'
     x.sem_ret_inss = x.sem_ret_inss === '1'
     x.efd_desobrigar = x.efd_desobrigar === '1'
     x.conferencia_check = x.conferencia_check === '1'
@@ -330,7 +344,7 @@ export class ListempresasdctfComponent implements OnInit {
     const sendObj = {
       id_empresa_dctf: rowData.id_empresa_dctf
     }
-    this.checkService.gravarCheckEmpresaSemRetencaoINSS(sendObj).subscribe(
+    this.checkService.checkGravarCheckEmpresaSemRetencaoINSS(sendObj).subscribe(
       () => {
         this.sucessMessage('Dados atualizados com sucesso.')
       },
@@ -343,7 +357,20 @@ export class ListempresasdctfComponent implements OnInit {
     const sendObj = {
       id_empresa_dctf: rowData.id_empresa_dctf
     }
-    this.checkService.gravarRetEfd(sendObj).subscribe(
+    this.checkService.checkGravarRetEfd(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setDesobrigarEfd (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarDesobrigarEfd(sendObj).subscribe(
       () => {
         this.sucessMessage('Dados atualizados com sucesso.')
       },

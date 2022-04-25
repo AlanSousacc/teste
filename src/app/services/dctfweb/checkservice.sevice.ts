@@ -25,34 +25,38 @@ export class CheckService {
   }
 
   checkGravarRhInterno (objSend: any) {
-    // Prams id_empresa_dctf
+    // Params id_empresa_dctf
     return this.http.post<any>(environment.apiUrl + 'check/setrhinterno', objSend, { headers: { userid: this.session.id_usuario } })
   }
 
   checkGravarCheckEsocial (objSend: any) {
-    // Prams id_empresa_dctf
+    // Params id_empresa_dctf
     return this.http.post<any>(environment.apiUrl + 'check/setcheckesocial', objSend, { headers: { userid: this.session.id_usuario } })
   }
 
   checkGravarRetEsocial (objSend: any) {
-    // Prams id_empresa_dctf
+    // Params id_empresa_dctf
     return this.http.post<any>(environment.apiUrl + 'check/setretesocial', objSend, { headers: { userid: this.session.id_usuario } })
   }
 
   checkGravarCheckEfd (objSend: any) {
+    // Params id_empresa_dctf
     return this.http.post<any>(environment.apiUrl + 'check/setcheckefd', objSend, { headers: { userid: this.session.id_usuario } })
   }
 
-  gravarCheckEfd (objSend: any) {
-    return this.http.post<any>(environment.apiUrl + 'check/setcheckefd', objSend, { headers: { userid: this.session.id_usuario } })
-  }
-
-  gravarCheckEmpresaSemRetencaoINSS (objSend: any) {
+  checkGravarCheckEmpresaSemRetencaoINSS (objSend: any) {
+    // Params id_empresa_dctf
     return this.http.post<any>(environment.apiUrl + 'check/setchecksemretencaoinss', objSend, { headers: { userid: this.session.id_usuario } })
   }
 
-  gravarRetEfd (objSend: any) {
+  checkGravarRetEfd (objSend: any) {
+    // Prams id_empresa_dctf
     return this.http.post<any>(environment.apiUrl + 'check/setretefd', objSend, { headers: { userid: this.session.id_usuario } })
+  }
+
+  checkGravarDesobrigarEfd (objSend: any) {
+    // Params id_empresa_dctf
+    return this.http.post<any>(environment.apiUrl + 'check/setdesobrigarefd', objSend, { headers: { userid: this.session.id_usuario } })
   }
 
   getPageLink (pageurl: string, objSend = {}):Observable<Paginator> {
