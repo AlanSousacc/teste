@@ -1,3 +1,4 @@
+import { PermissionService } from './../../../services/dctfweb/permission.service'
 
 import { DctfWeb } from '../../../services/dctfweb/dctfweb.service'
 import { Component, OnInit } from '@angular/core'
@@ -32,13 +33,16 @@ export class ListempresasdctfComponent implements OnInit {
   setoresVisibilidade: any
   incluir: boolean
   setoresVisibilidadeValues: any
-  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService, private messageService: MessageService, private spinner: NgxSpinnerService, private localStorage: LocalStorageService, private checkService: CheckService) {
+  session: any
+  permissoesDctf: any
+  constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService, private messageService: MessageService, private spinner: NgxSpinnerService, private localStorage: LocalStorageService, private checkService: CheckService, private permissionService: PermissionService) {
     this.displaymodalEdicaoEmpresaDctf = false
     this.displaydModalEmailEmpresas = false
     this.showFilters = false
     this.totaldata = 0
     this.incluir = false
     this.semdados = false
+    this.session = this.sessionService.session
   }
 
   async ngOnInit () {
@@ -62,6 +66,19 @@ export class ListempresasdctfComponent implements OnInit {
     this.getFilterEmpresas()
     this.idEmpresaCompetencia = this.route.snapshot.paramMap.get('id')
     this.checkVisibilidadeSetores()
+    this.getPermissionsDctf()
+  }
+
+  getPermissionsDctf () {
+    const DCTF_PERMISSORES_LISTA_EMPRESA__ID_FORMULARIO = 214
+    const objSend = {
+      id_usuario: this.session.id_usuario,
+      id_formulario: DCTF_PERMISSORES_LISTA_EMPRESA__ID_FORMULARIO
+    }
+    this.permissionService.getPermissionsDctf(objSend).subscribe((x) => {
+      this.permissoesDctf = x
+      console.log(x)
+    })
   }
 
   async getFilterEmpresas () {
@@ -116,7 +133,7 @@ export class ListempresasdctfComponent implements OnInit {
     this.showFilters = !this.showFilters
   }
 
-  loadPage(event: any, table: any) {
+  loadPage (event: any, table: any) {
     if (event.first > this.currentlast) {
       this.loadNextPage({ last: event.first, table: table })
     }
@@ -126,7 +143,7 @@ export class ListempresasdctfComponent implements OnInit {
     }
   }
 
-  async loadNextPage(params: any) {
+  async loadNextPage (params: any) {
     const objSend = {
       id_empresa_competencia: this.route.snapshot.paramMap.get('id')
     }
@@ -152,7 +169,7 @@ export class ListempresasdctfComponent implements OnInit {
       })
   }
 
-  async loadBackPage(params: any) {
+  async loadBackPage (params: any) {
     const objSend = {
       id_empresa_competencia: this.route.snapshot.paramMap.get('id')
     }

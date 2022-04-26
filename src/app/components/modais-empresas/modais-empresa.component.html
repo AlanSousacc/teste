@@ -113,7 +113,7 @@
   <!-- Modal de inclusao empresa dctf  -->
   <p-dialog [modal]="true" [style]="{width: '50vw'}" (onHide)="emitCloseModalCreateEmpresa()" [maximizable]="true"
     [baseZIndex]="10000" header="Incluir Empresa DCTF-WEB" [(visible)]="displayModalCreateEmpresa"
-    [style]="{width: '50vw'}" [baseZIndex]="10000">
+    [style]="{width: '50vw', height: '30vw'}" [baseZIndex]="10000">
     <form>
       <div class="row">
         <input type="hidden" id="id_empresa_competencia" [(ngModel)]="competenciaModal.id_empresa_competencia"
@@ -133,7 +133,7 @@
       </div>
 
       <div style="margin-top: 10px;" class="row">
-        <!--
+       
         <div class="col">
           <label>Status</label>
           <select [(ngModel)]="competenciaModal.status" [ngModelOptions]="{standalone: true}"
@@ -152,7 +152,7 @@
           </select>
         </div>
       </div>
-
+       <!--
       <div style="margin-top: 10px;" class="row">
         <div class="col">
           <label>Faturamento R$</label>
@@ -170,8 +170,8 @@
             class="form-control" placeholder=""></textarea>
         </div>
       </div>
-      -->
     </div>
+     -->
 
       <div style="margin-top: 10px;" class="row">
         <div class="col">
