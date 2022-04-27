@@ -68,6 +68,7 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
         </tr>
 
     </ng-template>
+   
     <ng-template pTemplate="body" let-item let-expanded="expanded">
         <tr>
             <td>{{item.id_dominio}}</td>
@@ -77,12 +78,14 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             <td>{{item.prioridade}}</td>
             <td *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" >
                 <p-checkbox (onChange)="setSemfolha(item)"
+                            [readonly]="!permissoesDctf['DCTF003']"
                             [binary]="true" 
                             [style]="{'text-align': 'center','align-content': 'center'}" 
                             [(ngModel)]="item.sem_folha">
                 </p-checkbox></td>
             <td *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" >
                 <p-checkbox (onChange)="setDeparamentoPessoal(item)" 
+                            [readonly]="!permissoesDctf['DCTF004']"
                             [binary]="true" 
                             [style]="{'text-align': 'center','align-content': 'center'}" 
                             [(ngModel)]="item.esocial_rh_interno">
@@ -91,6 +94,7 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             <td *ngIf="setoresVisibilidadeValues['rh'] == true">
                 <p-checkbox 
                     [binary]="true" 
+                    [readonly]="!permissoesDctf['DCTF005']"
                     [pTooltip]="item.esocial_usuario_nome ? 'Usuário ' + item.esocial_usuario_nome : '' "  
                     (onChange)="setCheckEsocial(item)" 
                     [style]="{'text-align': 'center','align-content': 'center'}" 
@@ -99,6 +103,7 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             </td>
             <td *ngIf="setoresVisibilidadeValues['rh'] == true">
                 <p-checkbox [binary]="true"
+                    [readonly]="!permissoesDctf['DCTF006']"
                     [pTooltip]="item.esocial_ret_usuario_nome ? 'Usuário ' + item.esocial_ret_usuario_nome : '' "  
                     (onChange)="setRetEsocial(item)" 
                     [style]="{'text-align': 'center','align-content': 'center'}" 
@@ -107,12 +112,14 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             </td> 
             <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true">
                 <p-checkbox [pTooltip]="item.efd_usuario_nome ? 'Usuário ' + item.efd_usuario_nome : '' " 
+                    [readonly]="!permissoesDctf['DCTF008']"
                     (onChange)="setCheckEfd(item)" 
                     [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}" 
                     [(ngModel)]="item.efd_check">
                 </p-checkbox></td>
             <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true">
                 <p-checkbox [pTooltip]="item.efd_usuario_nome ? 'Usuário ' + item.efd_usuario_nome : '' "
+                    [readonly]="!permissoesDctf['DCTF008']"
                     (onChange)="setSemRetencoes(item)" [binary]="true" 
                     [style]="{'text-align': 'center','align-content': 'center'}" 
                     [(ngModel)]="item.sem_ret_inss">
@@ -120,6 +127,7 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             </td>
             <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true">
                 <p-checkbox 
+                     [readonly]="!permissoesDctf['DCTF009']"
                      [pTooltip]="item.efd_usuario_nome ? 'Usuário ' + item.efd_ret_usuario_nome : '' "
                      (onChange)="setEfdRet(item)" 
                      [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}"
@@ -128,6 +136,7 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             </td>
             <td *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true">
                 <p-checkbox 
+                    [readonly]="!permissoesDctf['DCTF010']"
                     (onChange)="setDesobrigarEfd(item)" 
                     [binary]="true" 
                     [style]="{'text-align': 'center','align-content': 'center'}" 
@@ -135,7 +144,9 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
                 </p-checkbox>
             </td>
             <td *ngIf="setoresVisibilidadeValues['rh'] == true">
-                <p-checkbox [binary]="true" 
+                <p-checkbox 
+                     [binary]="true" 
+                     [readonly]="!permissoesDctf['DCTF011']"
                      (onChange)="setSemfolha(item)" 
                      [style]="{'text-align': 'center','align-content': 'center'}" 
                      [(ngModel)]="item.conferencia_check">
@@ -143,6 +154,7 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             </td>
             <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true">
                 <p-checkbox  
+                    [readonly]="!permissoesDctf['DCTF012']"
                     (onChange)="setSemfolha(item)" 
                     [binary]="true"  [style]="{'text-align': 'center','align-content': 'center'}" 
                     [(ngModel)]="item.dctf_check">
@@ -151,6 +163,7 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true">
                 <p-checkbox 
                     (onChange)="setSemfolha(item)" 
+                    [readonly]="!permissoesDctf['DCTF012']"
                     [binary]="true"  
                     [style]="{'text-align': 'center','align-content': 'center'}" 
                     [(ngModel)]="item.dctf_ret">
@@ -158,11 +171,12 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             </td>
             <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true">
                 <p-checkbox 
-                (onChange)="setSemfolha(item)" 
-                [binary]="true"  
-                [style]="{'text-align': 'center','align-content': 'center'}" 
-                [(ngModel)]="item.dctf_desobrigada">
-            </p-checkbox></td>
+                    [readonly]="!permissoesDctf['DCTF013']"
+                    (onChange)="setSemfolha(item)" 
+                    [binary]="true"  
+                    [style]="{'text-align': 'center','align-content': 'center'}" 
+                    [(ngModel)]="item.dctf_desobrigada">
+                 </p-checkbox></td>
             <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true">
                 <p-checkbox (onChange)="setSemfolha(item)" 
                             [binary]="true"  
@@ -171,6 +185,7 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
                 </p-checkbox>
             </td>
             <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true"><p-checkbox  
+                [readonly]="!permissoesDctf['DCTF015']"
                 (onChange)="setSemfolha(item)" 
                 [binary]="true" 
                 [style]="{'text-align': 'center','align-content': 'center'}" 

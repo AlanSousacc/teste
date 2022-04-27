@@ -78,6 +78,7 @@ export class ListempresasdctfComponent implements OnInit {
     this.permissionService.getPermissionsDctf(objSend).subscribe((x) => {
       this.permissoesDctf = x
       console.log(x)
+      alert(JSON.stringify(x))
     })
   }
 
