@@ -35,6 +35,7 @@ export class ListempresasdctfComponent implements OnInit {
   setoresVisibilidadeValues: any
   session: any
   permissoesDctf: any
+  colorTr:any
   constructor (private dctfWebService: DctfWeb, private route: ActivatedRoute, private sessionService: SessionService, private messageService: MessageService, private spinner: NgxSpinnerService, private localStorage: LocalStorageService, private checkService: CheckService, private permissionService: PermissionService) {
     this.displaymodalEdicaoEmpresaDctf = false
     this.displaydModalEmailEmpresas = false
@@ -96,6 +97,17 @@ export class ListempresasdctfComponent implements OnInit {
       () => {
         this.errorMessage('Um erro ocorreu ao se conectar com o servidor.')
       })
+  }
+
+  getColorTr (data: any) {
+    if (data.dctf_desobrigada === 1) {
+      return 'lightgray'
+    } else if (data.dctf_check === 0) {
+      return '#fff'
+    } else if (data.dctf_check === 1) {
+      return '#cfc'
+    }
+    return ''
   }
 
   async getList () {
@@ -221,15 +233,19 @@ export class ListempresasdctfComponent implements OnInit {
 
   async showModalEmailsEmpresa (rowData: any) {
     this.payloadModalEditEmpresaDctf = rowData
-    this.payloadModalEmailEpresas = rowData
+    this.payloadModalEmailEpresas = {}
 
     const objSend = {
       id_empresa: rowData.id_empresa_dctf
     }
 
     const response = await this.dctfWebService.getEmailEmpresa(objSend).toPromise()
+    this.payloadModalEmailEpresas.rowData = rowData
 
-    this.payloadModalEmailEpresas = response
+    this.payloadModalEmailEpresas.data = response
+
+
+    console.log(this.payloadModalEmailEpresas)
 
     this.displaydModalEmailEmpresas = true
   }
@@ -389,6 +405,32 @@ export class ListempresasdctfComponent implements OnInit {
       id_empresa_dctf: rowData.id_empresa_dctf
     }
     this.checkService.checkGravarDesobrigarEfd(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setCheckConferencia (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarConferencia(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setGravarDctf (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarDctf(sendObj).subscribe(
       () => {
         this.sucessMessage('Dados atualizados com sucesso.')
       },

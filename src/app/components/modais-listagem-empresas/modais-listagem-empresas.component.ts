@@ -20,12 +20,14 @@ export class ModaisListagemEmpresasComponent implements OnInit {
   @Output() closedModalEmailEmpresas = new EventEmitter<any>();
   loadingProcessingStatus: boolean
   incluir: boolean
+  emailInsert: string
 
   constructor (private dctfWebService: DctfWeb, private messageService: MessageService, private primengConfig: PrimeNGConfig) {
     this.displaymodalEdicaoEmpresaDctf = false
     this.loadingProcessingStatus = false
     this.displaymodalEmailsEmpresas = false
     this.incluir = false
+    this.emailInsert = ''
   }
 
   ngOnInit (): void {
@@ -47,6 +49,7 @@ export class ModaisListagemEmpresasComponent implements OnInit {
   emitCloseModalEmailEmpresas () {
     this.closedModalEmailEmpresas.emit(true)
     this.incluir = false
+    this.emailInsert = ''
   }
 
   sucessMessage (stringMessage: string) {
@@ -63,8 +66,16 @@ export class ModaisListagemEmpresasComponent implements OnInit {
     this.onchangData.emit(true)
   }
 
-  saveEmail () {
+  saveEmail (rowData: any) {
+    const objSend = {
+      id_empresa_dctf: rowData.id_empresa_dctf,
+      email: this.emailInsert
+    }
 
+    this.dctfWebService.saveEmailEmpresa(objSend).subscribe(
+      data => this.sucessMessage('Empresa atualiza com sucesso.'),
+      () => this.errorMessage('Houve um erro ao editar a empresa')
+    )
   }
 
   getEmailEmpresa () {

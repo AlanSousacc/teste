@@ -120,10 +120,10 @@
   [baseZIndex]="10000" header="Emails da Empresa - DCTF-WEB" [(visible)]="displaymodalEmailsEmpresas"
   [style]="{width: '50vw'}" [baseZIndex]="10000">
     <div style="margin-top: 10px;" *ngIf="incluir == true"  class="container">
-      <label>Escreva o email</label>
+      <label>Escreva o email  {{payloadModalEmailEpresas.rowData | json }}</label>
       <div class="p-inputgroup">   
-        <input type="text" pInputText placeholder="Vote">   
-        <button (click)="saveEmail()" type="button" pButton pRipple icon="pi pi-save" styleClass="p-button-success"></button> 
+        <input type="text" [(ngModel)]="emailInsert" pInputText placeholder="Vote">   
+        <button (click)="saveEmail(payloadModalEmailEpresas.rowData)" type="button" pButton pRipple icon="pi pi-save" styleClass="p-button-success"></button> 
     </div>
   </div>
     
@@ -131,7 +131,7 @@
       <div class="text-right">
         <button style="margin: 10px;" type="button" (click)="incluir = !incluir" pButton label="Incluir Contato" ></button>
       </div>
-      <p-table [value]="payloadModalEmailEpresas" responsiveLayout="scroll">
+      <p-table [value]="payloadModalEmailEpresas.data" responsiveLayout="scroll">
         <ng-template pTemplate="header">
             <tr>
                 <th>#</th>

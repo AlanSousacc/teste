@@ -77,4 +77,8 @@ export class DctfWeb {
   getEmailEmpresa (objSend: any) {
     return this.http.get<any>(environment.apiUrl + 'dctfweb/getemailsempresa', { params: objSend, headers: { userid: this.session.id_usuario } })
   }
+
+  saveEmailEmpresa (objSend: any) {
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/saveemailsempresa', { params: objSend, headers: { userid: this.session.id_usuario } })
+  }
 }
