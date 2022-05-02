@@ -3,7 +3,7 @@
   <!-- Toast componente utilizado para mostrar mensagems -->
   <p-toast></p-toast>
 
-  
+
   <!-- Toast de questão, utilizado para fazer um perguta ao usuario -->
   <p-toast position="bottom-center" key="c" [baseZIndex]="5000">
     <ng-template let-message pTemplate="message">
@@ -25,9 +25,9 @@
     </ng-template>
   </p-toast>
 
-  
 
-  
+
+
 
   <!-- Modal de alteração do status da competencia -->
   <p-dialog [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" (onHide)="emitCloseModalEditEmpresaDctf()"
@@ -36,33 +36,33 @@
     <form>
       <div class="row">
         <input type="hidden" id="id_empresa_competencia" class="form-control" placeholder="">
-        <input type="hidden" id="empresa"  [(ngModel)]="payloadModalEditEmpresaDctf.id_empresa" class="form-control" placeholder="">
+        <input type="hidden" id="empresa" [(ngModel)]="payloadModalEditEmpresaDctf.id_empresa" class="form-control"
+          placeholder="">
         <div class="col">
           <label>Competência</label>
-          <input type="text"   [(ngModel)]="payloadModalEditEmpresaDctf.competencia" [ngModelOptions]="{standalone: true}"
+          <input type="text" [(ngModel)]="payloadModalEditEmpresaDctf.competencia" [ngModelOptions]="{standalone: true}"
             class="form-control" placeholder="" disabled="true">
         </div>
         <div class="col">
           <label>Empresa</label>
-            <input type="text"    [(ngModel)]="payloadModalEditEmpresaDctf.razao_social" [ngModelOptions]="{standalone: true}"
-            class="form-control" placeholder="" disabled="true">
+          <input type="text" [(ngModel)]="payloadModalEditEmpresaDctf.razao_social"
+            [ngModelOptions]="{standalone: true}" class="form-control" placeholder="" disabled="true">
         </div>
       </div>
 
-      <div style="margin-top: 10px;" class="row">
+      <div class="row">
         <div class="col">
           <label>Status</label>
-          <select 
+          <select [(ngModel)]="payloadModalEditEmpresaDctf.status" [ngModelOptions]="{standalone: true}"
             class="form-control form-control-sm">
             <option selected value="1">Ativa</option>
             <option value="2">Inativa</option>
           </select>
         </div>
 
-        <!--
         <div class="col">
           <label>Prioridade</label>
-          <select 
+          <select [(ngModel)]="payloadModalEditEmpresaDctf.prioridade" [ngModelOptions]="{standalone: true}"
             class="form-control form-control-sm">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -71,38 +71,57 @@
         </div>
       </div>
 
+
+
       <div style="margin-top: 10px;" class="row">
         <div class="col">
           <label>Faturamento R$</label>
-          <input step="0.01"
+          <input step="0.01" [(ngModel)]="payloadModalEditEmpresaDctf.faturamento" [ngModelOptions]="{standalone: true}"
             type="number" class="form-control" placeholder="">
         </div>
         <div class="col">
-        </div>-->
+        </div>
       </div>
 
       <div style="margin-top: 10px;" class="row">
         <div class="col">
           <label>Comentário</label>
-          <textarea type="number"
-            class="form-control"  [(ngModel)]="payloadModalEditEmpresaDctf.comentario" [ngModelOptions]="{standalone: true}" placeholder=""></textarea>
+          <textarea type="number" class="form-control" [(ngModel)]="payloadModalEditEmpresaDctf.comentario"
+            [ngModelOptions]="{standalone: true}" placeholder=""></textarea>
         </div>
       </div>
 
       <div style="margin-top: 10px;" class="row">
+
+
         <div class="col">
           <label>
-            Enviar e-mail para o cliente ao marcar DCTF-WEB
-         </label>
-         <p-toggleButton onLabel="Enviar email" offLabel="Não enviar email" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width': '10em'}"></p-toggleButton>
+            Enviar e-mail ao marcar DCTF-WEB
+          </label>
+          <br>
+          <p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}"
+            name="enviar_email_cliente" value="enviar_email_cliente"
+            [(ngModel)]="payloadModalEditEmpresaDctf.enviar_email_cliente"></p-checkbox>
         </div>
 
         <div class="col">
           <label>
             Empresa com RH Externo
-         </label>
-         <br>
-         <p-toggleButton  onLabel="Sim" offLabel="Não" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width': '10em'}"></p-toggleButton>
+          </label>
+          <br>
+          <p-checkbox [binary]="true" [style]="{'text-align': 'center','align-content': 'center'}"
+            name="esocial_rh_interno" value="esocial_rh_interno"
+            [(ngModel)]="payloadModalEditEmpresaDctf.esocial_rh_interno"></p-checkbox>
+        </div>
+
+        <div class="col">
+          <label>
+            Bloquear E-mails ao marcar DCTF-WEB 
+          </label>
+          <br>
+          <p-checkbox [(ngModel)]="payloadModalEditEmpresaDctf.block_email_dctf_ok" [binary]="true"
+            [style]="{'text-align': 'center','align-content': 'center'}" name="block_email_dctf_ok"
+            value="block_email_dctf_ok"></p-checkbox>
         </div>
       </div>
     </form>
@@ -117,43 +136,61 @@
 
 
   <p-dialog [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" (onHide)="emitCloseModalEmailEmpresas()"
-  [baseZIndex]="10000" header="Emails da Empresa - DCTF-WEB" [(visible)]="displaymodalEmailsEmpresas"
-  [style]="{width: '50vw'}" [baseZIndex]="10000">
-    <div style="margin-top: 10px;" *ngIf="incluir == true"  class="container">
-      <label>Escreva o email  {{payloadModalEmailEpresas.rowData | json }}</label>
-      <div class="p-inputgroup">   
-        <input type="text" [(ngModel)]="emailInsert" pInputText placeholder="Vote">   
-        <button (click)="saveEmail(payloadModalEmailEpresas.rowData)" type="button" pButton pRipple icon="pi pi-save" styleClass="p-button-success"></button> 
-    </div>
-  </div>
-    
-    <div style="margin-top: 10px;"  *ngIf="incluir == false"  class="container">
-      <div class="text-right">
-        <button style="margin: 10px;" type="button" (click)="incluir = !incluir" pButton label="Incluir Contato" ></button>
+    [baseZIndex]="10000" header="Emails da Empresa - DCTF-WEB" [(visible)]="displaymodalEmailsEmpresas"
+    [style]="{width: '50vw'}" [baseZIndex]="10000">
+
+    <!--Inclusao email-->
+    <div style="margin-top: 10px;" *ngIf="incluirEmail == true" class="container">
+      <label>Escreva o email</label>
+      <div class="p-inputgroup">
+        <input type="text" [(ngModel)]="emailInsert" pInputText placeholder="Email">
+        <button (click)="saveEmail(payloadModalEmailEpresas?.rowData)" type="button" pButton pRipple icon="pi pi-save"
+          styleClass="p-button-success"></button>
       </div>
-      <p-table [value]="payloadModalEmailEpresas.data" responsiveLayout="scroll">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>#</th>
-                <th>Empresa</th>
-                <th>Email</th>
-                <th>Ações</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product>
-            <tr>
-                <td>{{product.id_empresa_email}}</td>
-                <td>{{product.nome_emp}}</td>
-                <td>{{product.emails}}</td>
-                <td>{{product.emails}}</td>
-            </tr>
-        </ng-template>
-    </p-table>
     </div>
-   
-  <ng-template pTemplate="footer">
-   
-  </ng-template>
-</p-dialog>
+    <!-- Edição email-->
+    <div style="margin-top: 10px;" *ngIf="editandoEmail == true" class="container">
+      <label>Editando o email</label>
+      <div class="p-inputgroup">
+        <input type="text" [(ngModel)]="emailInsert" pInputText placeholder="Email">
+        <button (click)="updateEmail()" type="button" pButton pRipple icon="pi pi-save"
+          styleClass="p-button-success"></button>
+      </div>
+    </div>
+
+    <div style="margin-top: 10px;" *ngIf="incluirEmail == false && editandoEmail == false" class="container">
+      <div class="text-right">
+        <button style="margin: 10px;" type="button" (click)="incluirEmail = !incluirEmail" pButton
+          label="Incluir Contato"></button>
+      </div>
+      <p-table [value]="payloadModalEmailEpresas?.data" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>#</th>
+            <th>Empresa</th>
+            <th>Email</th>
+            <th>Ações</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-email>
+          <tr>
+            <td>{{email.id_empresa_email}}</td>
+            <td>{{email.nome_emp}}</td>
+            <td>{{email.emails}}</td>
+            <td>
+              <button type="button" (click)="editEmail(email)" pButton pRipple icon="pi pi-pencil" class="mr-2"
+                pTooltip="Editar email" tooltipPosition="bottom"></button>
+              <button type="button" pButton pRipple icon="pi pi-trash" (click)="deleteEmail(email)" class="mr-2"
+                pTooltip="Excluir email" tooltipPosition="bottom"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <ng-template pTemplate="footer">
+
+    </ng-template>
+  </p-dialog>
 
 </div>

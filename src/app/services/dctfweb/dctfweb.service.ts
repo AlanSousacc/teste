@@ -79,6 +79,14 @@ export class DctfWeb {
   }
 
   saveEmailEmpresa (objSend: any) {
-    return this.http.post<any>(environment.apiUrl + 'dctfweb/saveemailsempresa', { params: objSend, headers: { userid: this.session.id_usuario } })
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/saveemailsempresa', objSend, { headers: { userid: this.session.id_usuario } })
+  }
+
+  updateEmailEmpresa (objSend: any) {
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/updateemailsempresa', objSend, { headers: { userid: this.session.id_usuario } })
+  }
+
+  deleteEmailEmpresa (objSend: any) {
+    return this.http.post<any>(environment.apiUrl + 'dctfweb/deleteemailempresa', objSend, { headers: { userid: this.session.id_usuario } })
   }
 }

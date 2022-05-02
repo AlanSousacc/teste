@@ -162,7 +162,7 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             </td>
             <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true">
                 <p-checkbox 
-                    (onChange)="setSemfolha(item)" 
+                    (onChange)="setGravarDctfRet(item)" 
                     [readonly]="!permissoesDctf['DCTF012']"
                     [binary]="true"  
                     [style]="{'text-align': 'center','align-content': 'center'}" 
@@ -172,13 +172,13 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             <td *ngIf="setoresVisibilidadeValues['declaracoes'] == true">
                 <p-checkbox 
                     [readonly]="!permissoesDctf['DCTF013']"
-                    (onChange)="setSemfolha(item)" 
+                    (onChange)="setGravarDctfDesobrigada(item)" 
                     [binary]="true"  
                     [style]="{'text-align': 'center','align-content': 'center'}" 
                     [(ngModel)]="item.dctf_desobrigada">
                  </p-checkbox></td>
             <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true">
-                <p-checkbox (onChange)="setSemfolha(item)" 
+                <p-checkbox (onChange)="setGravarDarf(item)" 
                         [binary]="true"  
                         [style]="{'text-align': 'center','align-content': 'center'}" 
                         [(ngModel)]="item.darf_check">
@@ -186,7 +186,7 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             </td>
             <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true"><p-checkbox  
                 [readonly]="!permissoesDctf['DCTF015']"
-                (onChange)="setSemfolha(item)" 
+                (onChange)="setGravarDarfComp(item)" 
                 [binary]="true" 
                 [style]="{'text-align': 'center','align-content': 'center'}" 
                 [(ngModel)]="item.darf_comp_check">

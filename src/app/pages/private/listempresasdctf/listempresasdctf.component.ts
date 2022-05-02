@@ -78,8 +78,6 @@ export class ListempresasdctfComponent implements OnInit {
     }
     this.permissionService.getPermissionsDctf(objSend).subscribe((x) => {
       this.permissoesDctf = x
-      console.log(x)
-      alert(JSON.stringify(x))
     })
   }
 
@@ -244,7 +242,6 @@ export class ListempresasdctfComponent implements OnInit {
 
     this.payloadModalEmailEpresas.data = response
 
-
     console.log(this.payloadModalEmailEpresas)
 
     this.displaydModalEmailEmpresas = true
@@ -291,6 +288,8 @@ export class ListempresasdctfComponent implements OnInit {
     x.dctf_desobrigada = x.dctf_desobrigada === '1'
     x.darf_check = x.darf_check === '1'
     x.darf_comp_check = x.darf_comp_check === '1'
+    x.enviar_email_cliente = x.enviar_email_cliente === '1'
+    x.block_email_dctf_ok = x.block_email_dctf_ok === '1'
     return x
   }
 
@@ -431,6 +430,58 @@ export class ListempresasdctfComponent implements OnInit {
       id_empresa_dctf: rowData.id_empresa_dctf
     }
     this.checkService.checkGravarDctf(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setGravarDctfRet (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarRetDctf(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setGravarDctfDesobrigada (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarDctfDesobrigada(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setGravarDarf (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarDarf(sendObj).subscribe(
+      () => {
+        this.sucessMessage('Dados atualizados com sucesso.')
+      },
+      () => {
+        this.sucessMessage('Houve um erro na atualização dos dados.')
+      })
+  }
+
+  setGravarDarfComp (rowData: any) {
+    const sendObj = {
+      id_empresa_dctf: rowData.id_empresa_dctf
+    }
+    this.checkService.checkGravarDarfComp(sendObj).subscribe(
       () => {
         this.sucessMessage('Dados atualizados com sucesso.')
       },

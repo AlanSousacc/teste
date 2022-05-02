@@ -74,6 +74,20 @@ export class CheckService {
     return this.http.post<any>(environment.apiUrl + 'check/setretdctf', objSend, { headers: { userid: this.session.id_usuario } })
   }
 
+  checkGravarDctfDesobrigada (objSend: any) {
+    // Params id_empresa_dctf
+    return this.http.post<any>(environment.apiUrl + 'check/setcheckdesobrigada', objSend, { headers: { userid: this.session.id_usuario } })
+  }
+
+  checkGravarDarf (objSend: any) {
+    // Params id_empresa_dctf
+    return this.http.post<any>(environment.apiUrl + 'check/setcheckdarf', objSend, { headers: { userid: this.session.id_usuario } })
+  }
+
+  checkGravarDarfComp (objSend: any) {
+    return this.http.post<any>(environment.apiUrl + 'check/setcheckdarfcomp', objSend, { headers: { userid: this.session.id_usuario } })
+  }
+
   getPageLink (pageurl: string, objSend = {}):Observable<Paginator> {
     const url = pageurl
     return this.http.get<any>(url, { params: objSend, headers: { userid: this.session.id_usuario } })

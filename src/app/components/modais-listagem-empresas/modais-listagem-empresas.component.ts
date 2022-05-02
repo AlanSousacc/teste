@@ -19,26 +19,27 @@ export class ModaisListagemEmpresasComponent implements OnInit {
   @Output() closedModalEditDctf = new EventEmitter<any>();
   @Output() closedModalEmailEmpresas = new EventEmitter<any>();
   loadingProcessingStatus: boolean
-  incluir: boolean
+  incluirEmail: boolean
+  editandoEmail: boolean
   emailInsert: string
+  tempEmailedit: any
 
   constructor (private dctfWebService: DctfWeb, private messageService: MessageService, private primengConfig: PrimeNGConfig) {
     this.displaymodalEdicaoEmpresaDctf = false
     this.loadingProcessingStatus = false
     this.displaymodalEmailsEmpresas = false
-    this.incluir = false
+    this.incluirEmail = false
+    this.editandoEmail = false
     this.emailInsert = ''
+    this.tempEmailedit = {}
   }
 
   ngOnInit (): void {
 
   }
 
-  emitCloseModalEditEmpresaDctf () {
-    this.closedModalEditDctf.emit(true)
-  }
-
   updateEmpresaDctf () {
+    alert(JSON.stringify(this.payloadModalEditEmpresaDctf))
     const objSend = this.payloadModalEditEmpresaDctf
     this.dctfWebService.updateEmpresaDctf(objSend).subscribe(
       data => this.sucessMessage('Empresa atualiza com sucesso.'),
@@ -46,9 +47,16 @@ export class ModaisListagemEmpresasComponent implements OnInit {
     )
   }
 
+  emitCloseModalEditEmpresaDctf () {
+    this.closedModalEditDctf.emit(true)
+    this.tempEmailedit = false
+  }
+
   emitCloseModalEmailEmpresas () {
     this.closedModalEmailEmpresas.emit(true)
-    this.incluir = false
+    this.incluirEmail = false
+    this.editandoEmail = false
+    this.tempEmailedit = {}
     this.emailInsert = ''
   }
 
@@ -73,9 +81,47 @@ export class ModaisListagemEmpresasComponent implements OnInit {
     }
 
     this.dctfWebService.saveEmailEmpresa(objSend).subscribe(
-      data => this.sucessMessage('Empresa atualiza com sucesso.'),
+      data => {
+        this.emitCloseModalEmailEmpresas()
+        this.sucessMessage('Empresa atualiza com sucesso.')
+      },
       () => this.errorMessage('Houve um erro ao editar a empresa')
     )
+  }
+
+  updateEmail () {
+    const objSend = {
+      id_empresa_email: this.tempEmailedit.id_empresa_email,
+      email: this.emailInsert
+    }
+
+    this.dctfWebService.updateEmailEmpresa(objSend).subscribe(
+      data => {
+        this.emitCloseModalEmailEmpresas()
+        this.sucessMessage('Empresa atualiza com sucesso.')
+      },
+      () => this.errorMessage('Houve um erro ao editar a empresa')
+    )
+  }
+
+  deleteEmail (email: any) {
+    const objSend = {
+      id_empresa_email: email.id_empresa_email
+    }
+
+    this.dctfWebService.deleteEmailEmpresa(objSend).subscribe(
+      data => {
+        this.emitCloseModalEmailEmpresas()
+        this.sucessMessage('Email empresa excluido com sucesso.')
+      },
+      () => this.errorMessage('Houve um erro ao excluir o email')
+    )
+  }
+
+  editEmail (emailRow: any) {
+    this.emailInsert = emailRow.emails
+    this.tempEmailedit = emailRow
+    this.editandoEmail = true
   }
 
   getEmailEmpresa () {
