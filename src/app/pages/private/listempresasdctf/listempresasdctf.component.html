@@ -22,48 +22,49 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
 >
     <ng-template pTemplate="header">
         <tr>
-            
-            <th colspan="5" ></th>
-            <th colspan="2"  *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" >Declarações/RH</th>
-            <th colspan="2"  *ngIf="setoresVisibilidadeValues['rh'] == true" >RH</th>
-            <th colspan="4"  *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >Fiscal/Retenções</th>
-            <th colspan="1"  *ngIf="setoresVisibilidadeValues['rh'] == true" >RH</th>
+           
 
-            <th colspan="3"  *ngIf="setoresVisibilidadeValues['declaracoes'] == true" >Declarações</th>
-            <th colspan="2"  *ngIf="setoresVisibilidadeValues['rh-controller'] == true" >RH - Controller</th>
+            <th  style="border-style: solid;border-color: black; border-width: 3px 3px 0px" colspan="5" ></th>
+            <th colspan="4" style="border-style: solid;border-color: black; border-width: 3px 3px 0px"  *ngIf="setoresVisibilidadeValues['declaracoes-rh'] == true" >RH</th>
+          
+            <th colspan="4"  style="border-style: solid;border-color: black; border-width: 3px 3px 0px"  *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >Fiscal/Retenções</th>
+            <th colspan="1"  style="border-style: solid;border-color: black; border-width: 3px 3px 0px"  *ngIf="setoresVisibilidadeValues['rh'] == true" >RH</th>
+
+            <th colspan="3"  style="border-style: solid;border-color: black; border-width: 3px 3px 0px"  *ngIf="setoresVisibilidadeValues['declaracoes'] == true" >Declarações</th>
+            <th colspan="2"  style="border-style: solid;border-color: black; border-width: 3px 3px 0px" *ngIf="setoresVisibilidadeValues['rh-controller'] == true" >RH - Controller</th>
           
         </tr>
         <tr>
-            <th rowspan="2" >Cod</th>
-            <th rowspan="2">Empresa</th>
-            <th rowspan="2">CNPJ</th>
-            <th rowspan="2">Tributação</th>
-            <th rowspan="2" >Prioridade</th>
+            <th rowspan="2"  style="border-style: solid;border-color: black; border-width: 1px 0px 3px 3px" >Cod</th>
+            <th rowspan="2"  style="border-style: solid;border-color: black; border-width: 1px 0px 3px 1px">Empresa</th>
+            <th rowspan="2"  style="border-style: solid;border-color: black; border-width: 1px 0px 3px 1px">CNPJ</th>
+            <th rowspan="2"  style="border-style: solid;border-color: black; border-width: 1px 0px 3px 1px">Tributação</th>
+            <th rowspan="2"  style="border-style: solid;border-color: black; border-width: 1px 3px 3px 1px">Prioridade</th>
 
-            <th rowspan="2" *ngIf="setoresVisibilidadeValues['declaracoes-rh']" >Sem Folha</th>
-            <th rowspan="2" *ngIf="setoresVisibilidadeValues['declaracoes-rh']" >RH Externo</th>
+            <th rowspan="2" style="border-style: solid;border-color: black; border-width: 1px 0px 3px 3px" *ngIf="setoresVisibilidadeValues['declaracoes-rh']"  >Sem Folha</th>
+            <th rowspan="2" style="border-style: solid;border-color: black; border-width: 1px 0px 3px 1px" *ngIf="setoresVisibilidadeValues['declaracoes-rh']" >RH Externo</th>
 
-            <th colspan="2" *ngIf="setoresVisibilidadeValues['rh'] == true">E-SOCIAL</th>
-            <th colspan="4" *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >EFD-REINF</th>
-            <th rowspan="2" *ngIf="setoresVisibilidadeValues['rh'] == true" >CONFERÊNCIA</th>
-            <th colspan="3" *ngIf="setoresVisibilidadeValues['declaracoes'] == true"  >DCTF WEB</th>
-            <th rowspan="2" *ngIf="setoresVisibilidadeValues['rh-controller'] == true"  >DARF</th>
-            <th rowspan="2" *ngIf="setoresVisibilidadeValues['rh-controller'] == true" >DARF COMP</th>
-            <th rowspan="3">AÇÕES</th>
+            <th colspan="2" style="border-style: solid;border-color: black; border-width: 1px 3px 1px 1px" *ngIf="setoresVisibilidadeValues['rh'] == true">E-SOCIAL</th>
+            <th colspan="4" style="border-style: solid;border-color: black; border-width: 1px 3px 1px 1px" *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >EFD-REINF</th>
+            <th rowspan="2" style="border-style: solid;border-color: black; border-width: 1px 3px 3px 1px" *ngIf="setoresVisibilidadeValues['rh'] == true" >CONFERÊNCIA</th>
+            <th colspan="3" style="border-style: solid;border-color: black; border-width: 1px 3px 1px 1px" *ngIf="setoresVisibilidadeValues['declaracoes'] == true"  >DCTF WEB</th>
+            <th rowspan="2" *ngIf="setoresVisibilidadeValues['rh-controller'] == true" style="border-style: solid;border-color: black; border-width: 1px 1px 3px 3px" >DARF</th>
+            <th rowspan="2" *ngIf="setoresVisibilidadeValues['rh-controller'] == true" style="border-style: solid;border-color: black; border-width: 1px 3px 3px 1px" >DARF COMP</th>
+            <th rowspan="3" style="border-style: solid;border-color: black; border-width: 3px 3px 3px 3px">AÇÕES</th>
             
         </tr>
         <tr>
-            <th *ngIf="setoresVisibilidadeValues['rh'] == true">OK</th>
-            <th *ngIf="setoresVisibilidadeValues['rh'] == true">Retificação</th>
+            <th  style="border-style: solid;border-color: black; border-width: 1px 1px 3px 1px"  *ngIf="setoresVisibilidadeValues['rh'] == true">OK</th>
+            <th *ngIf="setoresVisibilidadeValues['rh'] == true" style="border-style: solid;border-color: black; border-width: 1px 1px 3px 1px">Retificação</th>
             
-            <th *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >OK</th>
-            <th *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >Sem Retenções de INSS</th>
-            <th *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"  >Retificação</th>
-            <th *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >Desobrigar</th>
+            <th style="border-style: solid;border-color: black; border-width: 1px 1px 3px 3px" *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >OK</th>
+            <th style="border-style: solid;border-color: black; border-width: 1px 1px 3px 1px"  *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >Sem Retenções de INSS</th>
+            <th style="border-style: solid;border-color: black; border-width: 1px 1px 3px 1px" *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true"  >Retificação</th>
+            <th *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" style="border-style: solid;border-color: black; border-width: 1px 3px 3px 1px; text-align: center;" >Desobrigar</th>
             
-            <th *ngIf="setoresVisibilidadeValues['declaracoes'] == true" >OK</th>
-            <th *ngIf="setoresVisibilidadeValues['declaracoes'] == true"  style="text-align: center;">Ret</th>
-            <th *ngIf="setoresVisibilidadeValues['declaracoes'] == true"  style="text-align: center;">Desobrigada</th>
+            <th style="border-style: solid;border-color: black; border-width: 1px 1px 3px 1px" *ngIf="setoresVisibilidadeValues['declaracoes'] == true" >OK</th>
+            <th style="border-style: solid;border-color: black; border-width: 1px 1px 3px 1px; text-align: center;" *ngIf="setoresVisibilidadeValues['declaracoes'] == true" >Ret</th>
+            <th *ngIf="setoresVisibilidadeValues['declaracoes'] == true"  style="border-style: solid;border-color: black; border-width: 1px 3px 3px 1px; text-align: center;" >Desobrigada</th>
             
         </tr>
 
