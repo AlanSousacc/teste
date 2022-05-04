@@ -28,7 +28,7 @@ import { RippleModule } from 'primeng/ripple'
 import { CheckboxModule } from 'primeng/checkbox'
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToggleButtonModule } from 'primeng/togglebutton'
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MessagesModule } from 'primeng/messages'
 import { MessageModule } from 'primeng/message'
 import { FiltrosListagemEmpresasComponent } from './components/filtros-listagem-empresas/modais-empresas/filtros-listagem-empresas.component'
@@ -86,6 +86,7 @@ const primeModules = [
     ...primeModules
   ],
   providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ],

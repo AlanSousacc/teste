@@ -31,8 +31,9 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             <th colspan="1"  style="border-style: solid;border-color: black; border-width: 3px 3px 0px"  *ngIf="setoresVisibilidadeValues['rh'] == true" >RH</th>
 
             <th colspan="3"  style="border-style: solid;border-color: black; border-width: 3px 3px 0px"  *ngIf="setoresVisibilidadeValues['declaracoes'] == true" >Declarações</th>
+              <!--  
             <th colspan="2"  style="border-style: solid;border-color: black; border-width: 3px 3px 0px" *ngIf="setoresVisibilidadeValues['rh-controller'] == true" >RH - Controller</th>
-          
+                -->
         </tr>
         <tr>
             <th rowspan="2"  style="border-style: solid;border-color: black; border-width: 1px 0px 3px 3px" >Cod</th>
@@ -48,8 +49,10 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
             <th colspan="4" style="border-style: solid;border-color: black; border-width: 1px 3px 1px 1px" *ngIf="setoresVisibilidadeValues['fiscal-retencao'] == true" >EFD-REINF</th>
             <th rowspan="2" style="border-style: solid;border-color: black; border-width: 1px 3px 3px 1px" *ngIf="setoresVisibilidadeValues['rh'] == true" >CONFERÊNCIA</th>
             <th colspan="3" style="border-style: solid;border-color: black; border-width: 1px 3px 1px 1px" *ngIf="setoresVisibilidadeValues['declaracoes'] == true"  >DCTF WEB</th>
+            <!--  
             <th rowspan="2" *ngIf="setoresVisibilidadeValues['rh-controller'] == true" style="border-style: solid;border-color: black; border-width: 1px 1px 3px 3px" >DARF</th>
             <th rowspan="2" *ngIf="setoresVisibilidadeValues['rh-controller'] == true" style="border-style: solid;border-color: black; border-width: 1px 3px 3px 1px" >DARF COMP</th>
+            -->
             <th rowspan="3" style="border-style: solid;border-color: black; border-width: 3px 3px 3px 3px">AÇÕES</th>
             
         </tr>
@@ -178,6 +181,8 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
                     [style]="{'text-align': 'center','align-content': 'center'}" 
                     [(ngModel)]="item.dctf_desobrigada">
                  </p-checkbox></td>
+            
+            <!--  
             <td *ngIf="setoresVisibilidadeValues['rh-controller'] == true">
                 <p-checkbox (onChange)="setGravarDarf(item)" 
                         [binary]="true"  
@@ -192,6 +197,8 @@ id="excel-table" #dt (onLazyLoad)="loadPage($event, dt)" [paginator]="true" [row
                 [style]="{'text-align': 'center','align-content': 'center'}" 
                 [(ngModel)]="item.darf_comp_check">
             </p-checkbox></td>
+            -->
+
             <td>
                 <button type="button" pButton pRipple
                 icon="pi pi-pencil" class="mr-2" pTooltip="Editar DCTF WEB" (click)="showModalEdit(item)" tooltipPosition="bottom"></button> 
