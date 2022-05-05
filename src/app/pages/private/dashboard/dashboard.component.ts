@@ -1,8 +1,9 @@
-import { DctfWeb } from './../../../services/dctfweb/dctfweb.service'
+
 import { Component, OnInit } from '@angular/core'
-import { Paginator } from 'primeng/paginator'
 import { SessionService } from 'src/app/services/global/session.service'
 import { NgxSpinnerService } from 'ngx-spinner'
+import { HttpClient } from '@angular/common/http'
+import { AppxService } from 'src/app/services/appservice/appx.service'
 import { MessageService } from 'primeng/api'
 
 @Component({
@@ -12,126 +13,49 @@ import { MessageService } from 'primeng/api'
   providers: [MessageService]
 })
 export class DashboardComponent implements OnInit {
-  currenpage:any
-  competencias: any
-  idsetor: any
-  last = 0
-  currentlast = 0
-  idresponsavel = 1
-  counttotaldata=1000
-  semdados=false
-  constructor (private dctfWebService: DctfWeb, private sessionService: SessionService, private spinner: NgxSpinnerService, private messageService: MessageService) { }
+  countries:any
+  selectedCountry: any;
+  name:any
 
-  async ngOnInit () {
-    await this.setUpTable()
+  constructor (private AppService: AppxService, private http: HttpClient, private sessionService: SessionService, private spinner: NgxSpinnerService, private messageService: MessageService) {
+    this.countries = [
+      { name: 'Australia', code: 'AU' },
+      { name: 'Brazil', code: 'BR' },
+      { name: 'China', code: 'CN' },
+      { name: 'Egypt', code: 'EG' },
+      { name: 'France', code: 'FR' },
+      { name: 'Germany', code: 'DE' },
+      { name: 'India', code: 'IN' },
+      { name: 'Japan', code: 'JP' },
+      { name: 'Spain', code: 'ES' },
+      { name: 'United States', code: 'US' }
+    ]
   }
 
-  async setUpTable () {
-    this.competencias = []
-    this.idsetor = 8
-    await this.spinner.show('loading')
-    this.dctfWebService.getAllDctfCompetencias().subscribe(
-      (competencias: any) => {
-        this.counttotaldata = competencias.total
-        console.log(competencias.data)
-        competencias.data.forEach((competencia: any) => {
-          this.currenpage = competencias
-          this.competencias = competencias.data
-          this.assertCountItems(competencias)
-          this.spinner.hide('loading')
+  ngOnInit (): void {
+
+  }
+
+  fileChange (event: any) {
+
+  }
+
+  sendHandler (evt: any) {
+    const file: File = evt.files[0]
+    console.log(file)
+    const formData:FormData = new FormData()
+    formData.append('uploadfile', file, file.name)
+    formData.append('select', this.selectedCountry.name)
+    formData.append('name', this.selectedCountry.name)
+
+    this.AppService.saveForm(formData)
+      .subscribe(
+        (result: any) => {
+          console.log(result)
         },
-        () => {
-          this.spinner.hide('loading')
-          this.errorMessage('Um erro ocorreu ao se conectar com o servidor.')
-        })
-      })
-  }
-
-  assertCountItems (topicos: any) {
-    if (topicos.data.length === 0) {
-      this.semdados = true
-    } else {
-      this.semdados = false
-    }
-  }
-
-  onChangData () {
-    this.setUpTable()
-  }
-
-  restoreSearchEvent () {
-    this.setUpTable()
-  }
-
-  clearData () {
-    this.competencias = []
-  }
-
-  async loadNextPage (params: any) {
-    this.currentlast = params.last
-    this.last += 10
-    params.table.loading = true
-    this.competencias = []
-    await this.spinner.show('loading')
-    this.dctfWebService.getPageLink(this.currenpage.next_page_url).subscribe(
-      (competencias: any) => {
-        this.assertCountItems(competencias)
-        this.counttotaldata = competencias.total
-        this.spinner.hide('loading')
-        competencias.data.forEach((competencia: Paginator | any) => {
-          this.currenpage = competencias
-          this.competencias.push(competencia)
-          params.table.loading = false
-        }, () => {
-          this.spinner.hide('loading')
-          this.errorMessage('Um erro ocorreu ao se conectar com o servidor.')
-        })
-      })
-  }
-
-  searchCompetencia (params: any) {
-    this.competencias = []
-    if (params.value.trim() === '') {
-      this.setUpTable()
-    }
-    this.dctfWebService.searchCompetencias(params.value).subscribe((competencias: any) => {
-      this.assertCountItems(competencias)
-      this.counttotaldata = competencias.total
-      competencias.data.forEach((competencia: Paginator | any) => {
-        this.competencias.push(competencia)
-      },
-      () => {
-        this.spinner.hide('loading')
-        this.errorMessage('Um erro ocorreu ao se conectar com o servidor.')
-      })
-    })
-  }
-
-  async loadBackPage (params: any) {
-    await this.spinner.show('loading')
-    this.currentlast = params.last
-    this.last -= 10
-    params.table.loading = true
-    this.competencias = []
-    this.dctfWebService.getPageLink(this.currenpage.prev_page_url).subscribe(
-      (competencias: any) => {
-        this.assertCountItems(competencias)
-        this.spinner.hide('loading')
-        competencias.data.forEach((competencia: any) => {
-          this.counttotaldata = competencias.total
-          this.currenpage = competencias
-          this.competencias.push(competencia)
-          params.table.loading = false
-        },
-        () => {
-          this.spinner.hide('loading')
-          this.errorMessage('Um erro ocorreu ao se conectar com o servidor.')
-        })
-      }
-    )
-  }
-
-  errorMessage (errorMessage: string) {
-    this.messageService.add({ severity: 'error', summary: 'Erro', detail: errorMessage })
+        (error: any) => {
+          console.log(error)
+        }
+      )
   }
 }

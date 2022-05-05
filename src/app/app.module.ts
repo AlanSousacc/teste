@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { TableModule } from 'primeng/table'
 import { CgInputTextModule } from './components/cg-input-text/cg-input-text.module'
 import { ProgressBarModule } from 'primeng/progressbar'
+import {FileUploadModule} from 'primeng/fileupload';
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -52,6 +53,7 @@ const primeModules = [
   AccordionModule,
   TableModule,
   ButtonModule,
+  FileUploadModule,
   InputTextModule,
   DropdownModule,
   DialogModule,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
-import * as toastr from 'toastr'
+//import * as toastr from 'toastr'
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +23,10 @@ export class AppService {
   }
 
   actionsForError (error = 'Ocorreu um erro ao processar a sua solicitação!'): void {
-    toastr.error(error, '', { timeOut: 0, extendedTimeOut: 0 })
+  // toastr.error(error, '', { timeOut: 0, extendedTimeOut: 0 })
   }
 
   actionForSuccess (msg = 'Solicitação efetuada com sucesso!'): void {
-    toastr.success(msg)
+  // toastr.success(msg)
   }
 }

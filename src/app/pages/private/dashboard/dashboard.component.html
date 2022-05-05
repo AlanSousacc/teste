@@ -1,17 +1,26 @@
 
-<ngx-spinner
-  name="loading"
-  bdColor="rgba(51,51,51,0.8)"
-  size="medium"
-  color="#fcca43"
-  type="ball-spin-clockwise-fade">
-  <p class="p-customizado">Carregando...</p>
-</ngx-spinner>
 
-<app-table-component [data]="competencias" [idsetor]="idsetor" [idresponsavel]="idresponsavel"
-  [totaldata]="counttotaldata" (loadnextpage)="loadNextPage($event)" (loadbackpage)="loadBackPage($event)"
-  [currentlast]="currentlast" (searchdata)="searchCompetencia($event)" (onchangData)="onChangData()"
-  (clearData)="clearData()"
-  (restoreSearchEvent)="restoreSearchEvent()"
-  >
-</app-table-component>
+<div class="container">
+  <label>Teste input select</label>
+  <p-dropdown [options]="countries"  [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Country"
+  [style]="{'minWidth':'100%'}" [(ngModel)]="selectedCountry" optionLabel="name" [showClear]="true" placeholder="Select a Country">
+    <ng-template pTemplate="selectedItem">
+        <div class="country-item country-item-value"  *ngIf="selectedCountry">
+            <div>{{selectedCountry.name}}</div>
+        </div>
+    </ng-template>
+    <ng-template let-country pTemplate="item">
+        <div class="country-item">
+            <div>{{country.name}}</div>
+        </div>
+    </ng-template>
+  </p-dropdown>
+
+  <label>Name</label>
+  <input type="text" [(ngModel)]="name" pInputText  [style]="{'minWidth':'100%'}" />
+
+  <label>File</label>
+  <p-fileUpload name="myfile[]" [showCancelButton]="false" [customUpload]="true" (uploadHandler)="sendHandler($event)"></p-fileUpload>
+
+
+</div>
