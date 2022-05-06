@@ -17,13 +17,16 @@ export class AppxService {
   }
 
   saveForm (formData: any) {
-    // Params id_empresa_dctf,sem_folha
+    let apiUrl: string = 'http://localhost:8000/api/salvar-arquivo-valores';
     const HTTPOptions:Object = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
       responseType: 'text'
     }
-    return this.http.post<any>(environment.apiUrl + 'saveformdata', formData, HTTPOptions)
+    return this.http.post<any>(apiUrl, formData)
   }
+  
+  download (path: string){
+    let apiUrl: string = `http://localhost:8000/api/download-file/${path}`;
+    return this.http.get(apiUrl, {responseType: 'blob'});
+  }
+  
 }
